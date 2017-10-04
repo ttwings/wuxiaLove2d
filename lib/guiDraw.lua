@@ -1,7 +1,8 @@
 local lg=love.graphics
 local lp=love.graphics.print
 local lf=love.graphics.printf
-local guiData = require "lib/guiData"
+require "lib/guiData"
+require "assets/data/rooms"
 -- color
 local colorT={
 	["RED"]={255,0,0,255},
@@ -26,7 +27,7 @@ function guiDraw()
 			local image = love.graphics.newImage(dir .. v.image)
 			love.graphics.draw(image,v.x,v.y)
 		elseif v.visible and v.type=="bar" then
-			local maxHP=tonumber(v["contant"])
+			local maxHP=v["contant"]
 			-- lg.print(v["contant"])
 			local color=colorT[v.color] or {255,255,255,255}
 			text:set({color,v.title ..":"})
@@ -71,27 +72,39 @@ function guiDraw()
 	end
 end
 --  table data
-function guiUpdata(actor)
-	guiData["头像"].image=actor["头像"]
+function guiUpdata(actor,dt)
+	guiData["头像"].image=actor.faceImg
 	-- guiData["姓名"].contant=actor["姓名"]
-	key2data("名称",actor)
-	key2data("称号",actor)
-	key2data("头衔",actor)
+	-- guiData["名称"].contant=actor["名称"]
+	-- key2data("名称",actor)
+	-- key2data("称号",actor)
+	-- key2data("世家",actor)
+	guiData["名称"].contant=actor.name
+	guiData["称号"].contant=actor.epithet
+	guiData["世家"].contant=actor.clan
+
 	-- gui["身份"].contant=actor["身份"]
-	guiData["气血"].contant=actor["气血"]
-	guiData["真气"].contant=actor["真气"]
-	guiData["区域"].contant=actor["区域"]
-	guiData["地图"].title=actor["区域"]
-	guiData["房间"].contant=actor["房间"]
-	guiData["描述"].contant=rooms[1]["long"]
-	guiData["对话"].image=actor["头像"]
+	guiData["气血"].contant=actor.hp
+	guiData["真气"].contant=actor.mp
+	guiData["区域"].contant=actor.region
+	guiData["地图"].title=actor.region
+	guiData["房间"].contant=actor.room
+	if rooms[actor.room] and #actor.room>2 then
+		guiData["描述"].contant=rooms[actor.room]["description"]
+	else
+		guiData["描述"].contant=""
+	end
+
+	guiData["对话"].image=actor.faceImg
+	guiData["发现"].contant=actor.target
+
 	-- gui["精力"].contant=actor["精力"]
 	-- gui["食物"].contant=actor["食物"]
 	-- gui["饮水"].contant=actor["饮水"]
-	key2data("技能1",actor)
-	key2data("技能2",actor)
-	key2data("技能3",actor)
-	key2data("技能4",actor)
+	-- key2data("技能1",actor)
+	-- key2data("技能2",actor)
+	-- key2data("技能3",actor)
+	-- key2data("技能4",actor)
 end
 -- table col
 function key2data(key,actor)

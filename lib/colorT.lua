@@ -1,55 +1,48 @@
+Color={}
+---[[
+	Color.CLEAR 		= {0, 0, 0, 0};
+	Color.BLACK 		= {0, 0, 0, 255};
+	Color.BLUE 			= {0, 0, 255, 255};
+	Color.NAVY 			= {0,0,128,255};
+	Color.CYAN 			= {0, 255, 255, 255};
+	Color.TEAL 			= {0,128,128,255};
+	Color.WHITE 		= {0xff,0xff,0xff,0xff};
+	Color.LIGHT_GRAY 	= {0xbf,0xbf,0xbf,0xff};
+	Color.GRAY 			= {0x7f,0x7f,0x7f,0xff};
+	Color.DARK_GRAY 	= {0x3f,0x3f,0x3f,0xff};
+	Color.SLATE 		= {0x70,0x80,0x90,0xff};
+	Color.ROYAL 		= {0x41,0x69,0xe1,0xff};
+	Color.SKY 			= {0x87,0xce,0xeb,0xff};
+	Color.GREEN 		= {0x00,0xff,0x00,0xff};
+	Color.CHARTREUSE 	= {0x7f,0xff,0x00,0xff};
+	Color.LIME 			= {0x32,0xcd,0x32,0xff};
+	Color.FOREST 		= {0x22,0x8b,0x22,0xff};
+	Color.OLIVE 		= {0x6b,0x8e,0x23,0xff};
+	Color.YELLOW 		= {0xff,0xff,0x00,0xff};
+	Color.GOLD 			= {0xff,0xd7,0x00,0xff};
+	Color.GOLDENROD 	= {0xda,0xa5,0x20,0xff};
+	Color.BROWN 		= {0x8b,0x45,0x13,0xff};
+	Color.TAN 			= {0xd2,0xb4,0x8c,0xff};
+	Color.FIREBRICK 	= {0xb2,0x22,0x22,0xff};
+	Color.RED 			= {0xff,0x00,0x00,0xff};
+	Color.CORAL 		= {0xff,0x7f,0x50,0xff};
+	Color.ORANGE 		= {0xff,0xa5,0x00,0xff};
+	Color.SALMON 		= {0xfa,0x80,0x72,0xff};
+	Color.PINK 			= {0xff,0x69,0xb4,0xff};
+	Color.PURPLE 		= {0xa0,0x20,0xf0,0xff};
+	Color.VIOLET 		= {0xee,0x82,0xee,0xff};
+	Color.MAROON 		= {0xb0,0x30,0x60,0xff};
+	Color.MAGENTA 		= {255, 0, 255, 255};
+-- ]]
 --[[
-	public static final Color CLEAR = new Color(0, 0, 0, 0);
-	public static final Color BLACK = new Color(0, 0, 0, 1);
-
-	public static final Color WHITE = new Color(0xffffffff);
-	public static final Color LIGHT_GRAY = new Color(0xbfbfbfff);
-	public static final Color GRAY = new Color(0x7f7f7fff);
-	public static final Color DARK_GRAY = new Color(0x3f3f3fff);
-	public static final Color SLATE = new Color(0x708090ff);
-
-	public static final Color BLUE = new Color(0, 0, 1, 1);
-	public static final Color NAVY = new Color(0, 0, 0.5f, 1);
-	public static final Color ROYAL = new Color(0x4169e1ff);
-	public static final Color SKY = new Color(0x87ceebff);
-	public static final Color CYAN = new Color(0, 1, 1, 1);
-	public static final Color TEAL = new Color(0, 0.5f, 0.5f, 1);
-
-	public static final Color GREEN = new Color(0x00ff00ff);
-	public static final Color CHARTREUSE = new Color(0x7fff00ff);
-	public static final Color LIME = new Color(0x32cd32ff);
-	public static final Color FOREST = new Color(0x228b22ff);
-	public static final Color OLIVE = new Color(0x6b8e23ff);
-
-	public static final Color YELLOW = new Color(0xffff00ff);
-	public static final Color GOLD = new Color(0xffd700ff);
-	public static final Color GOLDENROD = new Color(0xdaa520ff);
-
-	public static final Color BROWN = new Color(0x8b4513ff);
-	public static final Color TAN = new Color(0xd2b48cff);
-	public static final Color FIREBRICK = new Color(0xb22222ff);
-
-	public static final Color RED = new Color(0xff0000ff);
-	public static final Color CORAL = new Color(0xff7f50ff);
-	public static final Color ORANGE = new Color(0xffa500ff);
-	public static final Color SALMON = new Color(0xfa8072ff);
-	public static final Color PINK = new Color(0xff69b4ff);
-	public static final Color MAGENTA = new Color(1, 0, 1, 1);
-
-	public static final Color PURPLE = new Color(0xa020f0ff);
-	public static final Color VIOLET = new Color(0xee82eeff);
-	public static final Color MAROON = new Color(0xb03060ff);
-]]
-
-colorT={
+Color={
 	["RED"]={255,0,0,255},
 	["GREEN"]={0,255,0,255},
 	["MAROON"]={0xb0,0x30,0x60,0xff},
 	["VIOLET"]={0xee,0x82,0xee,0xff},
 	["PURPLE"]={0xA0,0x20,0xf0,0xff},
 	["BLUE"]={0xA0,0x20,0xf0,0xff},
-}
-local color={255,255,255,255}
+}]]
 -- set color
 function setColor(color)
 	-- love.graphics.setColor(color["r"],color["g"],color["b"],color["a"])
@@ -58,7 +51,7 @@ function setColor(color)
 end
 -- reset color
 function resetColor()
-	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.setColor(Color.WHITE)
 end
 
-return colorT
+return Color
