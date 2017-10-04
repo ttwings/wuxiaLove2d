@@ -13,7 +13,6 @@ function love.load()
 		{0.5,0,0.5,0},
 		{1,0,1,0},
 	}
-}
 	mesh1 = love.graphics.newMesh(vert1, "strip")  --quest 1
 	mesh1:setTexture(map)
 	mesh2 = love.graphics.newMesh(vert2, "strip")  --quest 1
