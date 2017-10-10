@@ -9,6 +9,7 @@ require "assets/data/actors"
 require "assets/data/rooms"
 require "lib/guiDraw"
 require "lib/drawTool"
+require("animations")
 
 local GameScreen = {}
 local map
@@ -33,6 +34,7 @@ function canvasLoad()
 	love.graphics.clear()
 	map:draw(-tx,-ty)
 	map:box2d_draw(-tx,-ty)
+
 	love.graphics.setCanvas()
 end
 
@@ -90,6 +92,7 @@ function loadData(  )
 				actor:drawAnim()
                 actor:draw()
 				--npcs:drawAnim()
+				animations.draw()
 			end
 		end
 		canvasLoad()
@@ -101,6 +104,7 @@ function GameScreen.new(  )
 	function self:draw()
 		love.graphics.setShader(shader)
 		love.graphics.draw(canvas)
+
 		love.graphics.setShader()
 		-- GUI
 		guiDraw()
@@ -120,6 +124,7 @@ function GameScreen.new(  )
     	-- 画布
     	canvasLoad()
     	guiUpdata(actor,dt)
+		animations.update(dt)
     	date.update()
 	end
 	return self

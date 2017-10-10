@@ -1,7 +1,5 @@
 local ScreenManager = require( "lib/ScreenManager" )
-require("ani")
-
-ani.init("Light1")
+require("animations")
 
 screens = {
 	main=require( "MainScreen" ),
@@ -15,12 +13,12 @@ end
 
 function love.draw()
 	ScreenManager.draw()
-    ani.draw()
+
 end
 
 function love.update(dt)
 	ScreenManager.update(dt)
-    ani.update(dt)
+
 end
 
 function love.keypressed( key )

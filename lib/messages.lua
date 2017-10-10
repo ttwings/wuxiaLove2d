@@ -28,13 +28,14 @@ end
 messages.draw = function()
     for i = #messages,1,-1 do
         local b = messages[i]
+        local wide = #b.text
         --local vx,vy
         --vx = b.speed * math.cos(b.r)
         --vy = b.speed * math.sin(b.r)
         --b.x = b.x + vx
         --b.y = b.y + vy
         love.graphics.setColor(b.color)
-        love.graphics.print(b.text,b.x+16,b.y+16)
+        love.graphics.print(b.text,b.x-40,b.y)
         love.graphics.setColor({255,255,255,255})
         --love.graphics.rectangle("fill",200,200,200,200)
     end

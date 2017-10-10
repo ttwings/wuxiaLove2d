@@ -2,10 +2,15 @@
 --- Created by ttwings.
 --- DateTime: 2017/10/8 23:01
 ---
+
+require("animations")
+require("lib.messages")
 bullets = {}
 local bullet = {x0,y0,x,y,w,h,r=0,speed,range,color}
-
+local cd = 0
+local message={}
 bullets.update = function(dt)
+    cd = cd + dt
     local vx,vy
     local lx,ly
     local b
@@ -19,10 +24,13 @@ bullets.update = function(dt)
         ly = b.y - b.y0
         if (lx^2 + ly^2)>b.range^2 then
             table.remove(bullets,i)
+            animations.add("Light1",b.x,b.y)
+            if cd > 2 then
+                cd = 0
+                message = {text="雷霆拳法 淤伤 5",x=b.x,y=b.y,x0=b.x,y0=b.y,w=2,h=2,r=0,speed=100,range=100,color={255,255,0},cd=2}
+                messages.add(message)
+            end
         end
-        local text = string.format("%d:%d",lx^2 + ly^2,b.range^2)
-        print(text)
-
     end
 
 

@@ -135,16 +135,15 @@ function Actor:key(dt)
 
     -- end
 	local bullet = {x=self.x/2,y=self.y/2,x0=self.x/2,y0=self.y/2,w=4,h=4,r=self.r or 0,color={255,0,0,100},range=100,speed=1000,cd=0.5}
-	local message = {text="暴击",x=self.x/2,y=self.y/2,x0=self.x/2,y0=self.y/2,w=4,h=4,r=self.r or 0,color={255,255,0,255},range=100,speed=100,cd=0.5}
 	cd = cd + dt
 	local text = string.format("%s%s%s%s%s",bullet.x/2,bullet.y/2,bullet.x0/2,bullet.y0/2,#bullets)
-	if love.keyboard.isDown("k") and cd > message.cd then
+	if love.keyboard.isDown("k") then
     	-- table.insert(self.actorMsg,self["名称"] .. "测试信息")
     	-- fly msg test
     	--local msg={x=self.x,y=self.y,text="测试信息111",cd=3}
 		--table.insert(flyMsgs,msg)
 		bullets.add(bullet)
-		messages.add(message)
+		--messages.add(message)
 		--print(text)
 		cd = 0
     end
