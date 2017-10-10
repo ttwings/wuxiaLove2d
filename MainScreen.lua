@@ -3,8 +3,8 @@ local ScreenManager = require("lib/ScreenManager")
 local snow = require( "Snow" )
 local MainScreen = {}
 local bg = love.graphics.newImage("bg.jpeg")
-local font = love.graphics.newFont("assets/font/msyh.ttf", 24)
-local titlefont = love.graphics.newFont("assets/font/msyh.ttf", 48)
+local font = love.graphics.newFont("assets/font/myfont.ttf", 32)
+local titlefont = love.graphics.newFont("assets/font/myfont.ttf", 56)
 local menu = {}
 local index = 1
 function MainScreen.new(  )

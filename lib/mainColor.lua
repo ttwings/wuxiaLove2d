@@ -1,5 +1,3 @@
-
-
 local font26,font12,font120
 local tab={}
 local rt=require("richtext")

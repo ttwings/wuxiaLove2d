@@ -1,3 +1,4 @@
+----------------- 下雪动画 ----------------
 local snow={}
 local circles={}
 function snow.init(n)
@@ -15,7 +16,6 @@ end
 
 function snow.draw()
 	for i,v in ipairs(circles) do
-		-- v=circles[i]
 		love.graphics.setColor(v.color)
 		love.graphics.circle("fill",v.x,v.y,v.r-1)
 		love.graphics.circle("fill",v.x,v.y,v.r-2)

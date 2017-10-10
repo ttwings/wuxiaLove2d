@@ -2,6 +2,11 @@ Class=require "lib/middleclass"
 anim8=require "lib/anim8"
 require "assets/data/actors"
 require "assets/data/mapWuGuan"
+require("bullets")
+require("lib.messages")
+---- test bullet
+bullet={}
+message={}
 Actor=Class("actor")
 Actor["actorMsg"]={}
 -- fly Msg
@@ -101,35 +106,47 @@ function Actor:drawBag()
 end
 
 --------------------------- 键盘控制 ------------------------
-cd=10
+cd=0
 function Actor:key(dt)
 	speed = 600
-	cd=cd-dt
+	--cd=cd-dt
 	if love.keyboard.isDown("f") then
         self.x = self.x + dt*speed
         self.animNow=self.anim.moveRight
+		self.r = 0
     	elseif love.keyboard.isDown("s") then
     		self.x = self.x - dt*speed
     		self.animNow=self.anim.moveLeft
+			self.r = 3.1415
     end
 
     if love.keyboard.isDown("d") then
     	self.y = self.y + dt*speed
     	self.animNow=self.anim.moveDown
+		self.r = 3.1415/2
     	elseif love.keyboard.isDown("e") then
     		self.y = self.y - dt*speed
     		self.animNow=self.anim.moveUp
+			self.r = 3.1415*1.5
     end
 
     -- if love.keyboard.isDown("j") then
 
 
     -- end
-    if love.keyboard.isDown("k") then
+	local bullet = {x=self.x/2,y=self.y/2,x0=self.x/2,y0=self.y/2,w=4,h=4,r=self.r or 0,color={255,0,0,100},range=100,speed=1000,cd=0.5}
+	local message = {text="暴击",x=self.x/2,y=self.y/2,x0=self.x/2,y0=self.y/2,w=4,h=4,r=self.r or 0,color={255,255,0,255},range=100,speed=100,cd=0.5}
+	cd = cd + dt
+	local text = string.format("%s%s%s%s%s",bullet.x/2,bullet.y/2,bullet.x0/2,bullet.y0/2,#bullets)
+	if love.keyboard.isDown("k") and cd > message.cd then
     	-- table.insert(self.actorMsg,self["名称"] .. "测试信息")
     	-- fly msg test
-    	local msg={x=self.x,y=self.y,text="测试信息111",cd=3}
-    	table.insert(flyMsgs,msg)
+    	--local msg={x=self.x,y=self.y,text="测试信息111",cd=3}
+		--table.insert(flyMsgs,msg)
+		bullets.add(bullet)
+		messages.add(message)
+		--print(text)
+		cd = 0
     end
 end
 
@@ -147,22 +164,23 @@ function Actor:keypressed(key)
     	end
 	end
 end
-
+-------------- 总体功能 -------------------------
 function Actor:draw()
-	-- for i,v in pairs(actorMsg) do
-	-- 	love.graphics.print(v,400,400+20*i)
-	-- end
-	Actor:drawMsg()
-	Actor:drawBag()
-	Actor:drawFly()
+	--Actor:drawMsg()
+	--Actor:drawBag()
+	--Actor:drawFly()
+	bullets.draw()
+	messages.draw()
 end
 
 function Actor:update(dt)
 	-- self:key(dt)
 	self:atRoom()
 	self["animNow"]:update(dt)
+	bullets.update(dt)
+	messages.update(dt)
 end
--- -- 更新角色的位置
+------------------ 更新角色的位置 --------------
 function Actor:atRoom()
 	local rx,ry
 	rx = math.modf(self.x/256)+1 or 1
@@ -171,21 +189,8 @@ function Actor:atRoom()
 		self.room=mapWuGuan[ry][rx]
 	end
 end
--- 绘制飞行文字
-function Actor:addFlyMsg(msg)
-	-- body
-	flyMsg.x= msg.x
-	flyMsg.y = msg.y
-	flyMsg.text = msg.text
-	flyMsg.cd = msg.cd
-end
 
-function Actor:drawFly()
-	for i,v in ipairs(flyMsgs) do
-		love.graphics.print(v.text, v.x, v.y)
-	end
-end
--- 行走图文件
+------------------ 行走图文件 --------------------
 function Actor:image(name)
 	local path = "assets/graphics/Characters/"
 	self.image=love.graphics.newImage(path .. name)
@@ -195,12 +200,7 @@ end
 
 function Actor:anims()
 	local image = self.image
-	-- skillImg = love.graphics.newImage("assets/graphics/Animations/Attack2.png")
-	-- local skillG = anim8.newGrid(192,192,skillImg:getWidth(),skillImg:getHeight())
 	local g = anim8.newGrid(32,48,image:getWidth(),image:getHeight())
-	-- animation = anim8.newAnimation(g('1-4',2),0.2)
-	-- skillAnim = anim8.newAnimation(skillG('1-5',1),0.2)
-
 	self["anim"]["moveDown"] = anim8.newAnimation(g('1-4',1),0.3)
 	self["anim"]["moveLeft"] = anim8.newAnimation(g('1-4',2),0.3)
 	self["anim"]["moveRight"] = anim8.newAnimation(g('1-4',3),0.3)
@@ -210,7 +210,7 @@ end
 function Actor:drawAnim()
 	self["animNow"]:draw(self.image,self.x/2,self.y/2)
 end
--- 获得物品
+--------------------------- 获得物品 ---------------------------
 local cd
 function getObj()
 	if self.target~=nil then

@@ -1,4 +1,3 @@
-
 local rt={}
 rt.padding = {0,0,0,0}	-- top,left,bottom,right
 rt.margin = {0,0,0,0}	-- top,left,bottom,right

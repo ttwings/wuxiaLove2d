@@ -2,16 +2,14 @@ local Screen = require( "lib/Screen" )
 local sti = require "sti"
 local actorsdata=require "assets/data/actors"
 local anim8 = require 'lib/anim8'
--- local Class = require "lib/middleclass"
 require "Date"
--- 主要对象类,角色类，房间类，区域类
 require "Actor"
 require "Npc"
 require "assets/data/actors"
 require "assets/data/rooms"
 require "lib/guiDraw"
-require "lib/colorT"
 require "lib/drawTool"
+
 local GameScreen = {}
 local map
 local world
@@ -50,20 +48,10 @@ function canvasGUIload()
 end
 
 function loadData(  )
-	-- actor class
+		-- actor class
 		actor=Actor:new(actors["段誉"])
-		-- actor:readData(actors["段誉"])
-		-- npc1 = Actor:new(actors["言达平"])
-		-- npc2 = Actor:new(actors["鲁坤"])
 		npcs:add(actors,5)
-		-- npc1.x = 500
-		-- npc1.y = 600
-		-- npc2.x = 800
-		-- npc2.y = 1000
-		-- npc1:readData(actors["言达平"])
-		-- actor.misc = {}
-		--
-		font = love.graphics.newFont("assets/font/msyh.ttf", 18)
+		local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua",{"box2d"})
 		-- Prepare translations
@@ -88,8 +76,6 @@ function loadData(  )
 				local bx,by = objs[i].x,objs[i].y
 				local ax,ay = actor.x/2,actor.y/2
 				local distance=math.abs(bx-ax) + math.abs(by-ay)
-				-- print(distance)
-				-- print( distance )
 				if (distance<100) then
 					actor.target = objName .. ":"..bx .. ":".. by
 					break
@@ -101,20 +87,13 @@ function loadData(  )
 		--
 		function spriteLayer:draw()
 			for _, sprite in pairs(self.sprites) do
-				local x = math.floor(actor.x/2)
-    			local y = math.floor(actor.y/2)
 				actor:drawAnim()
-				npcs:drawAnim()
-				-- npc1:drawAnim()
-				-- npc2:drawAnim()
-				-- actor:drawFly()
+                actor:draw()
+				--npcs:drawAnim()
 			end
 		end
-
-
 		canvasLoad()
 end
-
 
 function GameScreen.new(  )
 	local self=Screen.new()
@@ -125,8 +104,6 @@ function GameScreen.new(  )
 		love.graphics.setShader()
 		-- GUI
 		guiDraw()
-		-- actor:draw()
-		-- actor:drawBag()
 		love.graphics.print("FPS:" .. love.timer.getFPS(),1220,0)
 		date.draw()
 	end
@@ -136,8 +113,7 @@ function GameScreen.new(  )
 		map:update(dt)
 		actor:key(dt)
 		actor:update(dt)
-		-- npc1:update(dt)
-		npcs:update(dt)
+        --npcs:update(dt)
 		-- 地图的位移
 		tx = math.floor((actor.x - 1280)/ 2)
     	ty = math.floor((actor.y - 800)/ 2)
@@ -148,6 +124,5 @@ function GameScreen.new(  )
 	end
 	return self
 end
-
 
 return GameScreen
