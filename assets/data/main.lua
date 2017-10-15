@@ -19,6 +19,7 @@ end
 
 function love.load()
 	-- excel2table("","rooms","rooms")
+	-- excel2table("","skills","skills")
 	excel2table("","actors","actors")
 	-- excel2array("","names","names")
 	-- excel2array("","itemStage","itemStage")

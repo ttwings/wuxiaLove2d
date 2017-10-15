@@ -23,7 +23,7 @@ local ty
 -- shader
 local code =[[
 vec4 effect(vec4 color,Image texture,vec2 tc,vec2 sc){
-	return Texel(texture,vec2((tc.x-0.5)/(tc.y+1)+0.5,tc.y));
+	return Texel(texture,vec2((tc.x-0.5)/(tc.y + 1.5)+0.5,tc.y));
 }
 ]]
 shader = love.graphics.newShader(code)
@@ -126,6 +126,9 @@ function GameScreen.new(  )
     	guiUpdata(actor,dt)
 		animations.update(dt)
     	date.update()
+	end
+	function self:keypressed(key)
+		actor:keypressed(key)
 	end
 	return self
 end

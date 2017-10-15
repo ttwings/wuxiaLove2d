@@ -4,15 +4,6 @@ local lf=love.graphics.printf
 require "lib/guiData"
 require "assets/data/rooms"
 require("assets.data.Color")
----- color
---local colorT={
---	["RED"]={255,0,0,255},
---	["GREEN"]={0,255,0,255},
---	["MAROON"]={0xb0,0x30,0x60,0xff},
---	["VIOLET"]={0xee,0x82,0xee,0xff},
---	["PURPLE"]={0xA0,0x20,0xf0,0xff},
---	["BLUE"]={0xA0,0x20,0xf0,0xff},
---}
 local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 local text = love.graphics.newText(font,"")
 function guiDraw()
@@ -39,7 +30,7 @@ function guiDraw()
 			local alpha = v.alpha or 128
 			local color=Color[v.color] or {255,255,255,255}
 		    love.graphics.setColor(0, 0, 0, alpha)
-			love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
+			love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
 			love.graphics.setColor(255, 255, 255, 255)
 			text:setf({color,v.contant},v.width,"left")
 			love.graphics.draw(text,v.x,v.y)
@@ -50,7 +41,7 @@ function guiDraw()
 			local alpha = v.alpha or 128
 			local color=Color[v.color] or {255,255,255,255}
 		    love.graphics.setColor(0, 0, 0, alpha)
-			love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
+			love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
 			love.graphics.setColor(255, 255, 255, 255)
 			text:setf({color,v.contant},v.width,"left")
 			love.graphics.draw(text,v.x,v.y)
@@ -59,13 +50,13 @@ function guiDraw()
 			local color=Color[v.color] or {255,255,255,255}
 			love.graphics.print(v.title or "地图", v.x, v.y)
 		    love.graphics.setColor(0, 0, 0, alpha)
-			love.graphics.rectangle("fill", v.x, v.y+20, v.width, v.height)
+			love.graphics.rectangle("fill", v.x, v.y+20, v.width, v.height,10)
 			love.graphics.setColor(255, 255, 255, 255)
 		elseif v.visible and v.type=="skill" then
 			local alpha = v.alpha or 128
 			local color=Color[v.color] or {255,255,255,255}
-		    love.graphics.setColor(0, 0, 0, alpha)
-			love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
+		    love.graphics.setColor(255, 255, 255, alpha)
+			love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
 			love.graphics.setColor(255, 255, 255, 255)
 			text:setf({color,v.contant},v.width,v.align)
 			love.graphics.draw(text,v.x,v.y+4)
@@ -77,9 +68,6 @@ function guiUpdata(actor,dt)
 	guiData["头像"].image=actor.faceImg
 	-- guiData["姓名"].contant=actor["姓名"]
 	-- guiData["名称"].contant=actor["名称"]
-	-- key2data("名称",actor)
-	-- key2data("称号",actor)
-	-- key2data("世家",actor)
 	guiData["名称"].contant=actor.name
 	guiData["称号"].contant=actor.epithet
 	guiData["世家"].contant=actor.clan
@@ -105,14 +93,6 @@ function guiUpdata(actor,dt)
 	-- gui["精力"].contant=actor["精力"]
 	-- gui["食物"].contant=actor["食物"]
 	-- gui["饮水"].contant=actor["饮水"]
-	-- key2data("技能1",actor)
-	-- key2data("技能2",actor)
-	-- key2data("技能3",actor)
-	-- key2data("技能4",actor)
-end
--- table col
-function key2data(key,actor)
-	guiData[key].contant=key..":"..actor[key]
 end
 -- rec eg.hp,mp
 function bar(nowHP,maxHP,x,y)

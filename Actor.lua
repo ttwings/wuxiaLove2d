@@ -4,15 +4,16 @@ require "assets/data/actors"
 require "assets/data/mapWuGuan"
 require("bullets")
 require("lib.messages")
+require( "assets/data/skills" )
+require("lib.Color")
+require("keymap")
 ---- test bullet
 bullet={}
 message={}
 Actor=Class("actor")
 Actor["actorMsg"]={}
--- fly Msg
-local flyMsg={x=400,y=400,text="飞行测试信息",cd}
-local flyMsgs={}
 Actor["anim"]={}
+Actor["menu"]=false
 function Actor:initialize(data)
 	self:readData(data)
 end
@@ -106,61 +107,57 @@ function Actor:drawBag()
 end
 
 --------------------------- 键盘控制 ------------------------
+
 cd=0
 function Actor:key(dt)
+	cd = cd + dt
 	speed = 600
 	--cd=cd-dt
-	if love.keyboard.isDown("f") then
-        self.x = self.x + dt*speed
-        self.animNow=self.anim.moveRight
+	if love.keyboard.isDown(keymap.R) then
+		self.x = self.x + dt*speed
+		self.animNow=self.anim.moveRight
 		self.r = 0
-    	elseif love.keyboard.isDown("s") then
-    		self.x = self.x - dt*speed
-    		self.animNow=self.anim.moveLeft
-			self.r = 3.1415
-    end
-
-    if love.keyboard.isDown("d") then
-    	self.y = self.y + dt*speed
-    	self.animNow=self.anim.moveDown
-		self.r = 3.1415/2
-    	elseif love.keyboard.isDown("e") then
-    		self.y = self.y - dt*speed
-    		self.animNow=self.anim.moveUp
-			self.r = 3.1415*1.5
-    end
-
-    -- if love.keyboard.isDown("j") then
-
-
-    -- end
-	local bullet = {x=self.x/2,y=self.y/2,x0=self.x/2,y0=self.y/2,w=4,h=4,r=self.r or 0,color={255,0,0,100},range=100,speed=1000,cd=0.5}
-	cd = cd + dt
-	local text = string.format("%s%s%s%s%s",bullet.x/2,bullet.y/2,bullet.x0/2,bullet.y0/2,#bullets)
-	if love.keyboard.isDown("k") then
-    	-- table.insert(self.actorMsg,self["名称"] .. "测试信息")
-    	-- fly msg test
-    	--local msg={x=self.x,y=self.y,text="测试信息111",cd=3}
-		--table.insert(flyMsgs,msg)
-		bullets.add(bullet)
-		--messages.add(message)
-		--print(text)
-		cd = 0
-    end
-end
-
-function Actor:keypressed(key)
-	local key = love.keypressed
-	-- Exit test
-	if key("escape") then
-		love.event.quit()
+	elseif love.keyboard.isDown(keymap.L) then
+		self.x = self.x - dt*speed
+		self.animNow=self.anim.moveLeft
+		self.r = math.pi
 	end
-	-- Reset translation
-	if key("j") then
-		if self.target~=nil then
-    		table.insert( self.misc,self.target)
-			print( #self.misc .. ":"..self.misc[#self.misc] )
-    	end
+
+	if love.keyboard.isDown(keymap.D) then
+		self.y = self.y + dt*speed
+		self.animNow=self.anim.moveDown
+		self.r = math.pi/2
+	elseif love.keyboard.isDown(keymap.U) then
+		self.y = self.y - dt*speed
+		self.animNow=self.anim.moveUp
+		self.r = math.pi*1.5
+	end
+end
+--------------------------- 菜单控制 ------------------------
+function Actor:keypressed(key)
+	if key == keymap.select then
+		if self.select then
+			self.select = false
+		else
+			self.select = true
+		end
+		print(self.select)
+	end
+
+	local bullet = skills[self.skill1[1]]
+	bullet.x=self.x/2
+	bullet.y=self.y/2
+	bullet.x0=self.x/2
+	bullet.y0=self.y/2
+	bullet.w=4
+	bullet.h=4
+	bullet.r=self.r
+	--bullet.damage=5
+
+	local text = string.format("%s%s%s%s%s",bullet.x/2,bullet.y/2,bullet.x0/2,bullet.y0/2,#bullets)
+	if key == keymap.B then
+		bullets.add(bullet)
+		cd = 0
 	end
 end
 -------------- 总体功能 -------------------------
@@ -195,8 +192,6 @@ function Actor:image(name)
 	self.image=love.graphics.newImage(path .. name)
 end
 
-
-
 function Actor:anims()
 	local image = self.image
 	local g = anim8.newGrid(32,48,image:getWidth(),image:getHeight())
@@ -210,7 +205,6 @@ function Actor:drawAnim()
 	self["animNow"]:draw(self.image,self.x/2,self.y/2)
 end
 --------------------------- 获得物品 ---------------------------
-local cd
 function getObj()
 	if self.target~=nil then
     	table.insert( self.misc,self.target)
