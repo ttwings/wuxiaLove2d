@@ -33,16 +33,10 @@ end
 bullets.draw = function()
     for i = #bullets,1,-1 do
         local b = bullets[i]
-        --local vx,vy
-        --vx = b.speed * math.cos(b.r)
-        --vy = b.speed * math.sin(b.r)
-        --b.x = b.x + vx
-        --b.y = b.y + vy
         love.graphics.setColor(Color[b.color])
         love.graphics.rectangle("fill",b.x+16,b.y+16,b.w,b.h)
         love.graphics.circle("line",b.x0+16,b.y0+16,b.range)
         love.graphics.setColor({255,255,255,255})
-        --love.graphics.rectangle("fill",200,200,200,200)
     end
 end
 

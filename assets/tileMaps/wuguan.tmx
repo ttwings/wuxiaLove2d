@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="256" height="150" tilewidth="32" tileheight="32" nextobjectid="56">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="256" height="150" tilewidth="32" tileheight="32" nextobjectid="57">
  <tileset firstgid="1" name="TileBig" tilewidth="32" tileheight="32" tilecount="6248" columns="8">
   <image source="../Graphics/Tilesets/TileBig.png" width="256" height="25000"/>
   <tile id="5">
@@ -670,5 +670,6 @@
   <object id="49" name="柴刀" type="工具" gid="213" x="448" y="256" width="32" height="32"/>
   <object id="52" name="葫芦" type="工具" gid="9271" x="32" y="928" width="32" height="32"/>
   <object id="53" name="原木" type="材料" gid="4922" x="96" y="480" width="32" height="32"/>
+  <object id="56" name="木人" type="角色" gid="8191" x="224" y="2336" width="32" height="32"/>
  </objectgroup>
 </map>

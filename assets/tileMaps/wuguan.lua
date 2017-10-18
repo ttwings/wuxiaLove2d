@@ -8,7 +8,7 @@ return {
   height = 150,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 56,
+  nextobjectid = 57,
   properties = {},
   tilesets = {
     {
@@ -1120,6 +1120,20 @@ return {
           height = 32,
           rotation = 0,
           gid = 4922,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 56,
+          name = "木人",
+          type = "角色",
+          shape = "rectangle",
+          x = 224,
+          y = 2336,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 8191,
           visible = true,
           properties = {}
         }

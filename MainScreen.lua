@@ -40,11 +40,11 @@ function MainScreen.new(  )
     end
     local screenStr = { "main", "help", "game", "help" }
     function self:keypressed(key)
-        if key == "e" and index > 1 then
+        if key == keymap.U and index > 1 then
             index = index - 1
-        elseif key == "d" and index < 4 then
+        elseif key == keymap.D and index < 4 then
             index = index + 1
-        elseif key == "j" or "k" then
+        elseif key == keymap.A then
             ScreenManager.switch(screenStr[index])
         end
     end
