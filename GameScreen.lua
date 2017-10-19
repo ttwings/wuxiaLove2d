@@ -10,6 +10,7 @@ require "assets/data/rooms"
 require "lib/guiDraw"
 require "lib/drawTool"
 require("animations")
+require("region")
 
 local GameScreen = {}
 local map
@@ -71,15 +72,19 @@ function loadData(  )
 			player = {}
 		}
 		-- Update callback for Custom Layer
+		region.objs =  map.layers["objs"].objects
 		function spriteLayer:update(dt)
-			local objs =  map.layers[7].objects
-			for i=1,#objs,1 do
+
+			local objs = region.objs
+			for i=#objs,1,-1 do
 				local objName = objs[i].name
 				local bx,by = objs[i].x,objs[i].y
 				local ax,ay = actor.x/2,actor.y/2
 				local distance=math.abs(bx-ax) + math.abs(by-ay)
 				if (distance<100) then
-					actor.target = objName .. ":"..bx .. ":".. by
+					actor.target = objName
+					actor.tx = bx
+					actor.ty = by
 					break
 				else
 					actor.target = ""

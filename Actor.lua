@@ -7,6 +7,7 @@ require("lib.messages")
 require( "assets/data/skills" )
 require("lib.Color")
 require("keymap")
+require("Actions")
 ---- test bullet
 bullet={}
 message={}
@@ -143,21 +144,12 @@ function Actor:keypressed(key)
 		end
 		print(self.select)
 	end
-
-	local bullet = skills[self.skill1[1]]
-	bullet.x=self.x/2
-	bullet.y=self.y/2
-	bullet.x0=self.x/2
-	bullet.y0=self.y/2
-	bullet.w=4
-	bullet.h=4
-	bullet.r=self.r
-	--bullet.damage=5
-
-	local text = string.format("%s%s%s%s%s",bullet.x/2,bullet.y/2,bullet.x0/2,bullet.y0/2,#bullets)
+	if key == keymap.A then
+		actions.eat(self,self.target)
+		--print(self.name.."eat"..self.target)
+	end
 	if key == keymap.B then
-		bullets.add(bullet)
-		cd = 0
+		actions.fire(self,self.target)
 	end
 end
 -------------- 总体功能 -------------------------
@@ -175,6 +167,7 @@ function Actor:update(dt)
 	self["animNow"]:update(dt)
 	bullets.update(dt)
 	messages.update(dt)
+	self:heartbeat(dt)
 end
 ------------------ 更新角色的位置 --------------
 function Actor:atRoom()
@@ -185,6 +178,19 @@ function Actor:atRoom()
 		self.room=mapWuGuan[ry][rx]
 	end
 end
+------------------ 更新角色的状态 --------------
+local heart = 0
+function Actor:heartbeat(dt)
+	heart = heart + dt
+	if heart > actor.Str/4 then
+		heart = 0
+		self.food = self.food - 1
+		self.water = self.water - 1
+		self.mp = math.min(self.mp + 1,100)
+		self.hp = math.min(self.hp + 1,100)
+	end
+end
+
 
 ------------------ 行走图文件 --------------------
 function Actor:image(name)
