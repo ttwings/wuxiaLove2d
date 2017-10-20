@@ -24,7 +24,7 @@ actions.eat = function(actor,target)
         end
         text = string.gsub(text,"$N",name)
         actor.action = text
-        --- 移除物品测试
+        --- 移除物品测试  数据移除，图像仍然显示
         for i=#region.objs,1,-1 do
             local objName = region.objs[i].name
             if objName == target then

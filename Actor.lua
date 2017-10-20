@@ -44,52 +44,6 @@ function Actor:move(x,y,dt)
 	end
 end
 
--- 房间移动
-function Actor:moveRoom(roomName)
-	local dt=love.timer.getDelta()
-	local roomX,roomY = rooms[1]["x"],rooms[1]["y"]
-	local x = tonumber(roomX)
-	local y = tonumber(roomY)
-	move(self,x,y,dt)
-	if (roomX-x+roomY-y)<16 then
-		self["房间"]=roomName
-	end
-end
--- 区域移动
-function Actor:moveRegion(regionName)
-	self["区域"]=regionName
-end
--- 观察
-function Actor:look(msg)
-	self["看"]=msg
-	table.insert(self["actorMsg"],self["名称"].."看到"..msg)
-end
-
--- 说话
-function Actor:say(msg)
-	self["说"]=msg
-	table.insert(self["actorMsg"],self["名称"].."："..msg)
-end
--- -- 思考
--- function Actor:think(actor,msg)
--- 	actor["想"]=msg
--- 	table.insert(actorMsg,actor["名称"].."心想"..msg)
--- end
--- -- 听到
--- function Actor:listen(actor,msg)
--- 	actor["听"]=msg
--- 	table.insert(actorMsg,actor["名称"].."听到"..msg)
--- end
--- -- 写出
--- function Actor:wirte(actor,msg)
--- 	actor["写"]=msg
--- 	table.insert(actorMsg,actor["名称"].."写下"..msg)
--- end
--- -- 得到
--- function Actor:get(actor,msg)
--- 	table.insert(actor["bag"],msg)
--- 	table.insert(actorMsg,actor["名称"].."得到"..msg)
--- end
 --------------------------- love2d 绘制部分 ---------------
 function Actor:drawMsg()
 	if self.actorMsg~=nil then
@@ -135,23 +89,28 @@ function Actor:key(dt)
 	end
 end
 --------------------------- 菜单控制 ------------------------
+local keyFunc={}
+keyFunc["战斗"] = {}
+keyFunc["闲逛"] = {}
+
+keyFunc["战斗"][keymap.select] = function(actor)
+	actor.state = "闲逛"
+end
+keyFunc["闲逛"][keymap.select] = function(actor)
+	actor.state = "战斗"
+end
+keyFunc["闲逛"][keymap.A] = function(actor)
+	actions.eat(actor,actor.target)
+end
+keyFunc["战斗"][keymap.B] = function(actor)
+	actions.fire(actor,actor.target)
+end
 function Actor:keypressed(key)
-	if key == keymap.select then
-		if self.select then
-			self.select = false
-		else
-			self.select = true
-		end
-		print(self.select)
-	end
-	if key == keymap.A then
-		actions.eat(self,self.target)
-		--print(self.name.."eat"..self.target)
-	end
-	if key == keymap.B then
-		actions.fire(self,self.target)
+	if keyFunc[self.state] and keyFunc[self.state][key] then
+		keyFunc[self.state][key](self)
 	end
 end
+
 -------------- 总体功能 -------------------------
 function Actor:draw()
 	--Actor:drawMsg()
@@ -186,6 +145,12 @@ function Actor:heartbeat(dt)
 		heart = 0
 		self.food = self.food - 1
 		self.water = self.water - 1
+		if self.food < 90 then
+			self.debuff[1] = "饥饿"
+		end
+		if self.water < 30 then
+			self.debuff[2] = "口渴"
+		end
 		self.mp = math.min(self.mp + 1,100)
 		self.hp = math.min(self.hp + 1,100)
 	end

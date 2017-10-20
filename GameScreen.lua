@@ -46,7 +46,7 @@ function canvasGUIload()
 	love.graphics.print("FPS:" .. love.timer.getFPS(),1220,0)
 	drawTile(actorImgs[1],0,0,32,48,640,400)
 	-- 绘制时间
-	-- date.draw()
+	 date.draw()
 	love.graphics.setCanvas()
 end
 
@@ -97,6 +97,7 @@ function loadData(  )
 				actor:drawAnim()
                 actor:draw()
 				--npcs:drawAnim()
+
 				animations.draw()
 			end
 		end

@@ -3,7 +3,7 @@ local lp=love.graphics.print
 local lf=love.graphics.printf
 require "lib/guiData"
 require "assets/data/rooms"
-require("assets.data.Color")
+require("lib.Color")
 local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 local text = love.graphics.newText(font,"")
 local gui = {}
@@ -24,6 +24,8 @@ function guiDraw()
 			gui.barFood(v)
 		elseif v.visible and v.type=="barWater" then
 			gui.barWater(v)
+		elseif v.visible and v.type=="state" then
+			gui.state(v)
 		elseif v.visible and v.type=="long" then
 			gui.long(v)
 		elseif v.visible and v.type=="dialog" then
@@ -85,6 +87,12 @@ gui.barWater = function(v)
 	text:set({color,v.title ..":"})
 	love.graphics.draw(text,v.x,v.y)
 	bar(v.now,max,v.x+50,v.y+26,color)
+end
+gui.state = function(v)
+	local debuff = v.debuff or {"state1","state2"}
+	for i, s in ipairs(debuff) do
+		love.graphics.print(s,v.x,v.y + i * 20-20)
+	end
 end
 gui.long = function(v)
 	local alpha = v.alpha or 128
@@ -160,25 +168,27 @@ end
 
 --  table data
 function guiUpdata(actor,dt)
+	--- 人物基本信息
 	guiData["头像"].image=actor.faceImg
-	-- guiData["姓名"].contant=actor["姓名"]
-	-- guiData["名称"].contant=actor["名称"]
 	guiData["名称"].contant=actor.name
 	guiData["称号"].contant=actor.epithet
 	guiData["世家"].contant=actor.clan
-
 	-- gui["身份"].contant=actor["身份"]
+	--- 人物基本状态
 	guiData["气血"].now=actor.hp
 	guiData["真气"].now=actor.mp
 	guiData["精力"].now=actor.ep
 	guiData["食物"].now = actor.food
 	guiData["饮水"].now = actor.water
-	--- pos
+	--- 世界位置，区域位置
 	guiData["区域"].contant=actor.region
 	guiData["地图"].title=actor.region
 	guiData["房间"].contant=actor.room
+	--- 状态机
+	guiData["行为"].contant = actor.state
 	local text = string.format("%d:%d",actor.x,actor.y)
 	guiData["坐标"].contant =  text
+	--- 目标信息
 	if rooms[actor.room] and #actor.room>2 then
 		guiData["描述"].contant=rooms[actor.room]["description"]
 	elseif objs[actor.target] then
@@ -196,7 +206,7 @@ function guiUpdata(actor,dt)
 	guiData["口袋"].contant = actor.misc --- table value
 
 end
--- rec eg: hp,mp
+--- 条形图，如气血、真气、精力、食物、饮水
 function bar(now,max,x,y,color)
 	love.graphics.rectangle("line",x,y-18,128,8,4)
 	local now = math.max(0,now)
@@ -205,16 +215,7 @@ function bar(now,max,x,y,color)
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.print(now,x+130,y-24)
 end
--- circle eg: food , water
-function circleFood(now,max,x,y)
-	love.graphics.circle("line",x,y-16,32)
-	local nowHP = math.max(0,now)
-	local color = {r=255-nowHP*255/max,g=nowHP*255/max,b=0,a=255}
-	love.graphics.setColor(color.r,color.g,color.b,color.a)
-	love.graphics.circle("fill",x,y-16,nowHP*32/max)
-	love.graphics.setColor(255,255,255,255)
-end
---- bag
+--- 背包绘制
 function bagItem(bag,x,y)
 	local bag = bag or actor.misc or {"物品1","物品2"}
 	local contant = ""

@@ -1,0 +1,14 @@
+dates={
+	{﻿id="春晴朗午夜",name="春晴朗午夜",season="春",weather="晴朗",type="午夜",descriptionOut="已经是午夜了，四野虫鸣人寂",descriptionIn="夜幕低垂，满天繁星",color="深蓝",param="event_midnight",hour=1},
+	{﻿id="春晴朗午夜",name="春晴朗午夜",season="春",weather="晴朗",type="午夜",descriptionOut="已经是午夜了，四野虫鸣人寂",descriptionIn="夜幕低垂，满天繁星",color="深蓝",param="event_midnight",hour=2},
+	{﻿id="春晴朗黎明",name="春晴朗黎明",season="春",weather="晴朗",type="黎明",descriptionOut="东方的天空中开始出现一丝白微曦",descriptionIn="东方的天空已逐渐发白",color="浅灰",param="event_dawn",hour=3},
+	{﻿id="春晴朗黎明",name="春晴朗黎明",season="春",weather="晴朗",type="黎明",descriptionOut="东方的天空中开始出现一丝白微曦",descriptionIn="东方的天空已逐渐发白",color="浅灰",param="event_dawn",hour=4},
+	{﻿id="春晴朗朝阳",name="春晴朗朝阳",season="春",weather="晴朗",type="朝阳",descriptionOut="太阳从东方的地平线升起了。一片红红的朝霞",descriptionIn="太阳刚从东方的地平线升起",color="浅红",param="event_sunrise",hour=5},
+	{﻿id="春晴朗早晨",name="春晴朗早晨",season="春",weather="晴朗",type="早晨",descriptionOut="太阳慢慢地升起在东方的天空中",descriptionIn="太阳正高挂在东方的天空中",color="红色",param="event_morning",hour=6},
+	{﻿id="春晴朗中午",name="春晴朗中午",season="春",weather="晴朗",type="中午",descriptionOut="已经是正午了，太阳从你正上方照耀著大地",descriptionIn="现在是正午时分，太阳高挂在你的头顶正上方",color="黄色",param="event_noon",hour=7},
+	{﻿id="春晴朗中午",name="春晴朗中午",season="春",weather="晴朗",type="中午",descriptionOut="已经是正午了，太阳从你正上方照耀著大地",descriptionIn="现在是正午时分，太阳高挂在你的头顶正上方",color="黄色",param="event_noon",hour=8},
+	{﻿id="春晴朗下午",name="春晴朗下午",season="春",weather="晴朗",type="下午",descriptionOut="太阳开始从西方的天空中慢慢西沉",descriptionIn="太阳正高挂在西方的天空中",color="浅黄",param="event_afternoon",hour=9},
+	{﻿id="春晴朗夕阳",name="春晴朗夕阳",season="春",weather="晴朗",type="夕阳",descriptionOut="傍晚了，太阳的馀晖将西方的天空映成一片火红",descriptionIn="一轮火红的夕阳正徘徊在西方的地平线上",color="橘黄",param="event_evening",hour=10},
+	{﻿id="春晴朗傍晚",name="春晴朗傍晚",season="春",weather="晴朗",type="傍晚",descriptionOut="夜晚降临了，远处的群山渐在你的视野里模糊了",descriptionIn="夜幕笼罩著大地，四周掩映在迷茫的夜色里",color="青色",param="event_night",hour=11},
+	{﻿id="春晴朗傍晚",name="春晴朗傍晚",season="春",weather="晴朗",type="傍晚",descriptionOut="夜晚降临了，远处的群山渐在你的视野里模糊了",descriptionIn="夜幕笼罩著大地，四周掩映在迷茫的夜色里",color="青色",param="event_night",hour=12}
+	}
