@@ -4,7 +4,6 @@
 ---
 messages = {}
 local message = {text="",x,y,speed,range,color}
-
 messages.update = function(dt)
     local vx,vy
     local lx,ly
@@ -21,23 +20,15 @@ messages.update = function(dt)
             table.remove(messages,i)
         end
     end
-
-
 end
 
 messages.draw = function()
     for i = #messages,1,-1 do
         local b = messages[i]
         local wide = #b.text
-        --local vx,vy
-        --vx = b.speed * math.cos(b.r)
-        --vy = b.speed * math.sin(b.r)
-        --b.x = b.x + vx
-        --b.y = b.y + vy
         love.graphics.setColor(b.color)
         love.graphics.print(b.text,b.x-40,b.y)
         love.graphics.setColor({255,255,255,255})
-        --love.graphics.rectangle("fill",200,200,200,200)
     end
 end
 

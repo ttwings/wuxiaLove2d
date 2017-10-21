@@ -2,8 +2,6 @@
 --- Created by ttwings.
 --- DateTime: 2017/10/8 23:01
 ---
-require("animations")
-require("lib.messages")
 bullets = {}
 local cd = 0
 local message={}

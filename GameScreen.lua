@@ -1,17 +1,5 @@
 local Screen = require( "lib/Screen" )
 local sti = require "sti"
-local actorsdata=require "assets/data/actors"
-local anim8 = require 'lib/anim8'
-require "Date"
-require "Actor"
-require "Npc"
-require "assets/data/actors"
-require "assets/data/rooms"
-require "lib/guiDraw"
-require "lib/drawTool"
-require("animations")
-require("region")
-
 local GameScreen = {}
 local map
 local world
@@ -35,7 +23,6 @@ function canvasLoad()
 	love.graphics.clear()
 	map:draw(-tx,-ty)
 	map:box2d_draw(-tx,-ty)
-
 	love.graphics.setCanvas()
 end
 
@@ -74,7 +61,6 @@ function loadData(  )
 		-- Update callback for Custom Layer
 		region.objs =  map.layers["objs"].objects
 		function spriteLayer:update(dt)
-
 			local objs = region.objs
 			for i=#objs,1,-1 do
 				local objName = objs[i].name
@@ -97,7 +83,6 @@ function loadData(  )
 				actor:drawAnim()
                 actor:draw()
 				--npcs:drawAnim()
-
 				animations.draw()
 			end
 		end

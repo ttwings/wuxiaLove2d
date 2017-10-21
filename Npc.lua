@@ -1,4 +1,3 @@
-require( "Actor" )
 npcs={}
 function npcs:add(npc)
 	table.insert( self, npc )

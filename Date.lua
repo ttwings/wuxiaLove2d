@@ -1,4 +1,3 @@
-require("lib.Color")
 date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
 animals = {"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
 weeks 	= {"上旬","中旬","下旬"}

@@ -2,10 +2,7 @@
 --- Created by ttwings.
 --- DateTime: 2017/10/19 19:52
 ---
-require("assets.data.objs")
-require("bullets")
-require("lib.messages")
-require("region")
+
 actions={}
 actions.eat = function(actor,target)
     if not objs[target] then return end

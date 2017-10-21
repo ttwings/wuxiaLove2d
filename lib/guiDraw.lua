@@ -1,48 +1,61 @@
 local lg=love.graphics
 local lp=love.graphics.print
 local lf=love.graphics.printf
-require "lib/guiData"
-require "assets/data/rooms"
-require("lib.Color")
+
 local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 local text = love.graphics.newText(font,"")
 local gui = {}
+--  table data
+function guiUpdata(actor,dt)
+	--- 人物基本信息
+	guiData["头像"].image=actor.faceImg
+	guiData["名称"].contant=actor.name
+	guiData["称号"].contant=actor.epithet
+	guiData["世家"].contant=actor.clan
+	-- gui["身份"].contant=actor["身份"]
+	--- 人物基本状态
+	guiData["气血"].now=actor.hp
+	guiData["真气"].now=actor.mp
+	guiData["精力"].now=actor.ep
+	guiData["食物"].now = actor.food
+	guiData["饮水"].now = actor.water
+	--- 世界位置，区域位置
+	guiData["区域"].contant=actor.region
+	guiData["地图"].title=actor.region
+	guiData["房间"].contant=actor.room
+	--- 状态机
+	guiData["行为"].contant = actor.state
+	local text = string.format("%d:%d",actor.x,actor.y)
+	guiData["坐标"].contant =  text
+	--- 目标信息
+	if rooms[actor.room] and #actor.room>2 then
+		guiData["描述"].contant=rooms[actor.room]["description"]
+	elseif objs[actor.target] then
+		guiData["描述"].contant=objs[actor.target].description
+	elseif actors[actor.target] then
+		guiData["描述"].contant=actors[actor.target].description
+	else
+		guiData["描述"].contant=""
+	end
+
+	guiData["对话"].image=actor.faceImg
+	guiData["商铺"].image = actor.faceImg
+	guiData["发现"].contant=actor.target
+	guiData["信息"].contant=actor.action
+	guiData["口袋"].contant = actor.misc --- table value
+	messages.update(dt)
+end
+
 function guiDraw()
-	local color={}
 	for i, v in pairs( guiData ) do
-		if v.visible and v.type=="txt"then
-			gui.text(v)
-		elseif v.visible and v.type=="image" then
-			gui.image(v)
-		elseif v.visible and v.type=="barHP" then
-			gui.barHP(v)
-		elseif v.visible and v.type=="barMP" then
-			gui.barMP(v)
-		elseif v.visible and v.type=="barAP" then
-			gui.barAP(v)
-		elseif v.visible and v.type=="barFood" then
-			gui.barFood(v)
-		elseif v.visible and v.type=="barWater" then
-			gui.barWater(v)
-		elseif v.visible and v.type=="state" then
-			gui.state(v)
-		elseif v.visible and v.type=="long" then
-			gui.long(v)
-		elseif v.visible and v.type=="dialog" then
-			gui.dialog(v)
-		elseif v.visible and v.type=="map" then
-			gui.map(v)
-		elseif v.visible and v.type=="shop" then
-			gui.shop(v)
-		elseif v.visible and v.type=="skill" then
-			gui.skill(v)
-		elseif v.visible and v.type=="bag" then
-			gui.bag(v)
+		if v.visible and gui[v.type] then
+			gui[v.type](v)
 		end
 	end
+	messages.draw()
 end
 --  不同的gui部件。
-gui.text = function(v)
+gui.txt = function(v)
 	local color=Color[v.color] or {255,255,255,255}
 	text:set({color,v.contant})
 	love.graphics.draw(text,v.x,v.y)
@@ -160,52 +173,10 @@ gui.bag = function(v)
 	love.graphics.setColor(0, 0, 0, alpha)
 	love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
 	love.graphics.setColor(255, 255, 255, 255)
-	--text:setf({color,v.contant},v.width,v.align)
-	--love.graphics.draw(text,v.x,v.y+4)
 	love.graphics.print(v.title,v.x,v.y-20)
 	bagItem(v.contant,v.x,v.y)
 end
 
---  table data
-function guiUpdata(actor,dt)
-	--- 人物基本信息
-	guiData["头像"].image=actor.faceImg
-	guiData["名称"].contant=actor.name
-	guiData["称号"].contant=actor.epithet
-	guiData["世家"].contant=actor.clan
-	-- gui["身份"].contant=actor["身份"]
-	--- 人物基本状态
-	guiData["气血"].now=actor.hp
-	guiData["真气"].now=actor.mp
-	guiData["精力"].now=actor.ep
-	guiData["食物"].now = actor.food
-	guiData["饮水"].now = actor.water
-	--- 世界位置，区域位置
-	guiData["区域"].contant=actor.region
-	guiData["地图"].title=actor.region
-	guiData["房间"].contant=actor.room
-	--- 状态机
-	guiData["行为"].contant = actor.state
-	local text = string.format("%d:%d",actor.x,actor.y)
-	guiData["坐标"].contant =  text
-	--- 目标信息
-	if rooms[actor.room] and #actor.room>2 then
-		guiData["描述"].contant=rooms[actor.room]["description"]
-	elseif objs[actor.target] then
-		guiData["描述"].contant=objs[actor.target].description
-	elseif actors[actor.target] then
-		guiData["描述"].contant=actors[actor.target].description
-	else
-		guiData["描述"].contant=""
-	end
-
-	guiData["对话"].image=actor.faceImg
-	guiData["商铺"].image = actor.faceImg
-	guiData["发现"].contant=actor.target
-	guiData["信息"].contant=actor.action
-	guiData["口袋"].contant = actor.misc --- table value
-
-end
 --- 条形图，如气血、真气、精力、食物、饮水
 function bar(now,max,x,y,color)
 	love.graphics.rectangle("line",x,y-18,128,8,4)

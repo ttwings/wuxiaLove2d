@@ -1,13 +1,6 @@
-Class=require "lib/middleclass"
-anim8=require "lib/anim8"
-require "assets/data/actors"
-require "assets/data/mapWuGuan"
-require("bullets")
-require("lib.messages")
-require( "assets/data/skills" )
-require("lib.Color")
-require("keymap")
-require("Actions")
+local Class=require "lib/middleclass"
+local anim8=require "lib/anim8"
+
 ---- test bullet
 bullet={}
 message={}
