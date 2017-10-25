@@ -26,6 +26,7 @@ actions.eat = function(actor,target)
             local objName = region.objs[i].name
             if objName == target then
                 table.remove(region.objs,i)
+                table.insert(actor.misc,target)
             end
         end
     end
@@ -44,5 +45,20 @@ actions.fire = function(actor,target)
     --bullet.damage=5
     actor.mp = actor.mp - bullet.mp
     bullets.add(bullet)
-    cd = 0
+--    cd = 0
+end
+
+actions.wear = function(actor,target)
+    if armor.target and armor[target].type=="衣服" then
+        if actor.body == "无" then
+            actor.body = target
+            local msg = armor[target].messageC
+            msg = string.gsub(msg,"$N",actor.name)
+            msg = string.gsub(msg,"$n",target)
+            messages.add(msg)
+        else
+            table.insert(actor.misc,actor.body)
+            actor.body = target
+        end
+    end
 end

@@ -11,4 +11,5 @@ region.objs={}
 region.actors={}
 -- 保存工作信息
 region.jobs={}
+region.tiledMap = "wuguan"
 return region

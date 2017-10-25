@@ -74,9 +74,9 @@ local function _setClassMetamethods(aClass)
   end
 end
 
-local function _setDefaultInitializeMethod(aClass, super)
-  aClass.initialize = function(instance, ...)
-    return super.initialize(instance, ...)
+local function _setDefaultinitMethod(aClass, super)
+  aClass.init = function(instance, ...)
+    return super.init(instance, ...)
   end
 end
 
@@ -107,7 +107,7 @@ end
 
 function Object.static:new(...)
   local instance = self:allocate()
-  instance:initialize(...)
+  instance:init(...)
   return instance
 end
 
@@ -117,10 +117,10 @@ function Object.static:subclass(name)
 
   local subclass = _createClass(name, self)
   _setClassMetamethods(subclass)
-  _setDefaultInitializeMethod(subclass, self)
+  _setDefaultinitMethod(subclass, self)
+  self.init = self.init
   self.subclasses[subclass] = true
   self:subclassed(subclass)
-
   return subclass
 end
 
@@ -153,7 +153,7 @@ function Object.static:includes(mixin)
          )
 end
 
-function Object:initialize() end
+function Object:init() end
 
 function Object:__tostring() return "instance of " .. tostring(self.class) end
 

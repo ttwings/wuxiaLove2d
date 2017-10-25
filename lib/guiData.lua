@@ -23,8 +23,10 @@ guiData={
 	["发现"]={visible=true,type="txt",x=440,y=40,contant="",color=nil},
 	["坐标"]={visible=true,type="txt",x=200,y=40,contant="",color=nil},
 	["信息"]={visible=true,title="讯息",type="long",x=8,y=400,width=280,height=340,alpha=64,contant="",color=nil},
-	["商铺"]={visible=true,type="shop",x=320,y=200,width=640,height=400,alpha=200,contant="",color=nil,image=""},
-	["口袋"]={visible=true,title="口袋",type="bag",x=1080,y=500,width=200,height=200,alpha=64,contant=nil,align="center",color=nil},
+	["商铺"]={visible=false,type="shop",x=320,y=200,width=640,height=400,alpha=200,contant="",color=nil,image=""},
+	["口袋"]={visible=true,title="口袋",type="bag",x=1080,y=500,width=200,height=240,alpha=64,contant=nil,align="center",color=nil},
+	["装备"]={visible=true,title="身穿",type="equip",x=1080,y=250,width=200,height=128,alpha=64,contant=nil,align="center",color=nil},
+	["钱币"]={visible=true,title="钱币",type="money",x=1080,y=400,width=200,height=24,alpha=64,contant=nil,align="center",color=nil},
 
 }
 

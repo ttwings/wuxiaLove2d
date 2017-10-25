@@ -70,12 +70,12 @@ function date:draw()
 	love.graphics.print(dateStr,800,0)
 	love.graphics.setColor(Color[colorStr])
 	love.graphics.print(text[2],330,0)
+	love.graphics.setColor(255,255,255,255)
 end
 
 --- 将数字转为文字
 ---@return string
 function replaseNumber(number)
-	-- local numbers = number ..""
 	numbers = string.gsub(number,"1", "一")
 	numbers = string.gsub(numbers,"2", "二")
 	numbers = string.gsub(numbers,"3", "三")

@@ -18,3 +18,4 @@ keymap.R2 = "o"
 keymap.start = "h"
 keymap.select = "g"
 --- key map
+return keymap

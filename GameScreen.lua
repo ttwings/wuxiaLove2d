@@ -6,7 +6,6 @@ local world
 local tx, ty
 local font
 local canvas = love.graphics.newCanvas()
-local canvasGUI = love.graphics.newCanvas()
 local tx
 local ty
 -- shader
@@ -15,8 +14,7 @@ vec4 effect(vec4 color,Image texture,vec2 tc,vec2 sc){
 	return Texel(texture,vec2((tc.x-0.5)/(tc.y + 1.5)+0.5,tc.y));
 }
 ]]
-shader = love.graphics.newShader(code)
-
+local shader = love.graphics.newShader(code)
 -- npc table
 function canvasLoad()
 	love.graphics.setCanvas(canvas)
@@ -26,18 +24,7 @@ function canvasLoad()
 	love.graphics.setCanvas()
 end
 
-function canvasGUIload()
-	love.graphics.setCanvas(canvas)
-	love.graphics.clear()
-	guiDraw()
-	love.graphics.print("FPS:" .. love.timer.getFPS(),1220,0)
-	drawTile(actorImgs[1],0,0,32,48,640,400)
-	-- 绘制时间
-	 date.draw()
-	love.graphics.setCanvas()
-end
-
-function loadData(  )
+local function loadData(  )
 		-- actor class
 		actor=Actor:new(actors["段誉"])
 		npcs:add(actors,5)
@@ -57,6 +44,7 @@ function loadData(  )
 
 		spriteLayer.sprites = {
 			player = {}
+
 		}
 		-- Update callback for Custom Layer
 		region.objs =  map.layers["objs"].objects
@@ -88,14 +76,19 @@ function loadData(  )
 		end
 		canvasLoad()
 end
-
+GameScreen.cam = {}
 function GameScreen.new(  )
 	local self=Screen.new()
+	GameScreen.cam = Camera.new(0,0,1280,800)
+
 	loadData()
+
 	function self:draw()
 		love.graphics.setShader(shader)
-		love.graphics.draw(canvas)
 
+		GameScreen.cam:draw(function()
+			love.graphics.draw(canvas)
+		end)
 		love.graphics.setShader()
 		-- GUI
 		guiDraw()
@@ -117,6 +110,7 @@ function GameScreen.new(  )
     	guiUpdata(actor,dt)
 		animations.update(dt)
     	date.update()
+--		GameScreen.cam:shakeUpdate()
 	end
 	function self:keypressed(key)
 		actor:keypressed(key)

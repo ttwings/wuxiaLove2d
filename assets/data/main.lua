@@ -1,6 +1,4 @@
 require "txt2table"
-require "mapWuGuan"
-require "printc"
 -- require "../lib/printc"
 
 font = love.graphics.newFont("simsun.ttf", 18)
@@ -22,7 +20,9 @@ function love.load()
 	-- excel2table("","skills","skills")
 	-- excel2table("","actors","actors")
 	-- excel2table("","objs","objs")
-	excel2table("","dates","dates")
+	-- excel2table("","dates","dates")
+	-- excel2table("","armors","armors")
+	excel2table("","foods","foods")
 
 	-- excel2array("","names","names")
 	-- excel2array("","itemStage","itemStage")

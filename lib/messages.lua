@@ -11,7 +11,7 @@ messages.update = function(dt)
     for i = #messages,1,-1 do
         b = messages[i]
         vx = 0
-        vy = b.speed *dt
+        vy = b.speed *dt or 150
         b.x = b.x + vx
         b.y = b.y - vy
         lx = b.x - b.x0
@@ -32,8 +32,22 @@ messages.draw = function()
     end
 end
 
-messages.add = function(bullet)
-    table.insert(messages,bullet)
+messages.add = function(message)
+    if type(message)=="string" then
+        local msg = {}
+        msg.text = message
+        msg.x = 640
+        msg.y = 400
+        msg.x0 = 640
+        msg.y0 = 400
+        msg.speed = 150
+        msg.range = 150
+        msg.color = Color.YELLOW
+        table.insert(messages,msg)
+    else
+        table.insert(messages,message)
+    end
+
 end
 
 return messages

@@ -19,6 +19,7 @@ function guiUpdata(actor,dt)
 	guiData["精力"].now=actor.ep
 	guiData["食物"].now = actor.food
 	guiData["饮水"].now = actor.water
+
 	--- 世界位置，区域位置
 	guiData["区域"].contant=actor.region
 	guiData["地图"].title=actor.region
@@ -43,6 +44,10 @@ function guiUpdata(actor,dt)
 	guiData["发现"].contant=actor.target
 	guiData["信息"].contant=actor.action
 	guiData["口袋"].contant = actor.misc --- table value
+	guiData["装备"].contant = actor.equip
+	guiData["技能"].contant = actor.skill
+	guiData["钱币"].contant = actor.money
+	--- 更新飞行消息
 	messages.update(dt)
 end
 
@@ -53,6 +58,8 @@ function guiDraw()
 		end
 	end
 	messages.draw()
+	--- 绘制时间信息
+	date.draw()
 end
 --  不同的gui部件。
 gui.txt = function(v)
@@ -164,8 +171,9 @@ gui.skill = function(v)
 	love.graphics.setColor(0, 0, 0, alpha)
 	love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
 	love.graphics.setColor(255, 255, 255, 255)
-	text:setf({color,v.contant},v.width,v.align)
-	love.graphics.draw(text,v.x,v.y+4)
+	--text:setf({color,v.contant[1]},v.width,v.align)
+	--love.graphics.draw(text,v.x,v.y+4)
+	skillItem(v.contant,v.x,v.y)
 end
 gui.bag = function(v)
 	local alpha = v.alpha or 128
@@ -176,7 +184,24 @@ gui.bag = function(v)
 	love.graphics.print(v.title,v.x,v.y-20)
 	bagItem(v.contant,v.x,v.y)
 end
-
+gui.equip = function(v)
+	local alpha = v.alpha or 128
+	local color=Color[v.color] or {0,0,0,255}
+	love.graphics.setColor(0, 0, 0, alpha)
+	love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.print(v.title,v.x,v.y-20)
+	equipItem(v.contant,v.x,v.y)
+end
+gui.money = function(v)
+	local alpha = v.alpha or 128
+	local color=Color[v.color] or {0,0,0,255}
+	love.graphics.setColor(0, 0, 0, alpha)
+	love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.print(v.title,v.x,v.y-20)
+	moneyItem(v.contant,v.x,v.y)
+end
 --- 条形图，如气血、真气、精力、食物、饮水
 function bar(now,max,x,y,color)
 	love.graphics.rectangle("line",x,y-18,128,8,4)
@@ -189,8 +214,34 @@ end
 --- 背包绘制
 function bagItem(bag,x,y)
 	local bag = bag or actor.misc or {"物品1","物品2"}
-	local contant = ""
+	local item = {"[一]","[二]","[三]","[四]","[五]","[六]","[七]","[八]","[九]"}
 	for i, v in ipairs(bag) do
-		love.graphics.print(v,x,y+i*20-20)
+		love.graphics.print(item[i]..v,x,y+i*20-20)
+	end
+end
+--- 装备绘制
+function equipItem(equips,x,y)
+	local equips = equips or actor.equips or {"布巾","白色茶花丝衣","无","琉璃折扇","镶金龙纹腰带","鞋"}
+	local item = {"[头]","[身]","[背]","[手]","[腰]","[足]"}
+	for i, v in ipairs(equips) do
+		local text = string.format("%s%s",item[i],v)
+		love.graphics.print(text,x,y+i*20-20)
+	end
+end
+--- 金钱绘制
+function moneyItem(money,x,y)
+	local m = tonumber(1245)
+	local g1,g2 = math.modf(m/1000),math.modf(m%1000)
+	local text = string.format("%18d贯%6d钱",g1,g2)
+	love.graphics.print(text,x,y)
+end
+
+--- 技能绘制
+function skillItem(skills,x,y)
+	local skills = skills or skills.equips or {"罗汉拳"}
+	local item = {"[招式一]","[招式二]","[招式三]","[招式四]","[身法]","[内功]"}
+	for i, v in ipairs(skills) do
+		local text = string.format("%s%s",item[i],v)
+		love.graphics.print(text,x+(i-1)*200,y+8)
 	end
 end

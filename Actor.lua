@@ -1,6 +1,6 @@
 local Class=require "lib/middleclass"
 local anim8=require "lib/anim8"
-
+require("keymap")
 ---- test bullet
 bullet={}
 message={}
@@ -8,7 +8,7 @@ Actor=Class("actor")
 Actor["actorMsg"]={}
 Actor["anim"]={}
 Actor["menu"]=false
-function Actor:initialize(data)
+function Actor:init(data)
 	self:readData(data)
 end
 function Actor:readData(data)
@@ -20,63 +20,28 @@ function Actor:readData(data)
 	self:anims()
 	self["animNow"]=self["anim"]["moveDown"]
 end
-
--- 坐标移动
-function Actor:move(x,y,dt)
-	local speed = 25600
-	local dx,dy=x-self.x,y-self.y
-	local round=dx^2+dy^2
-	if round<4 then return end
-	if math.abs(dx)>math.abs(dy) then
-		self.x = self.x + math.sign(dx)*speed*dt
-	elseif math.abs(dx)<math.abs(dy) then
-		self.y = self.y + math.sign(dy)*speed*dt
-	elseif math.abs(dx)==math.abs(dy) then
-		self.x = self.x + math.sign(dx)*speed*dt
-		self.y = self.y + math.sign(dy)*speed*dt
-	end
-end
-
---------------------------- love2d 绘制部分 ---------------
-function Actor:drawMsg()
-	if self.actorMsg~=nil then
-		for i = 1, #self.actorMsg do
-			love.graphics.print(self.actorMsg[i], 20, 400+i*20)
-		end
-	end
-end
--- 背包绘制
-function Actor:drawBag()
-	if self.bag~=nil then
-		for i = 1, #self.bag do
-			love.graphics.print(self.bag[i], 1220, 400+i*20)
-		end
-	end
-end
-
 --------------------------- 键盘控制 ------------------------
-
-cd=0
+local cd=0
 function Actor:key(dt)
 	cd = cd + dt
-	speed = 600
+	speed = 16
 	--cd=cd-dt
 	if love.keyboard.isDown(keymap.R) then
-		self.x = self.x + dt*speed
+		self.x = self.x + speed
 		self.animNow=self.anim.moveRight
 		self.r = 0
 	elseif love.keyboard.isDown(keymap.L) then
-		self.x = self.x - dt*speed
+		self.x = self.x - speed
 		self.animNow=self.anim.moveLeft
 		self.r = math.pi
 	end
 
 	if love.keyboard.isDown(keymap.D) then
-		self.y = self.y + dt*speed
+		self.y = self.y + speed
 		self.animNow=self.anim.moveDown
 		self.r = math.pi/2
 	elseif love.keyboard.isDown(keymap.U) then
-		self.y = self.y - dt*speed
+		self.y = self.y - speed
 		self.animNow=self.anim.moveUp
 		self.r = math.pi*1.5
 	end
@@ -110,7 +75,7 @@ function Actor:draw()
 	--Actor:drawBag()
 	--Actor:drawFly()
 	bullets.draw()
-	messages.draw()
+	--messages.draw()
 end
 
 function Actor:update(dt)
@@ -118,7 +83,6 @@ function Actor:update(dt)
 	self:atRoom()
 	self["animNow"]:update(dt)
 	bullets.update(dt)
-	messages.update(dt)
 	self:heartbeat(dt)
 end
 ------------------ 更新角色的位置 --------------
@@ -167,11 +131,4 @@ end
 
 function Actor:drawAnim()
 	self["animNow"]:draw(self.image,self.x/2,self.y/2)
-end
---------------------------- 获得物品 ---------------------------
-function getObj()
-	if self.target~=nil then
-    	table.insert( self.misc,self.target)
-		print( #self.misc .. ":"..self.misc[#self.misc] )
-   end
 end

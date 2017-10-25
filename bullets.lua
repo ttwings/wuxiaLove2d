@@ -2,9 +2,9 @@
 --- Created by ttwings.
 --- DateTime: 2017/10/8 23:01
 ---
+local GameScreen = require("GameScreen")
 bullets = {}
 local cd = 0
-local message={}
 bullets.update = function(dt)
     cd = cd + dt
     local vx,vy
@@ -21,9 +21,11 @@ bullets.update = function(dt)
         ly = b.y - b.y0
         if (lx^2 + ly^2)>b.range^2 then
             table.remove(bullets,i)
-            message = {text=b.name..":"..b.dmgt..b.damage,x=b.x,y=b.y,x0=b.x,y0=b.y,w=2,h=2,r=0,speed=50,range=100,color={255,255,0},cd=2}
+        --- 屏幕震动测试
+            GameScreen.cam:shake(0.1,4)
+            --message = {text=b.name..":"..b.dmgt..b.damage,x=b.x,y=b.y,x0=b.x,y0=b.y,w=2,h=2,r=0,speed=50,range=100,color={255,255,0},cd=2}
             animations.add(b.anim,b.x,b.y)
-            messages.add(message)
+            messages.add(b.name)
         end
     end
 end
@@ -39,11 +41,12 @@ bullets.draw = function()
 end
 
 bullets.add = function(bullet)
+    if cd < bullet.cd then return end
     if cd > bullet.cd then
         cd = 0
-        for i = 1, bullet.combo do
+--        for i = 1, bullet.combo do
             table.insert(bullets,bullet)
-        end
+--        end
     end
 end
 

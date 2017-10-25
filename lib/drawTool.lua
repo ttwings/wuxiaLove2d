@@ -1,28 +1,8 @@
--- color
-colorT={
-	["red"]={r=255,g=0,b=0,a=255},
-	["green"]={r=0,g=255,b=0,a=255}
-}
-function setColor(color)
-	love.graphics.setColor(color["r"],color["g"],color["b"],color["a"])
-end
-
--- color draw
--- r rectangle={x,y,w,h}
--- c color={r,g,b,a}
 function colorRec(r,c)
 	if c==nil then c={r=255,g=255,b=255,a=255} end
 	love.graphics.setColor(c.r,c.g,c.b,c.a)
 	love.graphics.rectangle("fill", r.x, r.y, r.w, r.h)
 	love.graphics.setColor(255,255,255,255)
-end
--- 设置色彩
-function setColor(r,g,b,a)
-	if r==nil or g==nil or b==nil or a==nil then
-		love.graphics.setColor(255, 255, 255, 255)
-	else
-		love.graphics.setColor(r,g,b,a)
-	end
 end
 -- 绘制矩阵
 function drawRectangle(r)

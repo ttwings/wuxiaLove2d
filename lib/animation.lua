@@ -11,7 +11,7 @@ Class = require "lib/middleclass"
 local animation=Class("ani")
 
 
-function animation:initialize(img,fx,fy,w,h,offx,offy,lx,ly,delay,count) 
+function animation:init(img,fx,fy,w,h,offx,offy,lx,ly,delay,count)
 
 	self.img=img
 	local sw,sh= img:getDimensions()

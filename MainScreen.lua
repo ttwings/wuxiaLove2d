@@ -10,7 +10,6 @@ local index = 1
 function MainScreen.new(  )
     love.graphics.setFont(font)
     local self = Screen.new()
-    local x, y, w, h = 20, 20, 40, 20
     title = love.graphics.newText(titlefont, "武侠与江湖")
     menu[1] = { color = { 255, 0, 0, 255 }, text = "新的穿越" }
     menu[2] = { color = { 255, 0, 0, 255 }, text = "梦回武林" }
@@ -31,7 +30,6 @@ function MainScreen.new(  )
                 menu[i].color = { 0, 0, 0, 255 }
             end
         end
-
         snow.draw()
     end
 
