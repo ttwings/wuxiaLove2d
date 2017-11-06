@@ -2,7 +2,8 @@
 --- Created by ttwings.
 --- DateTime: 2017/10/19 19:52
 ---
-
+require("assets.data.armors")
+__TESTING = true
 actions={}
 actions.eat = function(actor,target)
     if not objs[target] then return end
@@ -32,33 +33,95 @@ actions.eat = function(actor,target)
     end
 
 end
-
+---@type actor actorData
 actions.fire = function(actor,target)
-    local bullet = skills[actor.skill1[1]]
-    bullet.x=actor.x/2
-    bullet.y=actor.y/2
-    bullet.x0=actor.x/2
-    bullet.y0=actor.y/2
+    local bullet = skills[actor.mainHand]
+    bullet.x=actor.x
+    bullet.y=actor.y
+    bullet.x0=actor.x
+    bullet.y0=actor.y
     bullet.w=4
     bullet.h=4
     bullet.r=actor.r
     --bullet.damage=5
     actor.mp = actor.mp - bullet.mp
+
     bullets.add(bullet)
 --    cd = 0
 end
 
 actions.wear = function(actor,target)
-    if armor.target and armor[target].type=="衣服" then
-        if actor.body == "无" then
-            actor.body = target
-            local msg = armor[target].messageC
+    if armors[target] and armors[target].type=="衣服" then
+        if actor.equip[2] == "无" then
+            actor.equip[2] = target
+            local msg = armors[target].messageC or "$N将$n穿在身上！"
             msg = string.gsub(msg,"$N",actor.name)
             msg = string.gsub(msg,"$n",target)
             messages.add(msg)
         else
-            table.insert(actor.misc,actor.body)
-            actor.body = target
+            table.insert(actor.misc,actor.equip[2])
+            actor.equip[2] = target
+        end
+    end
+end
+---@param actor actorData
+---@param target actorData
+actions.unwear = function(actor,target)
+    if actor ~= "无" then
+        table.insert(actor.misc,actor.equip[2])
+        actor.equip[2] = "无"
+    end
+end
+
+
+actions.bagItemUp = function(actor,target)
+    if #actor.misc > 0 then
+        if actor.index > 1 then
+            actor.index = actor.index - 1
+        end
+        actor.target = actor.misc[actor.index]
+    end
+    print(actor.target)
+end
+
+actions.bagItemDown = function(actor,target)
+    if #actor.misc > 0 then
+        if actor.index < #actor.misc then
+            actor.index = actor.index + 1
+        end
+        actor.target = actor.misc[actor.index]
+    end
+    print(actor.target)
+end
+
+actions.find = function(actor,target)
+    local objs = region.objs
+    for i=#objs,1,-1 do
+        local objName = objs[i].name
+        local bx,by = objs[i].x,objs[i].y
+        local ax,ay = actor.x/2,actor.y/2
+        local distance=math.abs(bx-ax) + math.abs(by-ay)
+        if (distance<100) then
+            actor.target = objName
+            actor.tx = bx
+            actor.ty = by
+            break
+        else
+            actor.target = ""
+        end
+    end
+end
+actions.gather = function(actor,target)
+    if armors[target] and armors[target].type=="药草" then
+        if actor.equip[2] == "无" then
+            actor.equip[2] = target
+            local msg = armors[target].messageC or "$N将$n穿在身上！"
+            msg = string.gsub(msg,"$N",actor.name)
+            msg = string.gsub(msg,"$n",target)
+            messages.add(msg)
+        else
+            table.insert(actor.misc,actor.equip[2])
+            actor.equip[2] = target
         end
     end
 end

@@ -4,8 +4,9 @@ local lf=love.graphics.printf
 
 local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 local text = love.graphics.newText(font,"")
+
 local gui = {}
---  table data
+---@param actor actorData
 function guiUpdata(actor,dt)
 	--- 人物基本信息
 	guiData["头像"].image=actor.faceImg
@@ -16,7 +17,10 @@ function guiUpdata(actor,dt)
 	--- 人物基本状态
 	guiData["气血"].now=actor.hp
 	guiData["真气"].now=actor.mp
-	guiData["精力"].now=actor.ep
+	guiData["精力"].now=actor.ap
+	guiData["气血"].max=actor.maxHP
+	guiData["真气"].max=actor.maxMP
+	guiData["精力"].max=actor.maxAP
 	guiData["食物"].now = actor.food
 	guiData["饮水"].now = actor.water
 
@@ -26,6 +30,9 @@ function guiUpdata(actor,dt)
 	guiData["房间"].contant=actor.room
 	--- 状态机
 	guiData["行为"].contant = actor.state
+	guiData["增益"].contant = {{name="开心",num=12,color = Color["绿色"]}}
+	guiData["减益"].contant = {{name="伤心",num=122,color = Color["浅红"]}}
+
 	local text = string.format("%d:%d",actor.x,actor.y)
 	guiData["坐标"].contant =  text
 	--- 目标信息
@@ -38,14 +45,13 @@ function guiUpdata(actor,dt)
 	else
 		guiData["描述"].contant=""
 	end
-
 	guiData["对话"].image=actor.faceImg
 	guiData["商铺"].image = actor.faceImg
 	guiData["发现"].contant=actor.target
 	guiData["信息"].contant=actor.action
 	guiData["口袋"].contant = actor.misc --- table value
 	guiData["装备"].contant = actor.equip
-	guiData["技能"].contant = actor.skill
+	guiData["技能"].contant = {actor.mainHand,actor.offHand,actor.parry,actor.dodge}
 	guiData["钱币"].contant = actor.money
 	--- 更新飞行消息
 	messages.update(dt)
@@ -73,26 +79,22 @@ gui.image = function(v)
 	love.graphics.draw(image,v.x,v.y)
 end
 gui.barHP = function(v)
-	local maxHP=v.max
-	-- lg.print(v["contant"])
 	local color=Color[v.color] or {255,255,255,255}
 	text:set({color,v.title ..":"})
 	love.graphics.draw(text,v.x,v.y)
-	bar(v.now,maxHP,v.x+50,v.y+26,color)
+	bar(v.now,v.max,v.x+50,v.y+26,color)
 end
 gui.barMP = function(v)
-	local maxMP=v.max
 	local color=Color[v.color] or {255,255,255,255}
 	text:set({color,v.title ..":"})
 	love.graphics.draw(text,v.x,v.y)
-	bar(v.now,maxMP,v.x+50,v.y+26,color)
+	bar(v.now,v.max,v.x+50,v.y+26,color)
 end
 gui.barAP = function(v)
-	local max=v.max
 	local color=Color[v.color] or {255,255,255,255}
 	text:set({color,v.title ..":"})
 	love.graphics.draw(text,v.x,v.y)
-	bar(v.now,max,v.x+50,v.y+26,color)
+	bar(v.now,v.max,v.x+50,v.y+26,color)
 end
 gui.barFood = function(v)
 	local maxFood = v.max
@@ -113,6 +115,9 @@ gui.state = function(v)
 	for i, s in ipairs(debuff) do
 		love.graphics.print(s,v.x,v.y + i * 20-20)
 	end
+end
+gui.colorText = function(v)
+	buffs(v.contant,v.x,v.y)
 end
 gui.long = function(v)
 	local alpha = v.alpha or 128
@@ -238,10 +243,18 @@ end
 
 --- 技能绘制
 function skillItem(skills,x,y)
-	local skills = skills or skills.equips or {"罗汉拳"}
-	local item = {"[招式一]","[招式二]","[招式三]","[招式四]","[身法]","[内功]"}
+	local skills = skills or {"罗汉拳"}
+	local item = {"[主手]","[副手]","[招架]","[身法]","[内功]","[绝招]"}
 	for i, v in ipairs(skills) do
 		local text = string.format("%s%s",item[i],v)
 		love.graphics.print(text,x+(i-1)*200,y+8)
+	end
+end
+
+--- buffs 绘制
+function buffs(buffs,x,y)
+	for p, v in pairs(buffs) do
+		local text = {v.color,v.name}
+		love.graphics.print(text,x,y)
 	end
 end

@@ -4,18 +4,22 @@ require("keymap")
 ---- test bullet
 bullet={}
 message={}
-Actor=Class("actor")
+--- 角色数据
+---@class Actor
+Actor=Class("Actor")
 Actor["actorMsg"]={}
 Actor["anim"]={}
 Actor["menu"]=false
+
 function Actor:init(data)
 	self:readData(data)
+	self.index = 1
 end
 function Actor:readData(data)
 	for k,v in pairs( data ) do
 		self[k]=v
 	end
-	local actorImg=self["actorImg"] or "002-Fighter02.png"
+	local actorImg=self["actorImg"] or "actor (1).png"
 	self:image(actorImg)
 	self:anims()
 	self["animNow"]=self["anim"]["moveDown"]
@@ -58,7 +62,22 @@ keyFunc["闲逛"][keymap.select] = function(actor)
 	actor.state = "战斗"
 end
 keyFunc["闲逛"][keymap.A] = function(actor)
+	actions.find(actor,actor.target)
+end
+keyFunc["闲逛"][keymap.B] = function(actor)
 	actions.eat(actor,actor.target)
+end
+keyFunc["闲逛"][keymap.X] = function(actor)
+	actions.wear(actor,actor.target)
+end
+keyFunc["闲逛"][keymap.Y] = function(actor)
+	actions.unwear(actor,actor.target)
+end
+keyFunc["闲逛"][keymap.R1] = function(actor)
+	actions.bagItemUp(actor,actor.target)
+end
+keyFunc["闲逛"][keymap.L1] = function(actor)
+	actions.bagItemDown(actor,actor.target)
 end
 keyFunc["战斗"][keymap.B] = function(actor)
 	actions.fire(actor,actor.target)
@@ -88,9 +107,9 @@ end
 ------------------ 更新角色的位置 --------------
 function Actor:atRoom()
 	local rx,ry
-	rx = math.modf(self.x/256)+1 or 1
-	ry = math.modf(self.y/256)+1 or 1
-	if mapWuGuan[ry][rx] then
+	rx = math.modf(self.x/128)+1 or 1
+	ry = math.modf(self.y/128)+1 or 1
+	if mapWuGuan[ry] and mapWuGuan[ry][rx] then
 		self.room=mapWuGuan[ry][rx]
 	end
 end
@@ -98,15 +117,20 @@ end
 local heart = 0
 function Actor:heartbeat(dt)
 	heart = heart + dt
-	if heart > actor.Str/4 then
+	if heart > self.Str/4 then
 		heart = 0
 		self.food = self.food - 1
 		self.water = self.water - 1
 		if self.food < 90 then
-			self.debuff[1] = "饥饿"
+			if self.debuff then
+				table.insert(self.debuff,"饥饿")
+			else
+				self.debuff = {}
+				table.insert(self.debuff,"饥饿")
+			end
 		end
 		if self.water < 30 then
-			self.debuff[2] = "口渴"
+			table.insert(self.debuff,"口渴")
 		end
 		self.mp = math.min(self.mp + 1,100)
 		self.hp = math.min(self.hp + 1,100)
@@ -130,5 +154,6 @@ function Actor:anims()
 end
 
 function Actor:drawAnim()
-	self["animNow"]:draw(self.image,self.x/2,self.y/2)
+	love.graphics.print(self.name,self.x - 8,self.y - 24)
+	self["animNow"]:draw(self.image,self.x,self.y)
 end

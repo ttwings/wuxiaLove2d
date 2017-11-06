@@ -3,7 +3,6 @@ require("lib.Color")
 Camera = require("lib.gamera")
 require("lib.guiData")
 require("lib.guiDraw")
-require("lib.drawTool")
 require("lib.util")
 require("assets.data.actors")
 require("assets.data.mapWuGuan")
@@ -16,7 +15,7 @@ require("animations")
 require("bullets")
 require("Date")
 require("keymap")
-require("region")
+require("Region")
 require("Npc")
 __TESTING = true
 local ScreenManager = require( "lib/ScreenManager" )
@@ -33,9 +32,6 @@ end
 
 function love.draw()
 	ScreenManager.draw()
-	love.graphics.setColor(Color["紫色"])
-	love.graphics.drawLightning(400,0,400,400,100,1)
-	lg.setColor(Color.WHITE)
 end
 
 function love.update(dt)

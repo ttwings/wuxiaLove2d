@@ -9,7 +9,9 @@ guiData={
 	["精力"]={visible=true,title="精力",type="barAP",x=100,y=100,contant="",max=100,now=100,color="WHITE"},
 	["食物"]={visible=true,title="食物",type="barFood",x=100,y=120,contant="",max=100,now=100,color="YELLOW"},
 	["饮水"]={visible=true,title="饮水",type="barWater",x=100,y=140,contant="",max=100,now=100,color="SKY"},
-	["状态"]={visible=true,title="状态",type="state",x=0,y=100,contant="",max=100,now=100,color="SKY"},
+	["状态"]={visible=false,title="状态",type="state",x=0,y=100,contant="",max=100,now=100,color="SKY"},
+	["增益"]={visible=true,title="增益状态",type="colorText",x=0,y=100,contant={},max=100,now=100,color="SKY"},
+	["减益"]={visible=true,title="减益状态",type="colorText",x=0,y=140,contant={},max=100,now=100,color="SKY"},
 	["国家"]={visible=true,type="txt",x=100,y=180,contant="",color="RED"},
 	["门派"]={visible=true,type="txt",x=100,y=200,contant="",color="RED"},
 	["区域"]={visible=true,type="txt",x=400,y=20,contant="",color="GREEN"},
@@ -27,7 +29,7 @@ guiData={
 	["口袋"]={visible=true,title="口袋",type="bag",x=1080,y=500,width=200,height=240,alpha=64,contant=nil,align="center",color=nil},
 	["装备"]={visible=true,title="身穿",type="equip",x=1080,y=250,width=200,height=128,alpha=64,contant=nil,align="center",color=nil},
 	["钱币"]={visible=true,title="钱币",type="money",x=1080,y=400,width=200,height=24,alpha=64,contant=nil,align="center",color=nil},
-
+	--["钱币"]={visible=true,title="钱币",type="money",x=1080,y=400,width=200,height=24,alpha=64,contant=nil,align="center",color=nil},
 }
 
 return guiData

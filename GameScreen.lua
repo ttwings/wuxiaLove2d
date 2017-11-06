@@ -1,19 +1,20 @@
 local Screen = require( "lib/Screen" )
+local actorData = require("assets.data.actorData")
 local sti = require "sti"
 local GameScreen = {}
 local map
 local world
 local tx, ty
-local font
 local canvas = love.graphics.newCanvas()
 local tx
 local ty
--- shader
+---@language C
 local code =[[
 vec4 effect(vec4 color,Image texture,vec2 tc,vec2 sc){
 	return Texel(texture,vec2((tc.x-0.5)/(tc.y + 1.5)+0.5,tc.y));
 }
 ]]
+
 local shader = love.graphics.newShader(code)
 -- npc table
 function canvasLoad()
@@ -23,11 +24,12 @@ function canvasLoad()
 	map:box2d_draw(-tx,-ty)
 	love.graphics.setCanvas()
 end
-
+region = {}
 local function loadData(  )
 		-- actor class
-		actor=Actor:new(actors["段誉"])
-		npcs:add(actors,5)
+	---@param actor actorData
+		actor=Actor:new(actorData["段誉"])
+		
 		local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua",{"box2d"})
@@ -48,21 +50,11 @@ local function loadData(  )
 		}
 		-- Update callback for Custom Layer
 		region.objs =  map.layers["objs"].objects
+		region.actors = map.layers["sprites"].objects
+		npcs:load()
 		function spriteLayer:update(dt)
-			local objs = region.objs
-			for i=#objs,1,-1 do
-				local objName = objs[i].name
-				local bx,by = objs[i].x,objs[i].y
-				local ax,ay = actor.x/2,actor.y/2
-				local distance=math.abs(bx-ax) + math.abs(by-ay)
-				if (distance<100) then
-					actor.target = objName
-					actor.tx = bx
-					actor.ty = by
-					break
-				else
-					actor.target = ""
-				end
+			for _, sprite in pairs(self.sprites) do
+
 			end
 		end
 		--
@@ -70,7 +62,7 @@ local function loadData(  )
 			for _, sprite in pairs(self.sprites) do
 				actor:drawAnim()
                 actor:draw()
-				--npcs:drawAnim()
+				npcs:drawAnim()
 				animations.draw()
 			end
 		end
@@ -101,10 +93,10 @@ function GameScreen.new(  )
 		map:update(dt)
 		actor:key(dt)
 		actor:update(dt)
-        --npcs:update(dt)
+        npcs:update(dt)
 		-- 地图的位移
-		tx = math.floor((actor.x - 1280)/ 2)
-    	ty = math.floor((actor.y - 800)/ 2)
+		tx = math.floor((actor.x - 1280/2))
+    	ty = math.floor((actor.y - 800/2))
     	-- 画布
     	canvasLoad()
     	guiUpdata(actor,dt)

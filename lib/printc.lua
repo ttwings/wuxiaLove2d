@@ -1,11 +1,4 @@
---[[colorstr = "[NO]无色测试[RED]《血刀》[NO]插入文字测试：[GREEN]《玉箫剑法》[BLUE]《寒冰绵掌》[NO]汉字"
--- 色彩表
-colorT = {}
-colorT.RED = {255,0,0,255}
-colorT.GREEN = {0,255,0,255}
-colorT.BLUE = {0,0,255,255}
-colorT.YELLOW = {255,255,0,255}]]
-require( "Color" )
+require( "lib.Color" )
 -- 彩色标签中文文本输出
 function printc(text,x,y)
 	local x=x or 0
@@ -19,8 +12,8 @@ function printc(text,x,y)
 		else
 			table.insert(colorTable,{255,255,255,255})
 		end 			-- 匹配汉字
-		-- subtext = string.match(text,"[^x00-xff]+",index)
-		subtext = string.match(text,"/S.*",index)
+		 subtext = string.match(text,"[^x00-xff]+",index)
+		--subtext = string.match(text,"/S.*",index)
 		if subtext then
 			index = index+#c+#subtext+2  -- 定位下一个匹配位置
 		end
