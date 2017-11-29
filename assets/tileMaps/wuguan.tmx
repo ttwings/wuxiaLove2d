@@ -498,9 +498,9 @@
  </layer>
  <objectgroup name="sprites">
   <object id="55" name="player" x="3264" y="3776" width="32" height="32"/>
-  <object id="57" name="虚竹" x="864" y="704" width="32" height="32"/>
+  <object id="57" name="虚竹" x="3040" y="1888" width="32" height="32"/>
   <object id="58" name="段誉" x="576" y="128" width="32" height="32"/>
-  <object id="59" name="慕容复" x="288" y="416" width="32" height="32"/>
+  <object id="59" name="慕容复" x="1312" y="2720" width="32" height="32"/>
  </objectgroup>
  <layer name="cover" width="256" height="150">
   <data encoding="csv">

@@ -28,7 +28,7 @@ region = {}
 local function loadData(  )
 		-- actor class
 	---@param actor actorData
-		actor=Actor:new(actorData["段誉"])
+		actor=Actor:new(actorData["虚竹"])
 		
 		local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 		love.graphics.setFont(font)
@@ -64,6 +64,7 @@ local function loadData(  )
                 actor:draw()
 				npcs:drawAnim()
 				animations.draw()
+
 			end
 		end
 		canvasLoad()

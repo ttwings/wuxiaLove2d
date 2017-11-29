@@ -32,6 +32,9 @@ function npcs:drawAnim()
 	for i = #npcs,1,-1 do
 		self[i]:drawAnim()
 	end
+	--for k, v in pairs(npcs) do
+	--	self[k]:drawAnim()
+	--end
 end
 
 return npcs

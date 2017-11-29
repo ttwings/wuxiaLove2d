@@ -95,10 +95,6 @@ return {
 		hp = 74,
 		mp = 80,
 		ap = 110,
-		skills = {
-			长拳 = 123,
-			八段锦 = 12,
-		},
 		mainHand = "长拳",
 		offHand = "",
 		parry = "长拳",

@@ -10,10 +10,11 @@ Actor=Class("Actor")
 Actor["actorMsg"]={}
 Actor["anim"]={}
 Actor["menu"]=false
-
+Actor.heart = 8
 function Actor:init(data)
 	self:readData(data)
 	self.index = 1
+	self.heart = 1
 end
 function Actor:readData(data)
 	for k,v in pairs( data ) do
@@ -28,7 +29,7 @@ end
 local cd=0
 function Actor:key(dt)
 	cd = cd + dt
-	speed = 16
+	speed = 8
 	--cd=cd-dt
 	if love.keyboard.isDown(keymap.R) then
 		self.x = self.x + speed
@@ -114,11 +115,12 @@ function Actor:atRoom()
 	end
 end
 ------------------ 更新角色的状态 --------------
-local heart = 0
+--local heart = 0
 function Actor:heartbeat(dt)
-	heart = heart + dt
-	if heart > self.Str/4 then
-		heart = 0
+	self.heart = self.heart - dt
+	if self.heart < 0 then
+		-- 心跳
+		self.heart = 8
 		self.food = self.food - 1
 		self.water = self.water - 1
 		if self.food < 90 then
@@ -156,4 +158,41 @@ end
 function Actor:drawAnim()
 	love.graphics.print(self.name,self.x - 8,self.y - 24)
 	self["animNow"]:draw(self.image,self.x,self.y)
+
+	colorRectangle("fill",self.x,self.y + 50,self.hp,2,{255,0,0,255})
+	colorRectangle("fill",self.x,self.y + 52,self.mp,2,{0,0,255,255})
+	colorRectangle("fill",self.x,self.y + 54,self.ap,2,{0,255,0,255})
+
+	love.graphics.rectangle("line",self.x,self.y,32,48)
+	if self.mp>0 and #self.force>0 then
+		love.graphics.setColor(100,100,100,100)
+		love.graphics.circle("fill",self.x+16,self.y+24,24)
+		love.graphics.setColor(255,255,255,255)
+	end
+
+end
+
+function Actor:subHp(hp)
+	if self.hp - hp > 0 then
+		self.hp = self.hp - hp
+	else
+		self.hp = 0
+		self.state = "昏迷"
+	end
+end
+
+function Actor:subMp(mp)
+	if self.mp - mp > 0 then
+		self.mp = self.mp - mp
+	else
+		self.mp = 0
+		self.state = "昏迷"
+	end
+end
+
+function colorRectangle(mod,x,y,w,h,color)
+	local color = color or {255,255,255,255}
+	love.graphics.setColor(color)
+	love.graphics.rectangle(mod,x,y,w,h)
+	love.graphics.setColor(255,255,255,255)
 end

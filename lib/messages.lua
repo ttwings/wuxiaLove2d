@@ -27,7 +27,7 @@ messages.draw = function()
         local b = messages[i]
         local wide = #b.text
         love.graphics.setColor(b.color)
-        love.graphics.print(b.text,b.x-40,b.y)
+        love.graphics.print(b.text,b.x,b.y)
         love.graphics.setColor({255,255,255,255})
     end
 end

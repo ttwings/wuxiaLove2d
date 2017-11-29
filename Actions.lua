@@ -44,8 +44,8 @@ actions.fire = function(actor,target)
     bullet.h=4
     bullet.r=actor.r
     --bullet.damage=5
-    actor.mp = actor.mp - bullet.mp
-
+    --actor.mp = actor.mp - bullet.mp
+    actor:subMp(bullet.mp)
     bullets.add(bullet)
 --    cd = 0
 end
