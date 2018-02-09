@@ -22,7 +22,8 @@ local ScreenManager = require( "lib/ScreenManager" )
 screens = {
 	main=require( "MainScreen" ),
 	help=require( "HelpScreen" ),
-	game=require( "GameScreen" )
+	game=require( "GameScreen" ),
+	battle = require("BattleScreen")
 }
 
 function love.load( )

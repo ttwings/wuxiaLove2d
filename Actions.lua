@@ -36,10 +36,10 @@ end
 ---@type actor actorData
 actions.fire = function(actor,target)
     local bullet = skills[actor.mainHand]
-    bullet.x=actor.x
-    bullet.y=actor.y
-    bullet.x0=actor.x
-    bullet.y0=actor.y
+    bullet.x=actor.hx
+    bullet.y=actor.hy
+    bullet.x0=actor.hx
+    bullet.y0=actor.hy
     bullet.w=4
     bullet.h=4
     bullet.r=actor.r

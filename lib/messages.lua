@@ -3,7 +3,6 @@
 --- DateTime: 2017/10/9 1:11
 ---
 messages = {}
-local message = {text="",x,y,speed,range,color}
 messages.update = function(dt)
     local vx,vy
     local lx,ly

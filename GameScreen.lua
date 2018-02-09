@@ -29,7 +29,7 @@ local function loadData(  )
 		-- actor class
 	---@param actor actorData
 		actor=Actor:new(actorData["虚竹"])
-		
+
 		local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua",{"box2d"})

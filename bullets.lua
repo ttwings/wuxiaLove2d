@@ -29,14 +29,26 @@ bullets.update = function(dt)
             animations.add(b.anim,b.x,b.y)
             messages.add(b.name)
         end
-        if rectangleTest(b, actor) then
-            table.remove(bullets,i)
-            --- 屏幕震动测试
-            GameScreen.cam:shake(0.1,4)
-            --message = {text=b.name..":"..b.dmgt..b.damage,x=b.x,y=b.y,x0=b.x,y0=b.y,w=2,h=2,r=0,speed=50,range=100,color={255,255,0},cd=2}
-            animations.add(b.anim,b.x,b.y)
-            messages.add(b.damage)
-            actor:subHp(20)
+        --if rectangleTest(b, actor) then
+        --    table.remove(bullets,i)
+        --    --- 屏幕震动测试
+        --    GameScreen.cam:shake(0.1,4)
+        --    --message = {text=b.name..":"..b.dmgt..b.damage,x=b.x,y=b.y,x0=b.x,y0=b.y,w=2,h=2,r=0,speed=50,range=100,color={255,255,0},cd=2}
+        --    animations.add(b.anim,b.x,b.y)
+        --    messages.add(b.damage)
+        --    actor:subHp(20)
+        --end
+
+        for k, v in ipairs(npcs) do
+            if rectangleTest(b, v) then
+                table.remove(bullets,i)
+                --- 屏幕震动测试
+                GameScreen.cam:shake(0.1,4)
+                --message = {text=b.name..":"..b.dmgt..b.damage,x=b.x,y=b.y,x0=b.x,y0=b.y,w=2,h=2,r=0,speed=50,range=100,color={255,255,0},cd=2}
+                animations.add(b.anim,b.x,b.y)
+                messages.add(b.damage)
+                v:subHp(20)
+            end
         end
     end
 end

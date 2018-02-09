@@ -36,7 +36,7 @@ function MainScreen.new(  )
     function self:update( dt )
         snow.update(dt)
     end
-    local screenStr = { "game", "help", "main", "help" }
+    local screenStr = { "game", "help", "main", "battle" }
     function self:keypressed(key)
         if key == keymap.U and index > 1 then
             index = index - 1

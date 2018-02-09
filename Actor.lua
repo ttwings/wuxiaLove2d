@@ -1,5 +1,6 @@
 local Class=require "lib/middleclass"
 local anim8=require "lib/anim8"
+local ScreenManager = require("lib/ScreenManager")
 require("keymap")
 ---- test bullet
 bullet={}
@@ -31,22 +32,29 @@ function Actor:key(dt)
 	cd = cd + dt
 	speed = 8
 	--cd=cd-dt
+	self.hx = self.x
+	self.hy = self.y
 	if love.keyboard.isDown(keymap.R) then
 		self.x = self.x + speed
+		-- 调整出招的位置
+		self.hx = self.x + 32
 		self.animNow=self.anim.moveRight
 		self.r = 0
 	elseif love.keyboard.isDown(keymap.L) then
 		self.x = self.x - speed
+		self.hx = self.x - 8
 		self.animNow=self.anim.moveLeft
 		self.r = math.pi
 	end
 
 	if love.keyboard.isDown(keymap.D) then
 		self.y = self.y + speed
+		self.hy = self.y + 48
 		self.animNow=self.anim.moveDown
 		self.r = math.pi/2
 	elseif love.keyboard.isDown(keymap.U) then
 		self.y = self.y - speed
+		self.hy = self.y - 8
 		self.animNow=self.anim.moveUp
 		self.r = math.pi*1.5
 	end
@@ -58,9 +66,11 @@ keyFunc["闲逛"] = {}
 
 keyFunc["战斗"][keymap.select] = function(actor)
 	actor.state = "闲逛"
+	--ScreenManager.switch("game")
 end
 keyFunc["闲逛"][keymap.select] = function(actor)
 	actor.state = "战斗"
+	--ScreenManager.switch("battle")
 end
 keyFunc["闲逛"][keymap.A] = function(actor)
 	actions.find(actor,actor.target)
@@ -162,14 +172,19 @@ function Actor:drawAnim()
 	colorRectangle("fill",self.x,self.y + 50,self.hp,2,{255,0,0,255})
 	colorRectangle("fill",self.x,self.y + 52,self.mp,2,{0,0,255,255})
 	colorRectangle("fill",self.x,self.y + 54,self.ap,2,{0,255,0,255})
-
+	-- 绘制矩形碰撞体，方便测试
 	love.graphics.rectangle("line",self.x,self.y,32,48)
-	if self.mp>0 and #self.force>0 then
-		love.graphics.setColor(100,100,100,100)
-		love.graphics.circle("fill",self.x+16,self.y+24,24)
-		love.graphics.setColor(255,255,255,255)
-	end
+	-- 绘制真气护盾
+	--if self.mp>0 and #self.force>0 then
+	--	love.graphics.setColor(100,100,100,100)
+	--	love.graphics.circle("fill",self.x+16,self.y+24,24)
+	--	love.graphics.setColor(255,255,255,255)
+	--end
 
+	-- 绘制阴影 碰撞体
+	love.graphics.setColor(255,200,200,100)
+	love.graphics.circle("fill",self.x+16,self.y+48,16)
+	love.graphics.setColor(255,255,255,255)
 end
 
 function Actor:subHp(hp)
@@ -177,7 +192,7 @@ function Actor:subHp(hp)
 		self.hp = self.hp - hp
 	else
 		self.hp = 0
-		self.state = "昏迷"
+		self.state = "重伤昏迷"
 	end
 end
 
@@ -186,7 +201,7 @@ function Actor:subMp(mp)
 		self.mp = self.mp - mp
 	else
 		self.mp = 0
-		self.state = "昏迷"
+		self.state = "真气耗尽"
 	end
 end
 
