@@ -53,10 +53,10 @@ function Actor:key(dt)
 		self.animNow=self.anim.moveDown
 		self.r = math.pi/2
 	elseif love.keyboard.isDown(keymap.U) then
-		self.y = self.y - speed
-		self.hy = self.y - 8
-		self.animNow=self.anim.moveUp
-		self.r = math.pi*1.5
+		--self.y = self.y - speed
+		--self.hy = self.y - 8
+		--self.animNow=self.anim.moveUp
+		--self.r = math.pi*1.5
 	end
 end
 --------------------------- 菜单控制 ------------------------
@@ -92,6 +92,9 @@ keyFunc["闲逛"][keymap.L1] = function(actor)
 end
 keyFunc["战斗"][keymap.B] = function(actor)
 	actions.fire(actor,actor.target)
+end
+keyFunc["闲逛"][keymap.U] = function(actor)
+	actions.moveUp(actor)
 end
 function Actor:keypressed(key)
 	if keyFunc[self.state] and keyFunc[self.state][key] then

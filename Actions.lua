@@ -125,3 +125,20 @@ actions.gather = function(actor,target)
         end
     end
 end
+
+
+actions.moveUp = function (actor,dt)
+    --local y = actor.y + 32
+    --local speed = actor.speed or 32
+    ----if y == actor.y then
+    ----	y = actor.y + 32
+    ----end
+    --if actor.y < y then
+    --    actor.y = actor.y + speed*dt
+    --    --return false
+    --else
+    --    y = actor.y + 32
+    --    --return true
+    --end
+    actor.y = actor.y - 32
+end
