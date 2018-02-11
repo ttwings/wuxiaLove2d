@@ -34,30 +34,33 @@ function Actor:key(dt)
 	--cd=cd-dt
 	self.hx = self.x
 	self.hy = self.y
-	if love.keyboard.isDown(keymap.R) then
-		self.x = self.x + speed
-		-- 调整出招的位置
-		self.hx = self.x + 32
-		self.animNow=self.anim.moveRight
-		self.r = 0
-	elseif love.keyboard.isDown(keymap.L) then
-		self.x = self.x - speed
-		self.hx = self.x - 8
-		self.animNow=self.anim.moveLeft
-		self.r = math.pi
+	if actor.state == "闲逛" then
+		if love.keyboard.isDown(keymap.R) then
+			self.x = self.x + speed
+			-- 调整出招的位置
+			self.hx = self.x + 32
+			self.animNow=self.anim.moveRight
+			self.r = 0
+		elseif love.keyboard.isDown(keymap.L) then
+			self.x = self.x - speed
+			self.hx = self.x - 8
+			self.animNow=self.anim.moveLeft
+			self.r = math.pi
+		end
+
+		if love.keyboard.isDown(keymap.D) then
+			self.y = self.y + speed
+			self.hy = self.y + 48
+			self.animNow=self.anim.moveDown
+			self.r = math.pi/2
+		elseif love.keyboard.isDown(keymap.U) then
+			self.y = self.y - speed
+			self.hy = self.y - 8
+			self.animNow=self.anim.moveUp
+			self.r = math.pi*1.5
+		end
 	end
 
-	if love.keyboard.isDown(keymap.D) then
-		self.y = self.y + speed
-		self.hy = self.y + 48
-		self.animNow=self.anim.moveDown
-		self.r = math.pi/2
-	elseif love.keyboard.isDown(keymap.U) then
-		--self.y = self.y - speed
-		--self.hy = self.y - 8
-		--self.animNow=self.anim.moveUp
-		--self.r = math.pi*1.5
-	end
 end
 --------------------------- 菜单控制 ------------------------
 local keyFunc={}
@@ -93,8 +96,17 @@ end
 keyFunc["战斗"][keymap.B] = function(actor)
 	actions.fire(actor,actor.target)
 end
-keyFunc["闲逛"][keymap.U] = function(actor)
+keyFunc["战斗"][keymap.U] = function(actor)
 	actions.moveUp(actor)
+end
+keyFunc["战斗"][keymap.D] = function(actor)
+	actions.moveDown(actor)
+end
+keyFunc["战斗"][keymap.L] = function(actor)
+	actions.moveLeft(actor)
+end
+keyFunc["战斗"][keymap.R] = function(actor)
+	actions.moveRight(actor)
 end
 function Actor:keypressed(key)
 	if keyFunc[self.state] and keyFunc[self.state][key] then

@@ -128,17 +128,17 @@ end
 
 
 actions.moveUp = function (actor,dt)
-    --local y = actor.y + 32
-    --local speed = actor.speed or 32
-    ----if y == actor.y then
-    ----	y = actor.y + 32
-    ----end
-    --if actor.y < y then
-    --    actor.y = actor.y + speed*dt
-    --    --return false
-    --else
-    --    y = actor.y + 32
-    --    --return true
-    --end
     actor.y = actor.y - 32
+end
+
+actions.moveDown = function (actor,dt)
+    actor.y = actor.y + 32
+end
+
+actions.moveLeft = function (actor,dt)
+    actor.x = actor.x - 32
+end
+
+actions.moveRight = function (actor,dt)
+    actor.x = actor.x + 32
 end

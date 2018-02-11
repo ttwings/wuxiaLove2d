@@ -17,7 +17,7 @@ animations.update = function(dt)
         a.update(dt)
         if not a.animation.isPlay then
             table.remove(animations,i)
-            print(#animations)
+            --print(#animations)
         end
     end
 end
