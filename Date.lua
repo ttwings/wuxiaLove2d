@@ -1,3 +1,4 @@
+turn = 0
 date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
 animals = {"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
 weeks 	= {"上旬","中旬","下旬"}
@@ -53,7 +54,8 @@ date.second = math.random(10000,1000000)
 function date:update(dt)
 	-- 1年 = 12 月 * 3 旬 * 7 天 * 12 时辰 * 120 分 * 60 秒 * 60 帧 = 15552000
 	-- 计算年月日
-	date.second = date.second + 10
+	-- 6 秒一回合
+	date.second = date.second + 6
 	date.new(date.second)
 end
 

@@ -8,6 +8,7 @@ local tx, ty
 local canvas = love.graphics.newCanvas()
 local tx
 local ty
+gameTurn = 0
 ---@language C
 local code =[[
 vec4 effect(vec4 color,Image texture,vec2 tc,vec2 sc){
@@ -29,7 +30,8 @@ local function loadData(  )
 		-- actor class
 	---@param actor actorData
 		actor=Actor:new(actorData["虚竹"])
-
+		enemy=Actor:new(actorData["段誉"])
+		actors = npcs:load()
 		local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua",{"box2d"})
@@ -51,7 +53,7 @@ local function loadData(  )
 		-- Update callback for Custom Layer
 		region.objs =  map.layers["objs"].objects
 		region.actors = map.layers["sprites"].objects
-		npcs:load()
+
 		function spriteLayer:update(dt)
 			for _, sprite in pairs(self.sprites) do
 
@@ -62,6 +64,8 @@ local function loadData(  )
 			for _, sprite in pairs(self.sprites) do
 				actor:drawAnim()
                 actor:draw()
+				enemy:drawAnim()
+				enemy:draw()
 				npcs:drawAnim()
 				animations.draw()
 
@@ -92,9 +96,24 @@ function GameScreen.new(  )
 	function self:update( dt )
 		world:update(dt)
 		map:update(dt)
-		actor:key(dt)
+		--gameTurn = gameTurn + 1
+		if gameTurn < actor.turn then
+			gameTurn = gameTurn + 1
+					end
+		if gameTurn >= actor.turn then
+
+			actor:key(dt)
+		end
+		if gameTurn >= enemy.turn then
+
+			actions.moveLeft(enemy,dt)
+			--enemy.turn = gameTurn +  math.random(1,6)
+		end
 		actor:update(dt)
-        npcs:update(dt)
+		enemy:update(dt)
+		npcs:update(dt)
+
+
 		-- 地图的位移
 		tx = math.floor((actor.x - 1280/2))
     	ty = math.floor((actor.y - 800/2))
@@ -102,7 +121,7 @@ function GameScreen.new(  )
     	canvasLoad()
     	guiUpdata(actor,dt)
 		animations.update(dt)
-    	date.update()
+		date.update()
 --		GameScreen.cam:shakeUpdate()
 	end
 	function self:keypressed(key)

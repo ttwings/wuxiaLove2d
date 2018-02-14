@@ -142,6 +142,7 @@ end
 ------------------ 更新角色的状态 --------------
 --local heart = 0
 function Actor:heartbeat(dt)
+
 	self.heart = self.heart - dt
 	if self.heart < 0 then
 		-- 心跳

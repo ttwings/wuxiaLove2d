@@ -30,6 +30,7 @@ guiData={
 	["装备"]={visible=true,title="身穿",type="equip",x=1080,y=250,width=200,height=128,alpha=64,contant=nil,align="center",color=nil},
 	["钱币"]={visible=true,title="钱币",type="money",x=1080,y=400,width=200,height=24,alpha=64,contant=nil,align="center",color=nil},
 	--["钱币"]={visible=true,title="钱币",type="money",x=1080,y=400,width=200,height=24,alpha=64,contant=nil,align="center",color=nil},
+	["回合"]={visible=true,title="回合",type="turn",x=320,y=80,width=600,height=4,alpha=100,contant=nil,align="center",color=nil},
 }
 
 return guiData

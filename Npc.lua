@@ -14,6 +14,7 @@ function npcs:load()
 	for k, v in pairs(actorData) do
 		npcs:add(v.name)
 	end
+	return npcs
 end
 
 function npcs:update(dt)

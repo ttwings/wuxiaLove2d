@@ -53,6 +53,9 @@ function guiUpdata(actor,dt)
 	guiData["装备"].contant = actor.equip
 	guiData["技能"].contant = {actor.mainHand,actor.offHand,actor.parry,actor.dodge}
 	guiData["钱币"].contant = actor.money
+
+	guiData["回合"].contant = {players={actor},enemys={enemy}}
+
 	--- 更新飞行消息
 	messages.update(dt)
 end
@@ -207,6 +210,15 @@ gui.money = function(v)
 	love.graphics.print(v.title,v.x,v.y-20)
 	moneyItem(v.contant,v.x,v.y)
 end
+gui.turn = function(v)
+	local alpha = v.alpha or 128
+	local color=Color[v.color] or {0,0,0,255}
+	love.graphics.setColor(0, 0, 0, alpha)
+	love.graphics.rectangle("fill", v.x, v.y, v.width, v.height,10)
+	love.graphics.setColor(255, 255, 255, 255)
+	--love.graphics.print(v.title,v.x,v.y-20)
+	timeLine(v.contant,v.x,v.y)
+end
 --- 条形图，如气血、真气、精力、食物、饮水
 function bar(now,max,x,y,color)
 	love.graphics.rectangle("line",x,y-18,128,8,4)
@@ -257,4 +269,35 @@ function buffs(buffs,x,y)
 		local text = {v.color,v.name}
 		love.graphics.print(text,x,y)
 	end
+end
+
+--- TimeLine draw
+function timeLine(contant,x,y)
+	--for k, v in pairs(actors) do
+	--	love.graphics.setColor(255,0,0)
+	--
+	--end
+	local tabelPlayers = contant.players or {}
+	local tableEnemys = contant.enemys or {}
+	local tableNpcs = contant.npcs or {}
+	love.graphics.rectangle("fill",x + gameTurn%600,y,4,4,2)
+	love.graphics.print("回合".. gameTurn,x + gameTurn%600,y-20)
+	for _, v in pairs(tabelPlayers) do
+		love.graphics.setColor(0,255,0)
+		love.graphics.rectangle("fill",x + v.turn%600,y,4,4,2)
+		love.graphics.print(v.name .. v.turn,x + v.turn%600,y+10)
+	end
+	for _, v in pairs(tableEnemys) do
+		love.graphics.setColor(255,0,0)
+		love.graphics.rectangle("fill",x + v.turn%600,y,4,4,2)
+		love.graphics.print(v.name .. v.turn,x + v.turn%600,y+10)
+		love.graphics.print("x:" .. v.x,x + v.turn%600,y+20)
+		love.graphics.print("y:" .. v.y,x + v.turn%600,y+30)
+	end
+	for _, v in pairs(tableNpcs) do
+		love.graphics.setColor(0,0,255)
+		love.graphics.rectangle("fill",x + v.turn%600,y,4,4,2)
+		love.graphics.print(v.name .. v.turn,x + v.turn%600,y+10)
+	end
+
 end

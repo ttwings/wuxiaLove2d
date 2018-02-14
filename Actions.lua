@@ -128,17 +128,21 @@ end
 
 
 actions.moveUp = function (actor,dt)
+    actor.turn = gameTurn + 1
     actor.y = actor.y - 32
 end
 
 actions.moveDown = function (actor,dt)
+    actor.turn = actor.turn + 1
     actor.y = actor.y + 32
 end
 
 actions.moveLeft = function (actor,dt)
+    actor.turn = actor.turn + 1
     actor.x = actor.x - 32
 end
 
 actions.moveRight = function (actor,dt)
+    actor.turn = actor.turn + 1
     actor.x = actor.x + 32
 end
