@@ -174,7 +174,7 @@ end
 
 function Actor:anims()
 	local image = self.image
-	local g = anim8.newGrid(32,48,image:getWidth(),image:getHeight())
+	local g = anim8.newGrid(32,64,image:getWidth(),image:getHeight())
 	self["anim"]["moveDown"] = anim8.newAnimation(g('1-4',1),0.3)
 	self["anim"]["moveLeft"] = anim8.newAnimation(g('1-4',2),0.3)
 	self["anim"]["moveRight"] = anim8.newAnimation(g('1-4',3),0.3)

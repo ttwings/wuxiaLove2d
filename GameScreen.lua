@@ -45,10 +45,8 @@ local function loadData(  )
 		map:addCustomLayer("Sprite Layer", 5)
 		-- Add data to Custom Layer
 		local spriteLayer = map.layers["Sprite Layer"]
-
 		spriteLayer.sprites = {
 			player = {}
-
 		}
 		-- Update callback for Custom Layer
 		region.objs =  map.layers["objs"].objects
@@ -81,12 +79,11 @@ function GameScreen.new(  )
 	loadData()
 
 	function self:draw()
-		love.graphics.setShader(shader)
-
+		--love.graphics.setShader(shader)
 		GameScreen.cam:draw(function()
 			love.graphics.draw(canvas)
 		end)
-		love.graphics.setShader()
+		--love.graphics.setShader()
 		-- GUI
 		guiDraw()
 		love.graphics.print("FPS:" .. love.timer.getFPS(),1220,0)
@@ -112,8 +109,6 @@ function GameScreen.new(  )
 		actor:update(dt)
 		enemy:update(dt)
 		npcs:update(dt)
-
-
 		-- 地图的位移
 		tx = math.floor((actor.x - 1280/2))
     	ty = math.floor((actor.y - 800/2))
