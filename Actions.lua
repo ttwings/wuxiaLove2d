@@ -3,6 +3,7 @@
 --- DateTime: 2017/10/19 19:52
 ---
 require("assets.data.armors")
+
 __TESTING = true
 actions={}
 actions.eat = function(actor,target)
@@ -126,23 +127,41 @@ actions.gather = function(actor,target)
     end
 end
 
-
 actions.moveUp = function (actor,dt)
     actor.turn = gameTurn + 1
-    actor.y = actor.y - 32
+    local xx,yy
+    yy = actor.y - 32
+    xx = actor.x
+    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.moveDown = function (actor,dt)
     actor.turn = actor.turn + 1
-    actor.y = actor.y + 32
+    local xx,yy
+    yy = actor.y + 32
+    xx = actor.x
+    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.moveLeft = function (actor,dt)
     actor.turn = actor.turn + 1
-    actor.x = actor.x - 32
+    local xx,yy
+    yy = actor.y
+    xx = actor.x - 32
+    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.moveRight = function (actor,dt)
     actor.turn = actor.turn + 1
-    actor.x = actor.x + 32
+    local xx,yy
+    yy = actor.y
+    xx = actor.x + 32
+    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
+end
+
+actions.lockTarget = function (actor,target)
+    local dx = target.x - actor.x
+    local dy = target.y - actor.y
+    local angle = math.atan(dy/dx)
+    local angles = {}
 end

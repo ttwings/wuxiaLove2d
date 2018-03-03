@@ -1,8 +1,6 @@
-local lg=love.graphics
-local lp=love.graphics.print
-local lf=love.graphics.printf
-
-local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
+assets = require('lib.cargo').init('assets')
+font = assets.font.myfont(20)
+--local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 local text = love.graphics.newText(font,"")
 
 local gui = {}
@@ -77,8 +75,9 @@ gui.txt = function(v)
 	love.graphics.draw(text,v.x,v.y)
 end
 gui.image = function(v)
-	local dir="assets/graphics/Faces/"
-	local image = love.graphics.newImage(dir .. v.image)
+	--local dir="assets/graphics/Faces/"
+	--local image = love.graphics.newImage(dir .. v.image)
+	local image = assets.graphics.Faces[v.image]
 	love.graphics.draw(image,v.x,v.y)
 end
 gui.barHP = function(v)

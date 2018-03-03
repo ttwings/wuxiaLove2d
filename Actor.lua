@@ -21,7 +21,7 @@ function Actor:readData(data)
 	for k,v in pairs( data ) do
 		self[k]=v
 	end
-	local actorImg=self["actorImg"] or "actor (1).png"
+	local actorImg=self["actorImg"] or "actor (1)"
 	self:image(actorImg)
 	self:anims()
 	self["animNow"]=self["anim"]["moveDown"]
@@ -168,8 +168,7 @@ end
 
 ------------------ 行走图文件 --------------------
 function Actor:image(name)
-	local path = "assets/graphics/Characters/"
-	self.image=love.graphics.newImage(path .. name)
+	self.image = assets.graphics.Characters[name]
 end
 
 function Actor:anims()
@@ -189,7 +188,7 @@ function Actor:drawAnim()
 	colorRectangle("fill",self.x,self.y + 52,self.mp,2,{0,0,255,255})
 	colorRectangle("fill",self.x,self.y + 54,self.ap,2,{0,255,0,255})
 	-- 绘制矩形碰撞体，方便测试
-	love.graphics.rectangle("line",self.x,self.y,32,48)
+	--love.graphics.rectangle("line",self.x,self.y,32,48)
 	-- 绘制真气护盾
 	--if self.mp>0 and #self.force>0 then
 	--	love.graphics.setColor(100,100,100,100)

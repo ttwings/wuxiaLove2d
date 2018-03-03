@@ -1,5 +1,7 @@
+assets = require('lib.cargo').init('assets')
 local Screen = require( "lib/Screen" )
-local actorData = require("assets.data.actorData")
+--local actorData = require("assets.data.actorData")
+local actorData = assets.data.actorData
 local sti = require "sti"
 local GameScreen = {}
 local map
@@ -32,7 +34,6 @@ local function loadData(  )
 		actor=Actor:new(actorData["虚竹"])
 		enemy=Actor:new(actorData["段誉"])
 		actors = npcs:load()
-		local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua",{"box2d"})
 		-- Prepare translations
