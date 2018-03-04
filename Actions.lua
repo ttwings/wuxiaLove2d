@@ -3,8 +3,6 @@
 --- DateTime: 2017/10/19 19:52
 ---
 require("assets.data.armors")
-
-__TESTING = true
 actions={}
 actions.eat = function(actor,target)
     if not objs[target] then return end
@@ -132,7 +130,7 @@ actions.moveUp = function (actor,dt)
     local xx,yy
     yy = actor.y - 32
     xx = actor.x
-    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.moveDown = function (actor,dt)
@@ -140,7 +138,7 @@ actions.moveDown = function (actor,dt)
     local xx,yy
     yy = actor.y + 32
     xx = actor.x
-    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.moveLeft = function (actor,dt)
@@ -148,7 +146,7 @@ actions.moveLeft = function (actor,dt)
     local xx,yy
     yy = actor.y
     xx = actor.x - 32
-    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.moveRight = function (actor,dt)
@@ -156,12 +154,15 @@ actions.moveRight = function (actor,dt)
     local xx,yy
     yy = actor.y
     xx = actor.x + 32
-    timer:tween(0.5, actor, {x = xx,y = yy}, 'in-linear')
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
 actions.lockTarget = function (actor,target)
-    local dx = target.x - actor.x
-    local dy = target.y - actor.y
-    local angle = math.atan(dy/dx)
-    local angles = {}
+    local tx = target.x
+    local ty = target.y
+    local ax = actor.x
+    local ay = actor.y
+
+    actor.r = math.getRot(ax,ay,tx,ty)
+    --actor.r = math.getDirection(ax,ay,tx,ty)
 end

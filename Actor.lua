@@ -62,6 +62,7 @@ function Actor:key(dt)
 	end
 
 end
+
 --------------------------- 菜单控制 ------------------------
 local keyFunc={}
 keyFunc["战斗"] = {}
@@ -200,6 +201,9 @@ function Actor:drawAnim()
 	love.graphics.setColor(255,200,200,100)
 	love.graphics.circle("fill",self.x+16,self.y+48,16)
 	love.graphics.setColor(255,255,255,255)
+	-- 绘制手部位置
+	love.graphics.rectangle('fill',self.x + 32,self.y + 32,32,32)
+	--love.graphics.print(self.r..'',self.x,self.y + 32)
 end
 
 function Actor:subHp(hp)
@@ -207,7 +211,6 @@ function Actor:subHp(hp)
 		self.hp = self.hp - hp
 	else
 		self.hp = 0
-		self.state = "重伤昏迷"
 	end
 end
 
@@ -216,7 +219,6 @@ function Actor:subMp(mp)
 		self.mp = self.mp - mp
 	else
 		self.mp = 0
-		self.state = "真气耗尽"
 	end
 end
 

@@ -423,7 +423,52 @@ function math.unitAngle(angle)  --convert angle to 0,2*Pi
  	return angle
 end
 
+---- 判断x2，y2在 x1、y1的弧度、角度、方向（N,S,W,E）、周围点
 
+function math.getRot( x1,y1,x2,y2 )
+	if x1==x2 and y1 == y2 then return 0 end
+	if y1 == y2 and x2 - x1 > 0 then return math.pi/2 end
+	if y1 == y2 and x2 - x1 < 0 then return 3*math.pi/2 end
+	local angle = math.atan( (x2-x1)/(y2-y1) )
+	if y1-y2 < 0 then angle =  angle - math.pi end
+	if angle>0 then angle = angle - 2*math.pi end
+	return -angle
+end
+
+function math.getAngle( x1,y1,x2,y2 )
+	local rot = math.getRot(x1,y1,x2,y2)
+	local angle = rot/(2*math.pi)*360
+	return angle
+end
+
+function math.getDirection( x1,y1,x2,y2 )
+	local d = {'N','EN','E','ES','S','WS','W','WN'}
+	local a = {0,45,90,135,180,225,270,315,360}
+	local angle = math.getAngle(x1,y1,x2,y2)
+	if angle>=a[9]-22.5 or angle < a[1] + 22.5 then return d[1] end
+	if angle>=a[2]-22.5 and angle < a[2] + 22.5 then return d[2] end
+	if angle>=a[3]-22.5 and angle < a[3] + 22.5 then return d[3] end
+	if angle>=a[4]-22.5 and angle < a[4] + 22.5 then return d[4] end
+	if angle>=a[5]-22.5 and angle < a[5] + 22.5 then return d[5] end
+	if angle>=a[6]-22.5 and angle < a[6] + 22.5 then return d[6] end
+	if angle>=a[7]-22.5 and angle < a[7] + 22.5 then return d[7] end
+	if angle>=a[8]-22.5 and angle < a[8] + 22.5 then return d[8] end
+end
+
+function math.getDirecPoint( x1,y1,x2,y2 )
+	local points = {}
+	points.N 	= {x=0,y=-1}
+	points.EN 	= {x=1,y=-1}
+	points.E 	= {x=1,y=0}
+	points.ES 	={x=1,y=-1}
+	points.S 	= {x=0,y=1}
+	points.WS 	= {x=-1,y=1}
+	points.W 	= {x=-1,y=0}
+	points.WN 	= {x=-1,y=-1}
+	local direc = math.getDirection(x1,y1,x2,y2)
+	return points[direc]
+end
+---
 function math.vertToLine(a,b,c,x,y) --过已知点垂线公式
   local a2=math.abs(b/a)==1/0 and math.sign(b/a)*math.tan(Pi/2) or b/a
   return a2,-1,y-a2*x
