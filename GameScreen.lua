@@ -80,11 +80,11 @@ function GameScreen.new(  )
 	loadData()
 
 	function self:draw()
-		--love.graphics.setShader(shader)
+		love.graphics.setShader(shader)
 		GameScreen.cam:draw(function()
 			love.graphics.draw(canvas)
 		end)
-		--love.graphics.setShader()
+		love.graphics.setShader()
 		-- GUI
 		guiDraw()
 		love.graphics.print("FPS:" .. love.timer.getFPS(),1220,0)
