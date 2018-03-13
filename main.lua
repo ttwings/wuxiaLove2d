@@ -21,29 +21,27 @@ __TESTING = true
 Timer = require( 'lib.Timer' )
 local ScreenManager = require( "lib/ScreenManager" )
 screens = {
-	main=require( "MainScreen" ),
-	help=require( "HelpScreen" ),
-	game=require( "GameScreen" ),
-	battle = require("BattleScreen")
+    main = require( "MainScreen" ),
+    help = require( "HelpScreen" ),
+    game = require( "GameScreen" ),
+    battle = require("BattleScreen")
 }
 
 function love.load( )
-	timer = Timer()
-	love.keyboard.setKeyRepeat(true)
-	ScreenManager.init(screens,'main')
-
+    timer = Timer()
+    ScreenManager.init(screens, 'main')
 end
 
 function love.draw()
-	ScreenManager.draw()
+    ScreenManager.draw()
 end
 
 function love.update(dt)
-	ScreenManager.update(dt)
-	timer:update(dt)
+    ScreenManager.update(dt)
+    timer:update(dt)
 end
 
 function love.keypressed( key )
-	ScreenManager.keypressed(key)
+    ScreenManager.keypressed(key)
 end
 

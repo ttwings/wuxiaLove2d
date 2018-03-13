@@ -1,11 +1,9 @@
 assets = require('lib.cargo').init('assets')
 local Screen = require( "lib/Screen" )
---local actorData = require("assets.data.actorData")
 local actorData = assets.data.actorData
 local sti = require "sti"
 local GameScreen = {}
 local map
-local world
 local tx, ty
 local canvas = love.graphics.newCanvas()
 local tx
@@ -24,24 +22,19 @@ function canvasLoad()
 	love.graphics.setCanvas(canvas)
 	love.graphics.clear()
 	map:draw(-tx,-ty)
-	map:box2d_draw(-tx,-ty)
 	love.graphics.setCanvas()
 end
 region = {}
 local function loadData(  )
 		-- actor class
-	---@param actor actorData
+	---@param actor Actor
 		actor=Actor:new(actorData["虚竹"])
 		enemy=Actor:new(actorData["段誉"])
 		actors = npcs:load()
 		love.graphics.setFont(font)
-		map = sti("assets/tileMaps/wuguan.lua",{"box2d"})
+		map = sti("assets/tileMaps/wuguan.lua")
 		-- Prepare translations
 		tx, ty = 0, 0
-		-- Prepare physics world
-		love.physics.setMeter(32)
-		world = love.physics.newWorld(0, 0)
-		map:box2d_init(world)
 		-- Create a Custom Layer
 		map:addCustomLayer("Sprite Layer", 5)
 		-- Add data to Custom Layer
@@ -70,15 +63,13 @@ local function loadData(  )
 
 			end
 		end
-		canvasLoad()
+		--canvasLoad()
 end
 GameScreen.cam = {}
 function GameScreen.new(  )
 	local self=Screen.new()
 	GameScreen.cam = Camera.new(0,0,1280,800)
-
 	loadData()
-
 	function self:draw()
 		love.graphics.setShader(shader)
 		GameScreen.cam:draw(function()
@@ -92,19 +83,15 @@ function GameScreen.new(  )
 	end
 
 	function self:update( dt )
-		world:update(dt)
 		map:update(dt)
-		--gameTurn = gameTurn + 1
 		if gameTurn < actor.turn then
 			gameTurn = gameTurn + 1
-					end
+		end
 		if gameTurn >= actor.turn then
-
 			actor:key(dt)
 		end
 		if gameTurn >= enemy.turn then
-
-			actions.moveLeft(enemy,dt)
+			actions.moveW(enemy,dt)
 			--enemy.turn = gameTurn +  math.random(1,6)
 		end
 		actor:update(dt)

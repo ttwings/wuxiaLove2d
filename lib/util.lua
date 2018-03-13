@@ -928,6 +928,14 @@ end
 
 
 --------------------------------love addon----------------------------------
+function love.graphics.colorRectangle(mod,x,y,w,h,color)
+	local color = color or {255,255,255,255}
+	love.graphics.setColor(color)
+	love.graphics.rectangle(mod,x,y,w,h)
+	love.graphics.setColor(255,255,255,255)
+end
+
+
 function love.graphics.hexagon(mode, x,y,l)
 	local i=(l/2)*3^0.5
 	love.graphics.polygon(mode, x,y,x+l,y,x+1.5*l,y+i,x+l,y+2*i,x,y+2*i,x-l*0.5,y+i)

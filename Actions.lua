@@ -125,7 +125,8 @@ actions.gather = function(actor,target)
     end
 end
 
-actions.moveUp = function (actor,dt)
+actions.moveN = function (actor,dt)
+    actor.toward = 'N'
     actor.turn = gameTurn + 1
     local xx,yy
     yy = actor.y - 32
@@ -133,7 +134,8 @@ actions.moveUp = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.moveDown = function (actor,dt)
+actions.moveS = function (actor,dt)
+    actor.toward = 'S'
     actor.turn = actor.turn + 1
     local xx,yy
     yy = actor.y + 32
@@ -141,7 +143,8 @@ actions.moveDown = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.moveLeft = function (actor,dt)
+actions.moveW = function (actor,dt)
+    actor.toward = 'W'
     actor.turn = actor.turn + 1
     local xx,yy
     yy = actor.y
@@ -149,7 +152,8 @@ actions.moveLeft = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.moveRight = function (actor,dt)
+actions.moveE = function (actor,dt)
+    actor.toward = 'E'
     actor.turn = actor.turn + 1
     local xx,yy
     yy = actor.y
@@ -162,7 +166,5 @@ actions.lockTarget = function (actor,target)
     local ty = target.y
     local ax = actor.x
     local ay = actor.y
-
-    actor.r = math.getRot(ax,ay,tx,ty)
-    --actor.r = math.getDirection(ax,ay,tx,ty)
+    actor.toward = math.getDirection(ax,ay,tx,ty)
 end
