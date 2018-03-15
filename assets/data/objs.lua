@@ -1,4 +1,4 @@
-objs={
+return {
 	["柴刀"]={﻿ID="柴刀",type="工具",name="柴刀",weight=500,unit="柄",description="这是一柄沉甸甸的砍柴刀，普通百姓的日常用品。",value=50,material="铁",water=0,food=0,pice=0,actionA="无",actionB="砍",actionX="拿",actionY="无",messageA="无",messageB="$N「唰」的一声抽出一柄$n握在手中。",messageC="$N将手中的$n插回腰间。",messageD="无",},
 	["锄头"]={﻿ID="锄头",type="工具",name="锄头",weight=500,unit="把",description="这是一把锄头，普通百姓的日常务农用品。",value=50,material="铁",water=0,food=0,pice=0,actionA="无",actionB="锄",actionX="拿",actionY="无",messageA="无",messageB="$N「唰」的一声抽出一柄$n握在手中。",messageC="$N将手中的$n抗在肩上。",messageD="无",},
 	["大碗茶"]={﻿ID="大碗茶",type="饮水",name="大碗茶",weight=50,unit="杯",description="一杯大碗茶，悠悠地冒着热气～～～",value=0,material="水",water=30,food=0,pice=3,actionA="喝",actionB="无",actionX="无",actionY="无",messageA="$N端起杯茶，有滋有味地品了几口。一股香气直入心脾，$N觉得精神好多了。",messageB="无",messageC="无",messageD="无",},

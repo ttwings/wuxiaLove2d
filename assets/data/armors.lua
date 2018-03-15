@@ -1,4 +1,4 @@
-armors={
+return{
 	["锦缎"]={id="锦缎",type="衣服",name="锦缎",unit="件",description="华贵的锦缎",weight=3000,material="cloth",value=10000,armor=1,dodge=0,personality=0,warm=0,actionA="无",actionB="无",actionX="穿",actionY="脱",messageA="无",messageB="无",messageC="无",messageD="无",},
 	["九耳麻鞋"]={id="九耳麻鞋",type="鞋子",name="九耳麻鞋",unit="双",description="由草藤编织而成，既轻便又结实，前后织有九环，形状象耳朵。",weight=600,material="boots",value=300,armor=0,dodge=5,personality=0,warm=0,actionA="无",actionB="无",actionX="穿",actionY="脱",messageA="无",messageB="无",messageC="无",messageD="无",},
 	["铁甲"]={id="铁甲",type="衣服",name="铁甲",unit="件",description="一件铁甲",weight=20000,material="steel",value=2000,armor=50,dodge=0,personality=0,warm=0,actionA="无",actionB="无",actionX="穿",actionY="脱",messageA="无",messageB="无",messageC="无",messageD="无",},

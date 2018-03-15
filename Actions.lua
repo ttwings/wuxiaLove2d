@@ -2,9 +2,12 @@
 --- Created by ttwings.
 --- DateTime: 2017/10/19 19:52
 ---
-require("assets.data.armors")
-actions={}
-actions.eat = function(actor,target)
+module('Actions',package.seeall)
+local assets = require("lib.cargo").init("assets")
+local armors = assets.data.armors
+local skills = assets.data.skills
+
+eat = function(actor,target)
     if not objs[target] then return end
     if objs[target].actionA == "吃" or "喝" then
         actor.food = actor.food + objs[target].food
@@ -33,7 +36,7 @@ actions.eat = function(actor,target)
 
 end
 ---@type actor actorData
-actions.fire = function(actor,target)
+fire = function(actor,target)
     local bullet = skills[actor.mainHand]
     bullet.x=actor.hx
     bullet.y=actor.hy
@@ -49,7 +52,7 @@ actions.fire = function(actor,target)
 --    cd = 0
 end
 
-actions.wear = function(actor,target)
+wear = function(actor,target)
     if armors[target] and armors[target].type=="衣服" then
         if actor.equip[2] == "无" then
             actor.equip[2] = target
@@ -65,7 +68,7 @@ actions.wear = function(actor,target)
 end
 ---@param actor actorData
 ---@param target actorData
-actions.unwear = function(actor,target)
+unwear = function(actor,target)
     if actor ~= "无" then
         table.insert(actor.misc,actor.equip[2])
         actor.equip[2] = "无"
@@ -73,7 +76,7 @@ actions.unwear = function(actor,target)
 end
 
 
-actions.bagItemUp = function(actor,target)
+bagItemUp = function(actor,target)
     if #actor.misc > 0 then
         if actor.index > 1 then
             actor.index = actor.index - 1
@@ -83,7 +86,7 @@ actions.bagItemUp = function(actor,target)
     print(actor.target)
 end
 
-actions.bagItemDown = function(actor,target)
+bagItemDown = function(actor,target)
     if #actor.misc > 0 then
         if actor.index < #actor.misc then
             actor.index = actor.index + 1
@@ -93,7 +96,7 @@ actions.bagItemDown = function(actor,target)
     print(actor.target)
 end
 
-actions.find = function(actor,target)
+find = function(actor,target)
     local objs = region.objs
     for i=#objs,1,-1 do
         local objName = objs[i].name
@@ -110,7 +113,7 @@ actions.find = function(actor,target)
         end
     end
 end
-actions.gather = function(actor,target)
+gather = function(actor,target)
     if armors[target] and armors[target].type=="药草" then
         if actor.equip[2] == "无" then
             actor.equip[2] = target
@@ -125,7 +128,7 @@ actions.gather = function(actor,target)
     end
 end
 
-actions.moveN = function (actor,dt)
+moveN = function (actor,dt)
     actor.toward = 'N'
     actor.turn = gameTurn + 1
     local xx,yy
@@ -134,7 +137,7 @@ actions.moveN = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.moveS = function (actor,dt)
+moveS = function (actor,dt)
     actor.toward = 'S'
     actor.turn = actor.turn + 1
     local xx,yy
@@ -143,7 +146,7 @@ actions.moveS = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.moveW = function (actor,dt)
+moveW = function (actor,dt)
     actor.toward = 'W'
     actor.turn = actor.turn + 1
     local xx,yy
@@ -152,7 +155,7 @@ actions.moveW = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.moveE = function (actor,dt)
+moveE = function (actor,dt)
     actor.toward = 'E'
     actor.turn = actor.turn + 1
     local xx,yy
@@ -161,7 +164,7 @@ actions.moveE = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-actions.lockTarget = function (actor,target)
+lockTarget = function (actor,target)
     local tx = target.x
     local ty = target.y
     local ax = actor.x

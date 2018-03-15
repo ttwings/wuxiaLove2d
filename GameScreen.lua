@@ -28,9 +28,9 @@ region = {}
 local function loadData(  )
 		-- actor class
 	---@param actor Actor
-		actor=Actor:new(actorData["虚竹"])
+		player=Actor:new(actorData["虚竹"])
 		enemy=Actor:new(actorData["段誉"])
-		actors = npcs:load()
+		-- actors = npcs:load()
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua")
 		-- Prepare translations
@@ -54,11 +54,11 @@ local function loadData(  )
 		--
 		function spriteLayer:draw()
 			for _, sprite in pairs(self.sprites) do
-				actor:drawAnim()
-                actor:draw()
+				player:drawAnim()
+                player:draw()
 				enemy:drawAnim()
 				enemy:draw()
-				npcs:drawAnim()
+				--npcs:drawAnim()
 				animations.draw()
 
 			end
@@ -84,31 +84,31 @@ function GameScreen.new(  )
 
 	function self:update( dt )
 		map:update(dt)
-		if gameTurn < actor.turn then
+		if gameTurn < player.turn then
 			gameTurn = gameTurn + 1
 		end
-		if gameTurn >= actor.turn then
-			actor:key(dt)
+		if gameTurn >= player.turn then
+			player:key(dt)
 		end
 		if gameTurn >= enemy.turn then
-			actions.moveW(enemy,dt)
+			Actions.moveW(enemy,dt)
 			--enemy.turn = gameTurn +  math.random(1,6)
 		end
-		actor:update(dt)
+		player:update(dt)
 		enemy:update(dt)
-		npcs:update(dt)
+		--npcs:update(dt)
 		-- 地图的位移
-		tx = math.floor((actor.x - 1280/2))
-    	ty = math.floor((actor.y - 800/2))
+		tx = math.floor((player.x - 1280/2))
+    	ty = math.floor((player.y - 800/2))
     	-- 画布
     	canvasLoad()
-    	guiUpdata(actor,dt)
+    	guiUpdata(player,dt)
 		animations.update(dt)
 		date.update()
 --		GameScreen.cam:shakeUpdate()
 	end
 	function self:keypressed(key)
-		actor:keypressed(key)
+		player:keypressed(key)
 	end
 	return self
 end

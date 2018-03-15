@@ -1,6 +1,7 @@
-local actorData = require("assets.data.actorData")
-
-npcs={}
+local assets = require("lib.cargo").init("assets")
+local actorData = assets.data.actorData
+local npcs={}
+Npcs = npcs
 function npcs:add(name)
 	if actorData[name] then
 		npc = Class("npc",Actor)

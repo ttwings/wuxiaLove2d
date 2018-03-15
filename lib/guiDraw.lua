@@ -1,5 +1,8 @@
-assets = require('lib.cargo').init('assets')
-font = assets.font.myfont(20)
+local assets = require('lib.cargo').init('assets')
+local font = assets.font.myfont(20)
+local actors = assets.data.actorData
+local rooms = assets.data.rooms
+local objs = assets.data.objs
 --local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 local text = love.graphics.newText(font,"")
 
@@ -237,7 +240,7 @@ function bagItem(bag,x,y)
 end
 --- 装备绘制
 function equipItem(equips,x,y)
-	local equips = equips or actor.equips or {"布巾","白色茶花丝衣","无","琉璃折扇","镶金龙纹腰带","鞋"}
+	local equips = equips or {"布巾","白色茶花丝衣","无","琉璃折扇","镶金龙纹腰带","鞋"}
 	local item = {"[头]","[身]","[背]","[手]","[腰]","[足]"}
 	for i, v in ipairs(equips) do
 		local text = string.format("%s%s",item[i],v)

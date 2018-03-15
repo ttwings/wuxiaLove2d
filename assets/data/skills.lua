@@ -1,4 +1,4 @@
-skills={
+return {
 	["长拳"]={﻿ID="长拳",name="长拳",sect="无",type="拳",target="对手",fire=1,damage="1D6",fireType="点",range=32,ap=3,mp=6,rSkill="拳法D1",rMap="无D0",add1="臂力D1",add2="无",anim="Attack1",audio="Attack1.ogg",book="无",description="无",w=2,h=2,r=0,speed=1000,cd=0.5,dmgt="瘀伤",combo=1,color="YELLOW",},
 	["六合拳"]={﻿ID="六合拳",name="六合拳",sect="丐帮、神农帮、新门派、英雄门",type="拳",target="对手",fire=2,damage="1D6",fireType="点",range=32,ap=3,mp=6,rSkill="拳法D1",rMap="无D0",add1="臂力D1",add2="无",anim="Attack2",audio="Attack1.ogg",book="无",description="无",w=2,h=2,r=0,speed=1000,cd=0.5,dmgt="瘀伤",combo=1,color="YELLOW",},
 	["景阳搏虎拳"]={﻿ID="景阳搏虎拳",name="景阳搏虎拳",sect="丐帮",type="拳",target="对手",fire=3,damage="1D6",fireType="点",range=32,ap=3,mp=6,rSkill="拳法D1",rMap="无D0",add1="臂力D1",add2="无",anim="Attack3",audio="Attack1.ogg",book="无",description="无",w=2,h=2,r=0,speed=1000,cd=0.5,dmgt="瘀伤",combo=1,color="YELLOW",},

@@ -1,6 +1,8 @@
 local Class = require "lib/middleclass"
 local anim8 = require "lib/anim8"
 require("keymap")
+local assets = require("lib.cargo").init("assets")
+local mapWuGuan = assets.data.mapWuGuan
 ---- test bullet
 bullet = {}
 message = {}
@@ -32,7 +34,7 @@ function Actor:key(dt)
     --cd=cd-dt
     self.hx = self.x
     self.hy = self.y
-    if actor.state == "闲逛" then
+    if self.state == "闲逛" then
         if love.keyboard.isDown(keymap.R) then
             self.x = self.x + speed
             -- 调整出招的位置
@@ -79,37 +81,37 @@ keyFunc["闲逛"][keymap.select] = function(actor)
     --ScreenManager.switch("battle")
 end
 keyFunc["闲逛"][keymap.A] = function(actor)
-    actions.find(actor, actor.target)
+    Actions.find(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.B] = function(actor)
-    actions.eat(actor, actor.target)
+    Actions.eat(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.X] = function(actor)
-    actions.wear(actor, actor.target)
+    Actions.wear(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.Y] = function(actor)
-    actions.unwear(actor, actor.target)
+    Actions.unwear(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.R1] = function(actor)
-    actions.bagItemUp(actor, actor.target)
+    Actions.bagItemUp(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.L1] = function(actor)
-    actions.bagItemDown(actor, actor.target)
+    Actions.bagItemDown(actor, actor.target)
 end
 keyFunc["战斗"][keymap.B] = function(actor)
-    actions.fire(actor, actor.target)
+    Actions.fire(actor, actor.target)
 end
 keyFunc["战斗"][keymap.U] = function(actor)
-    actions.moveN(actor)
+    Actions.moveN(actor)
 end
 keyFunc["战斗"][keymap.D] = function(actor)
-    actions.moveS(actor)
+    Actions.moveS(actor)
 end
 keyFunc["战斗"][keymap.L] = function(actor)
-    actions.moveW(actor)
+    Actions.moveW(actor)
 end
 keyFunc["战斗"][keymap.R] = function(actor)
-    actions.moveE(actor)
+    Actions.moveE(actor)
 end
 function Actor:keypressed(key)
     if keyFunc[self.state] and keyFunc[self.state][key] then
