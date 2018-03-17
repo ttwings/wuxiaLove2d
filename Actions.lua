@@ -164,6 +164,57 @@ function moveE(actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
+function moveE(actor,dt)
+    actor.toward = 'E'
+    actor.turn = actor.turn + 1
+    local xx,yy
+    yy = actor.y
+    xx = actor.x + 32
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
+end
+
+function moveEN(actor,dt)
+    actor.toward = 'EN'
+    actor.turn = actor.turn + 1
+    local xx,yy
+    yy = actor.y - 32
+    xx = actor.x + 32
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
+end
+
+function moveES(actor,dt)
+    actor.toward = 'ES'
+    actor.turn = actor.turn + 1
+    local xx,yy
+    yy = actor.y + 32
+    xx = actor.x + 32
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
+end
+
+function moveWN(actor,dt)
+    actor.toward = 'E'
+    actor.turn = actor.turn + 1
+    local xx,yy
+    yy = actor.y - 32
+    xx = actor.x - 32
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
+end
+
+function moveWS(actor,dt)
+    actor.toward = 'E'
+    actor.turn = actor.turn + 1
+    local xx,yy
+    yy = actor.y + 32
+    xx = actor.x - 32
+    timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
+end
+
+
+
+function wait(actor,turn)
+    actor.turn = actor.turn + turn
+end
+
 function lockTarget(actor,target)
     local tx = target.x
     local ty = target.y

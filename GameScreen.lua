@@ -11,7 +11,7 @@ local ty
 
 local behaviorTree = b3.BehaviorTree.new()
 local blackBoard = b3.Blackboard.new()
-
+date = require("Date")
 gameTurn = 0
 --- @language C
 --- @return 透视效果

@@ -1,5 +1,5 @@
-turn = 0
-date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
+local date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
+Date = date
 animals = {"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
 weeks 	= {"上旬","中旬","下旬"}
 days 	= {"月曜日","火曜日","水曜日","木曜日","金曜日","土曜日","日曜日"}
@@ -111,3 +111,5 @@ function date.new(second)
 	date.year 	= math.modf(date.year%12)+1
 	return date
 end
+
+return date
