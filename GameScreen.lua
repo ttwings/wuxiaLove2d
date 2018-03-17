@@ -1,4 +1,4 @@
-assets = require('lib.cargo').init('assets')
+local assets = require('lib.cargo').init('assets')
 local Screen = require( "lib/Screen" )
 local actorData = assets.data.actorData
 local sti = require "sti"
@@ -8,8 +8,13 @@ local tx, ty
 local canvas = love.graphics.newCanvas()
 local tx
 local ty
+
+local behaviorTree = b3.BehaviorTree.new()
+local blackBoard = b3.Blackboard.new()
+
 gameTurn = 0
----@language C
+--- @language C
+--- @return 透视效果
 local code =[[
 vec4 effect(vec4 color,Image texture,vec2 tc,vec2 sc){
 	return Texel(texture,vec2((tc.x-0.5)/(tc.y + 1.5)+0.5,tc.y));
@@ -30,7 +35,15 @@ local function loadData(  )
 	---@param actor Actor
 		player=Actor:new(actorData["虚竹"])
 		enemy=Actor:new(actorData["段誉"])
+	---
+		player.id = math.createID()
+		enemy.id = math.createID()
 		-- actors = npcs:load()
+	--- load  behavior tree
+		behaviorTree:load('lib/behavior3/jsons/behavior3.json', {})
+		blackBoard:set("actor",enemy)
+		blackBoard:set('target',player)
+
 		love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua")
 		-- Prepare translations
@@ -91,8 +104,9 @@ function GameScreen.new(  )
 			player:key(dt)
 		end
 		if gameTurn >= enemy.turn then
-			Actions.moveW(enemy,dt)
+			--Actions.moveW(enemy,dt)
 			--enemy.turn = gameTurn +  math.random(1,6)
+			behaviorTree:tick(enemy.id, blackBoard)
 		end
 		player:update(dt)
 		enemy:update(dt)

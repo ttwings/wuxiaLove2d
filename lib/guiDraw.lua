@@ -4,10 +4,10 @@ local actors = assets.data.actorData
 local rooms = assets.data.rooms
 local objs = assets.data.objs
 --local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
+local guiData = require("lib.guiData")
 local text = love.graphics.newText(font,"")
-
 local gui = {}
----@param actor actorData
+---@param actor Actor
 function guiUpdata(actor,dt)
 	--- 人物基本信息
 	guiData["头像"].image=actor.faceImg
@@ -134,8 +134,7 @@ gui.long = function(v)
 	love.graphics.draw(text,v.x,v.y)
 end
 gui.dialog = function(v)
-	local dir="assets/graphics/Faces/"
-	local image = love.graphics.newImage(dir .. v.image)
+	local image = assets.graphics.Faces[v.image]
 	love.graphics.draw(image,v.x-image:getWidth(),v.y)
 	local alpha = v.alpha or 128
 	local color=Color[v.color] or {255,255,255,255}
@@ -232,7 +231,7 @@ function bar(now,max,x,y,color)
 end
 --- 背包绘制
 function bagItem(bag,x,y)
-	local bag = bag or actor.misc or {"物品1","物品2"}
+	local bag = bag or actor.misc or {}
 	local item = {"[一]","[二]","[三]","[四]","[五]","[六]","[七]","[八]","[九]"}
 	for i, v in ipairs(bag) do
 		love.graphics.print(item[i]..v,x,y+i*20-20)

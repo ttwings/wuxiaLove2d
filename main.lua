@@ -1,9 +1,13 @@
 require("lib.messages")
 require("lib.Color")
 Camera = require("lib.gamera")
-require("lib.guiData")
 require("lib.guiDraw")
 require("lib.util")
+require("lib.behavior3.b3")
+requireDirectory("lib/behavior3/core")
+requireDirectory("lib/behavior3/actions")
+requireDirectory("lib/behavior3/composites")
+requireDirectory("lib/behavior3/decorators")
 require("Actions")
 require("Actor")
 require("animations")
@@ -12,10 +16,13 @@ require("Date")
 require("keymap")
 require("Region")
 require("Npcs")
-__TESTING = true
+
+testing()
 Timer = require( 'lib.Timer' )
-print("test")
+
 local ScreenManager = require( "lib/ScreenManager" )
+--- testing print
+print("test")
 screens = {
     main = require( "MainScreen" ),
     help = require( "HelpScreen" ),

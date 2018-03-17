@@ -10,6 +10,7 @@ function w() return lg.getWidth() end
 function h() return lg.getHeight() end
 
 
+---------------------------------math addon ----------------------------
 
 
 
@@ -468,7 +469,17 @@ function math.getDirecPoint( x1,y1,x2,y2 )
 	local direc = math.getDirection(x1,y1,x2,y2)
 	return points[direc]
 end
----
+---@return UUID
+function math.createID()
+	local seed = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'}
+	local tb = {}
+	for i =1,32 do
+		table.insert(tb, seed[math.random(1,16)])
+	end
+	return  table.concat(tb)
+end
+
+
 function math.vertToLine(a,b,c,x,y) --过已知点垂线公式
   local a2=math.abs(b/a)==1/0 and math.sign(b/a)*math.tan(Pi/2) or b/a
   return a2,-1,y-a2*x
@@ -910,7 +921,15 @@ end
 
 
 
-
+-----------------------------file addon ------------------------------------
+--- 批量导入目录下所有.lua 文件（带. 共4个字符后缀文件,因此n 默认为5）。
+--- 注意，目录下文件后缀必须 长度一致
+function requireDirectory( path ,n)
+	local n = n or 5
+	for _,name in ipairs(love.filesystem.getDirectoryItems(path)) do
+		require(path.."/"..name:sub(1,-n))
+	end
+end
 
 
 
@@ -928,6 +947,9 @@ end
 
 
 --------------------------------love addon----------------------------------
+
+
+
 function love.graphics.colorRectangle(mod,x,y,w,h,color)
 	local color = color or {255,255,255,255}
 	love.graphics.setColor(color)
@@ -1057,23 +1079,23 @@ love.system.run=love.system.openURL
 
 
 ----------------------------------system addon-------------------------------------
-
-if __TESTING then
+--- change new print
+function testing()
 	local old_print = print
 	print = function(...)
 		local info = debug.getinfo(2, "Sl")
 		local source = info.source
-		local msg = tostring(love.timer.getTime())..("%s:%i-->"):format(source, info.currentline)
+		local msg = tostring(("%s:%i-->"):format(source, info.currentline))
 		old_print(msg, ...)
 	end
 end
 
-if __CONSOLE then
+function console()
 	local console_buff = {}
 	local o_lovedraw = love.draw
 	local o_print = print
 	local consoleFont = love.graphics.newFont(10)
-	function print(...) 
+	function print(...)
 		o_print(...)
 		local para = {...}
 		local line = ""
@@ -1085,8 +1107,7 @@ if __CONSOLE then
 			console_buff[11] = nil
 		end
 	end
-
-	function love.draw()	
+	function love.draw()
 		o_lovedraw()
 		love.graphics.setColor(255,0,0)
 		love.graphics.setFont(consoleFont)
@@ -1095,6 +1116,7 @@ if __CONSOLE then
 		end
 	end
 end
+
 
 
 function debug.tracebackex()    --局部变量

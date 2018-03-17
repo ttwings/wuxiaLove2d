@@ -7,7 +7,7 @@ local assets = require("lib.cargo").init("assets")
 local armors = assets.data.armors
 local skills = assets.data.skills
 
-eat = function(actor,target)
+function eat(actor,target)
     if not objs[target] then return end
     if objs[target].actionA == "吃" or "喝" then
         actor.food = actor.food + objs[target].food
@@ -36,7 +36,7 @@ eat = function(actor,target)
 
 end
 ---@type actor actorData
-fire = function(actor,target)
+function fire(actor,target)
     local bullet = skills[actor.mainHand]
     bullet.x=actor.hx
     bullet.y=actor.hy
@@ -52,7 +52,7 @@ fire = function(actor,target)
 --    cd = 0
 end
 
-wear = function(actor,target)
+function wear(actor,target)
     if armors[target] and armors[target].type=="衣服" then
         if actor.equip[2] == "无" then
             actor.equip[2] = target
@@ -68,7 +68,7 @@ wear = function(actor,target)
 end
 ---@param actor actorData
 ---@param target actorData
-unwear = function(actor,target)
+function unwear(actor,target)
     if actor ~= "无" then
         table.insert(actor.misc,actor.equip[2])
         actor.equip[2] = "无"
@@ -76,7 +76,7 @@ unwear = function(actor,target)
 end
 
 
-bagItemUp = function(actor,target)
+function bagItemUp(actor,target)
     if #actor.misc > 0 then
         if actor.index > 1 then
             actor.index = actor.index - 1
@@ -86,7 +86,7 @@ bagItemUp = function(actor,target)
     print(actor.target)
 end
 
-bagItemDown = function(actor,target)
+function bagItemDown(actor,target)
     if #actor.misc > 0 then
         if actor.index < #actor.misc then
             actor.index = actor.index + 1
@@ -96,7 +96,7 @@ bagItemDown = function(actor,target)
     print(actor.target)
 end
 
-find = function(actor,target)
+function find(actor,target)
     local objs = region.objs
     for i=#objs,1,-1 do
         local objName = objs[i].name
@@ -113,7 +113,7 @@ find = function(actor,target)
         end
     end
 end
-gather = function(actor,target)
+function gather(actor,target)
     if armors[target] and armors[target].type=="药草" then
         if actor.equip[2] == "无" then
             actor.equip[2] = target
@@ -128,7 +128,7 @@ gather = function(actor,target)
     end
 end
 
-moveN = function (actor,dt)
+function moveN(actor,dt)
     actor.toward = 'N'
     actor.turn = gameTurn + 1
     local xx,yy
@@ -137,7 +137,7 @@ moveN = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-moveS = function (actor,dt)
+function moveS(actor,dt)
     actor.toward = 'S'
     actor.turn = actor.turn + 1
     local xx,yy
@@ -146,7 +146,7 @@ moveS = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-moveW = function (actor,dt)
+function moveW(actor,dt)
     actor.toward = 'W'
     actor.turn = actor.turn + 1
     local xx,yy
@@ -155,7 +155,7 @@ moveW = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-moveE = function (actor,dt)
+function moveE(actor,dt)
     actor.toward = 'E'
     actor.turn = actor.turn + 1
     local xx,yy
@@ -164,7 +164,7 @@ moveE = function (actor,dt)
     timer:tween(0.2, actor, {x = xx,y = yy}, 'in-linear')
 end
 
-lockTarget = function (actor,target)
+function lockTarget(actor,target)
     local tx = target.x
     local ty = target.y
     local ax = actor.x

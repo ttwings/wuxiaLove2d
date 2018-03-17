@@ -1,5 +1,5 @@
 -- 窗口配置表格文件
-guiData={
+return{
 	["头像"]={visible=true,type="image",x=0,y=0,width=192,height=192,contant="",color="RED",image=nil},
 	["世家"]={visible=true,type="txt",x=100,y=0,contant="",color=""},
 	["称号"]={visible=true,type="txt",x=100,y=20,contant="",color=""},
@@ -19,7 +19,7 @@ guiData={
 	["行为"]={visible=true,type="txt",x=600,y=20,contant="",color="蓝色"},
 	["描述"]={visible=true,type="long",x=8,y=160,width=280,height=200,alpha=64,contant="",color=nil},
 	-- ["时间"]={visible=true,type="txt",x=500,y=0,contant="虎年 十二月 十日 子时 晴朗",color=nil},
-	["对话"]={visible=false,type="dialog",x=500,y=160,width=280,height=100,alpha=64,contant="对话测试文本这是一段长文本的对话测试",color="WHITE",image=nil},
+	["对话"]={visible=true,type="dialog",x=500,y=160,width=280,height=100,alpha=64,contant="对话测试文本这是一段长文本的对话测试",color="WHITE",image=nil},
 	["地图"]={visible=true,title="测试",type="map",x=1080,y=0,width=200,height=200,alpha=64,contant="",color=nil},
 	["技能"]={visible=true,type="skill",x=4,y=752,width=1280,height=48,alpha=64,contant="技能栏测试",align="center",color=nil,image=nil},
 	["发现"]={visible=true,type="txt",x=440,y=40,contant="",color=nil},
@@ -32,5 +32,3 @@ guiData={
 	--["钱币"]={visible=true,title="钱币",type="money",x=1080,y=400,width=200,height=24,alpha=64,contant=nil,align="center",color=nil},
 	["回合"]={visible=true,title="回合",type="turn",x=320,y=80,width=600,height=4,alpha=100,contant=nil,align="center",color=nil},
 }
-
-return guiData
