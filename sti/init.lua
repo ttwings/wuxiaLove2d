@@ -202,8 +202,8 @@ function Map:setTiles(index, tileset, gid)
 end
 
 --- Create Layers
--- @param layer Layer data
--- @param path (Optional) Path to an Image Layer's image
+--- @param layer Layer data
+--- @param path (Optional) Path to an Image Layer's image
 function Map:setLayer(layer, path)
 	if layer.encoding then
 		if layer.encoding == "base64" then
@@ -260,7 +260,7 @@ function Map:setLayer(layer, path)
 end
 
 --- Add Tiles to Tile Layer
--- @param layer The Tile Layer
+--- @param layer The Tile Layer
 function Map:setTileData(layer)
 	local i   = 1
 	local map = {}
@@ -282,7 +282,7 @@ function Map:setTileData(layer)
 end
 
 --- Add Objects to Layer
--- @param layer The Object Layer
+--- @param layer The Object Layer
 function Map:setObjectData(layer)
 	for _, object in ipairs(layer.objects) do
 		object.layer            = layer
@@ -291,7 +291,7 @@ function Map:setObjectData(layer)
 end
 
 --- Correct position and orientation of Objects in an Object Layer
--- @param layer The Object Layer
+--- @param layer The Object Layer
 function Map:setObjectCoordinates(layer)
 	for _, object in ipairs(layer.objects) do
 		local x   = layer.x + object.x
@@ -341,7 +341,7 @@ function Map:setObjectCoordinates(layer)
 end
 
 --- Batch Tiles in Tile Layer for improved draw speed
--- @param layer The Tile Layer
+--- @param layer The Tile Layer
 function Map:setSpriteBatches(layer)
 	local newBatch = lg.newSpriteBatch
 	local tileW    = self.tilewidth
@@ -540,7 +540,7 @@ function Map:setSpriteBatches(layer)
 end
 
 --- Batch Tiles in Object Layer for improved draw speed
--- @param layer The Object Layer
+--- @param layer The Object Layer
 function Map:setObjectSpriteBatches(layer)
 	local newBatch = lg.newSpriteBatch
 	local tileW    = self.tilewidth
@@ -550,6 +550,12 @@ function Map:setObjectSpriteBatches(layer)
 	if layer.draworder == "topdown" then
 		table.sort(layer.objects, function(a, b)
 			return a.y + a.height < b.y + b.height
+		end)
+	end
+---@param 自行添加，希望从左下角做判断，进行排序
+	if layer.draworder == "downtop" then
+		table.sort(layer.objects, function(a, b)
+			return a.y + a.height > b.y + b.height
 		end)
 	end
 
@@ -1281,79 +1287,79 @@ function Map:convertPixelToTile(x, y)
 end
 
 --- A list of individual layers indexed both by draw order and name
--- @table Map.layers
--- @see TileLayer
--- @see ObjectLayer
--- @see ImageLayer
--- @see CustomLayer
+--- @table Map.layers
+--- @see TileLayer
+--- @see ObjectLayer
+--- @see ImageLayer
+--- @see CustomLayer
 
 --- A list of individual tiles indexed by Global ID
--- @table Map.tiles
--- @see Tile
--- @see Map.tileInstances
+--- @table Map.tiles
+--- @see Tile
+--- @see Map.tileInstances
 
 --- A list of tile instances indexed by Global ID
--- @table Map.tileInstances
--- @see TileInstance
--- @see Tile
--- @see Map.tiles
+--- @table Map.tileInstances
+--- @see TileInstance
+--- @see Tile
+--- @see Map.tiles
 
 --- A list of individual objects indexed by Global ID
--- @table Map.objects
--- @see Object
+--- @table Map.objects
+--- @see Object
 
 --- @table TileLayer
--- @field name The name of the layer
--- @field x Position on the X axis (in pixels)
--- @field y Position on the Y axis (in pixels)
--- @field width Width of layer (in tiles)
--- @field height Height of layer (in tiles)
--- @field visible Toggle if layer is visible or hidden
--- @field opacity Opacity of layer
--- @field properties Custom properties
--- @field data A tileWo dimensional table filled with individual tiles indexed by [y][x] (in tiles)
--- @field update Update function
--- @field draw Draw function
--- @see Map.layers
--- @see Tile
+--- @field name The name of the layer
+--- @field x Position on the X axis (in pixels)
+--- @field y Position on the Y axis (in pixels)
+--- @field width Width of layer (in tiles)
+--- @field height Height of layer (in tiles)
+--- @field visible Toggle if layer is visible or hidden
+--- @field opacity Opacity of layer
+--- @field properties Custom properties
+--- @field data A tileWo dimensional table filled with individual tiles indexed by [y][x] (in tiles)
+--- @field update Update function
+--- @field draw Draw function
+--- @see Map.layers
+--- @see Tile
 
 --- @table ObjectLayer
--- @field name The name of the layer
--- @field x Position on the X axis (in pixels)
--- @field y Position on the Y axis (in pixels)
--- @field visible Toggle if layer is visible or hidden
--- @field opacity Opacity of layer
--- @field properties Custom properties
--- @field objects List of objects indexed by draw order
--- @field update Update function
--- @field draw Draw function
--- @see Map.layers
--- @see Object
+--- @field name The name of the layer
+--- @field x Position on the X axis (in pixels)
+--- @field y Position on the Y axis (in pixels)
+--- @field visible Toggle if layer is visible or hidden
+--- @field opacity Opacity of layer
+--- @field properties Custom properties
+--- @field objects List of objects indexed by draw order
+--- @field update Update function
+--- @field draw Draw function
+--- @see Map.layers
+--- @see Object
 
 --- @table ImageLayer
--- @field name The name of the layer
--- @field x Position on the X axis (in pixels)
--- @field y Position on the Y axis (in pixels)
--- @field visible Toggle if layer is visible or hidden
--- @field opacity Opacity of layer
--- @field properties Custom properties
--- @field image Image to be drawn
--- @field update Update function
--- @field draw Draw function
--- @see Map.layers
+--- @field name The name of the layer
+--- @field x Position on the X axis (in pixels)
+--- @field y Position on the Y axis (in pixels)
+--- @field visible Toggle if layer is visible or hidden
+--- @field opacity Opacity of layer
+--- @field properties Custom properties
+--- @field image Image to be drawn
+--- @field update Update function
+--- @field draw Draw function
+--- @see Map.layers
 
 --- Custom Layers are used to place userdata such as sprites within the draw order of the map.
--- @table CustomLayer
--- @field name The name of the layer
--- @field x Position on the X axis (in pixels)
--- @field y Position on the Y axis (in pixels)
--- @field visible Toggle if layer is visible or hidden
--- @field opacity Opacity of layer
--- @field properties Custom properties
--- @field update Update function
--- @field draw Draw function
--- @see Map.layers
--- @usage
+--- @table CustomLayer
+--- @field name The name of the layer
+--- @field x Position on the X axis (in pixels)
+--- @field y Position on the Y axis (in pixels)
+--- @field visible Toggle if layer is visible or hidden
+--- @field opacity Opacity of layer
+--- @field properties Custom properties
+--- @field update Update function
+--- @field draw Draw function
+--- @see Map.layers
+--- @usage
 --	-- Create a Custom Layer
 --	local spriteLayer = map:addCustomLayer("Sprite Layer", 3)
 --
@@ -1385,49 +1391,49 @@ end
 --	end
 
 --- @table Tile
--- @field id Local ID within Tileset
--- @field gid Global ID
--- @field tileset Tileset ID
--- @field quad Quad object
--- @field properties Custom properties
--- @field terrain Terrain data
--- @field animation Animation data
--- @field frame Current animation frame
--- @field time Time spent on current animation frame
--- @field width Width of tile
--- @field height Height of tile
--- @field sx Scale value on the X axis
--- @field sy Scale value on the Y axis
--- @field r Rotation of tile (in radians)
--- @field offset Offset drawing position
--- @field offset.x Offset value on the X axis
--- @field offset.y Offset value on the Y axis
--- @see Map.tiles
+--- @field id Local ID within Tileset
+--- @field gid Global ID
+--- @field tileset Tileset ID
+--- @field quad Quad object
+--- @field properties Custom properties
+--- @field terrain Terrain data
+--- @field animation Animation data
+--- @field frame Current animation frame
+--- @field time Time spent on current animation frame
+--- @field width Width of tile
+--- @field height Height of tile
+--- @field sx Scale value on the X axis
+--- @field sy Scale value on the Y axis
+--- @field r Rotation of tile (in radians)
+--- @field offset Offset drawing position
+--- @field offset.x Offset value on the X axis
+--- @field offset.y Offset value on the Y axis
+--- @see Map.tiles
 
 --- @table TileInstance
--- @field batch Spritebatch the Tile Instance belongs to
--- @field id ID within the spritebatch
--- @field gid Global ID
--- @field x Position on the X axis (in pixels)
--- @field y Position on the Y axis (in pixels)
--- @see Map.tileInstances
--- @see Tile
+--- @field batch Spritebatch the Tile Instance belongs to
+--- @field id ID within the spritebatch
+--- @field gid Global ID
+--- @field x Position on the X axis (in pixels)
+--- @field y Position on the Y axis (in pixels)
+--- @see Map.tileInstances
+--- @see Tile
 
 --- @table Object
--- @field id Global ID
--- @field name Name of object (non-unique)
--- @field shape Shape of object
--- @field x Position of object on X axis (in pixels)
--- @field y Position of object on Y axis (in pixels)
--- @field width Width of object (in pixels)
--- @field height Heigh tof object (in pixels)
--- @field rotation Rotation of object (in radians)
--- @field visible Toggle if object is visible or hidden
--- @field properties Custom properties
--- @field ellipse List of verticies of specific shape
--- @field rectangle List of verticies of specific shape
--- @field polygon List of verticies of specific shape
--- @field polyline List of verticies of specific shape
--- @see Map.objects
+--- @field id Global ID
+--- @field name Name of object (non-unique)
+--- @field shape Shape of object
+--- @field x Position of object on X axis (in pixels)
+--- @field y Position of object on Y axis (in pixels)
+--- @field width Width of object (in pixels)
+--- @field height Heigh tof object (in pixels)
+--- @field rotation Rotation of object (in radians)
+--- @field visible Toggle if object is visible or hidden
+--- @field properties Custom properties
+--- @field ellipse List of verticies of specific shape
+--- @field rectangle List of verticies of specific shape
+--- @field polygon List of verticies of specific shape
+--- @field polyline List of verticies of specific shape
+--- @see Map.objects
 
 return setmetatable({}, STI)

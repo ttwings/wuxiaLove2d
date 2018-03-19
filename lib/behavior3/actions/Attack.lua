@@ -8,7 +8,7 @@ function attack:ctor(settings)
 
 	self.name = "Attack"
 	self.title = "Attack"
-	self.properties = {}
+	self.properties = {skill = ''}
 
 end
 
@@ -18,11 +18,9 @@ function attack:tick(tick)
 	local target = tick.blackboard:get('target')
 	local distance = math.abs(target.x - actor.x) + math.abs(target.y - actor.y)
 	local attackDis = 5
-	-- local currTime = _G.timer.turn
-	-- local startTime = tick.blackboard:get("startTime")
-	--- 添加时间
+    local skill = self.properties.skill
 	if distance <= attackDis then
-		actions.attack(actor,target)
+		Actions.attack(actor,target)
 		return b3.SUCCESS
 	end
 

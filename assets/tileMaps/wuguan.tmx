@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="256" height="150" tilewidth="32" tileheight="32" nextobjectid="60">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="256" height="150" tilewidth="32" tileheight="32" nextobjectid="85">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="16384" columns="64">
   <image source="../graphics/Tilesets/tileset.png" width="2048" height="8192"/>
  </tileset>
@@ -622,11 +622,20 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="sprites">
+ <objectgroup name="rooms" visible="0">
+  <object id="60" name="西练武场" x="832" y="1920" width="1088" height="832"/>
+  <object id="61" name="木柴房" x="672" y="2944" width="448" height="544"/>
+  <object id="62" name="水房" x="1568" y="2912" width="448" height="576"/>
+  <object id="63" name="马房" x="800" y="3840" width="832" height="480"/>
+  <object id="64" name="厨房" x="64" y="864" width="544" height="800"/>
+  <object id="65" name="柴房" x="0" y="192" width="480" height="416"/>
+ </objectgroup>
+ <objectgroup name="actors">
   <object id="55" name="player" x="3264" y="3776" width="32" height="32"/>
   <object id="57" name="虚竹" x="3040" y="1888" width="32" height="32"/>
   <object id="58" name="段誉" x="576" y="128" width="32" height="32"/>
   <object id="59" name="慕容复" x="1312" y="2720" width="32" height="32"/>
+  <object id="68" name="木人" x="1408" y="2496" width="32" height="64"/>
  </objectgroup>
  <layer name="cover" width="256" height="150">
   <data encoding="csv">
@@ -782,5 +791,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="objs"/>
+ <objectgroup name="objs">
+  <object id="69" name="大碗茶" gid="929" x="480" y="1472" width="32" height="32"/>
+  <object id="72" name="麻婆豆腐" gid="1186" x="224" y="1472" width="32" height="32"/>
+  <object id="74" name="木剑" gid="13162" x="1600" y="2048" width="32" height="32"/>
+  <object id="81" name="木枪" gid="13228" x="1728" y="2048" width="32" height="32"/>
+  <object id="82" name="木枪" gid="13164" x="1728" y="2016" width="32" height="32"/>
+  <object id="83" name="木枪" gid="13292" x="1728" y="2080" width="32" height="32"/>
+  <object id="84" name="木剑" gid="13161" x="1568" y="2048" width="32" height="32"/>
+ </objectgroup>
 </map>

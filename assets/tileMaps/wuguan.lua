@@ -8,7 +8,7 @@ return {
   height = 150,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 60,
+  nextobjectid = 85,
   properties = {},
   tilesets = {
     {
@@ -727,7 +727,97 @@ return {
     },
     {
       type = "objectgroup",
-      name = "sprites",
+      name = "rooms",
+      visible = false,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 60,
+          name = "西练武场",
+          type = "",
+          shape = "rectangle",
+          x = 832,
+          y = 1920,
+          width = 1088,
+          height = 832,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 61,
+          name = "木柴房",
+          type = "",
+          shape = "rectangle",
+          x = 672,
+          y = 2944,
+          width = 448,
+          height = 544,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 62,
+          name = "水房",
+          type = "",
+          shape = "rectangle",
+          x = 1568,
+          y = 2912,
+          width = 448,
+          height = 576,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 63,
+          name = "马房",
+          type = "",
+          shape = "rectangle",
+          x = 800,
+          y = 3840,
+          width = 832,
+          height = 480,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 64,
+          name = "厨房",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 864,
+          width = 544,
+          height = 800,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 65,
+          name = "柴房",
+          type = "",
+          shape = "rectangle",
+          x = 0,
+          y = 192,
+          width = 480,
+          height = 416,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "actors",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -783,6 +873,19 @@ return {
           y = 2720,
           width = 32,
           height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 68,
+          name = "木人",
+          type = "",
+          shape = "rectangle",
+          x = 1408,
+          y = 2496,
+          width = 32,
+          height = 64,
           rotation = 0,
           visible = true,
           properties = {}
@@ -964,7 +1067,106 @@ return {
       offsety = 0,
       draworder = "topdown",
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 69,
+          name = "大碗茶",
+          type = "",
+          shape = "rectangle",
+          x = 480,
+          y = 1472,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 929,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 72,
+          name = "麻婆豆腐",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 1472,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1186,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 74,
+          name = "木剑",
+          type = "",
+          shape = "rectangle",
+          x = 1600,
+          y = 2048,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 13162,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 81,
+          name = "木枪",
+          type = "",
+          shape = "rectangle",
+          x = 1728,
+          y = 2048,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 13228,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 82,
+          name = "木枪",
+          type = "",
+          shape = "rectangle",
+          x = 1728,
+          y = 2016,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 13164,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 83,
+          name = "木枪",
+          type = "",
+          shape = "rectangle",
+          x = 1728,
+          y = 2080,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 13292,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 84,
+          name = "木剑",
+          type = "",
+          shape = "rectangle",
+          x = 1568,
+          y = 2048,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 13161,
+          visible = true,
+          properties = {}
+        }
+      }
     }
   }
 }

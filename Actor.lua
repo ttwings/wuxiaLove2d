@@ -81,7 +81,7 @@ keyFunc["闲逛"][keymap.select] = function(actor)
     --ScreenManager.switch("battle")
 end
 keyFunc["闲逛"][keymap.A] = function(actor)
-    Actions.find(actor, actor.target)
+    Actions.get(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.B] = function(actor)
     Actions.eat(actor, actor.target)
@@ -121,29 +121,25 @@ end
 
 -------------- 总体功能 -------------------------
 function Actor:draw()
-    --Actor:drawMsg()
-    --Actor:drawBag()
-    --Actor:drawFly()
     bullets.draw()
     --messages.draw()
 end
 
 function Actor:update(dt)
-    self:atRoom()
     self['animNow']=self["anim"][self.toward]
     self["animNow"]:update(dt)
     bullets.update(dt)
     self:heartbeat(dt)
 end
 ------------------ 更新角色的位置 --------------
-function Actor:atRoom()
-    local rx, ry
-    rx = math.modf(self.x / 128) + 1 or 1
-    ry = math.modf(self.y / 128) + 1 or 1
-    if mapWuGuan[ry] and mapWuGuan[ry][rx] then
-        self.room = mapWuGuan[ry][rx]
-    end
-end
+--function Actor:atRoom()
+--    local rx, ry
+--    rx = math.modf(self.x / 128) + 1 or 1
+--    ry = math.modf(self.y / 128) + 1 or 1
+--    if mapWuGuan[ry] and mapWuGuan[ry][rx] then
+--        self.room = mapWuGuan[ry][rx]
+--    end
+--end
 ------------------ 更新角色的状态 --------------
 
 function Actor:heartbeat(dt)

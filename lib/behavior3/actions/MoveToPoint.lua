@@ -1,3 +1,4 @@
+require ('lib.util')
 local moveToPoint = b3.Class("MoveToPoint", b3.Action)
 b3.MoveToPoint = moveToPoint
 
@@ -6,26 +7,21 @@ function moveToPoint:ctor(settings)
 
 	self.name = "moveToPoint"
 	self.title = "moveToPoint"
-	self.properties = {x=0,y=0}
-end
+	self.properties = {tx=0,ty=0}
 
-function moveToPoint:open(tick)
-	local point = {x = self.properties.x,y = self.properties.y}
-	tick.blackboard:set("point",point)
 end
 
 function moveToPoint:tick(tick)
-
-	local point = tick.blackboard:get('point')
+	local point = {tx = self.properties.tx,ty = self.properties.ty}
+    local str = ('tx:%s ty:%s'):format(point.tx,point.ty)
+	lovebird.print(str)
 	local actor = tick.blackboard:get('actor')
-	print(point.x)
-    local d = math.getDirection(actor.x,actor.y,point.x,point.y)
-    print(d)
-
-	if point.x == actor.x and point.y == actor.y then
+    local d = math.getDirection(actor.tx,actor.ty,point.tx,point.ty)
+    lovebird.print(d)
+	if point.tx == actor.tx and point.ty == actor.ty then
 		return b3.SUCCESS
 	end
-	if d == 'N' then Actions.moveN(actor) end
+	if d == 'N' then Ations.moveN(actor) end
     if d == 'S' then Actions.moveS(actor) end
     if d == 'W' then Actions.moveW(actor) end
     if d == 'E' then Actions.moveE(actor) end

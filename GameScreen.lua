@@ -1,5 +1,6 @@
 local assets = require('lib.cargo').init('assets')
 local Screen = require( "lib/Screen" )
+require("lib.util")
 local actorData = assets.data.actorData
 local sti = require "sti"
 local GameScreen = {}
@@ -8,6 +9,8 @@ local tx, ty
 local canvas = love.graphics.newCanvas()
 local tx
 local ty
+
+
 
 local behaviorTree = b3.BehaviorTree.new()
 local blackBoard = b3.Blackboard.new()
@@ -48,33 +51,72 @@ local function loadData(  )
 		map = sti("assets/tileMaps/wuguan.lua")
 		-- Prepare translations
 		tx, ty = 0, 0
-		-- Create a Custom Layer
-		map:addCustomLayer("Sprite Layer", 5)
-		-- Add data to Custom Layer
-		local spriteLayer = map.layers["Sprite Layer"]
-		spriteLayer.sprites = {
-			player = {}
-		}
-		-- Update callback for Custom Layer
-		region.objs =  map.layers["objs"].objects
-		region.actors = map.layers["sprites"].objects
+		region.map = assets.tileMaps.wuguan
+		region.objLayer = map.layers["objs"]
+		region.roomLayer = map.layers["rooms"]
+		region.actorLayer = map.layers["actors"]
 
-		function spriteLayer:update(dt)
-			for _, sprite in pairs(self.sprites) do
+		--- @param roomLayer 房间层
+		function region.roomLayer:update(dt)
+			for _, room in pairs(self.objects) do
+				local rx,ry = room.x,room.y
+				local rw,rh = room.width,room.height
+				local px,py = player.x,player.y
+				if rx <= px and rx + rw > px and ry <= py and ry + rh > py then
+					player.room = room.name
+					break
+				else
+					player.room = ""
+				end
+			end
+		end
+		--- @param objLayer 物品层
+		function region.objLayer:update(dt)
+			for _,obj in pairs(self.objects) do
+				local ox,oy = obj.x + 16,obj.y + 16
+				local px,py = player.x + 16 ,player.y + 32
+				local distance = math.getDistance(px,py,ox,oy)
+				if  distance <= 96 then
+					player.target = obj.name
+					--print(obj.name)
+					break
+				else
+					player.target = ""
+				end
+			end
+			---@param obj 的更新，需要重新set 同理tile
+			map:setObjectSpriteBatches(self)
+		end
 
+		-----@param 复写这里就能达到物品增减的效果
+		--function region.objLayer:draw()
+		--	for _, batch in pairs(self.batches) do
+		--		lg.draw(batch, 0, 0)
+		--	end
+		--end
+
+		---@param actorLayer
+		function region.actorLayer:update(dt)
+			for _, actor in pairs(self.objects) do
+				if actor.name == player.name then
+					actor.x = player.x
+					actor.y = player.y
+				end
 			end
 		end
 		--
-		function spriteLayer:draw()
-			for _, sprite in pairs(self.sprites) do
-				player:drawAnim()
-                player:draw()
-				enemy:drawAnim()
-				enemy:draw()
-				--npcs:drawAnim()
-				animations.draw()
-
-			end
+		function region.actorLayer:draw()
+			--for _, sprite in pairs(self.objects) do
+            --
+            --
+			--end
+			--love.graphics.print(sprite.Name .."",sprite.x,sprite.y)
+			player:drawAnim()
+			player:draw()
+			enemy:drawAnim()
+			enemy:draw()
+			--npcs:drawAnim()
+			animations.draw()
 		end
 		--canvasLoad()
 end

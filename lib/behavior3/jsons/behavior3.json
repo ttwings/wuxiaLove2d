@@ -1,78 +1,65 @@
 {
   "id": "40c252c8-2983-434b-9b13-01e86fa44894",
-  "title": "A behavior tree",
+  "title": "TestBT",
   "description": "",
-  "root": "35dda9b1-0a27-4fb5-b458-7f20cd4b2a3b",
+  "root": "c441b480-210b-4bdd-8089-42b34dd6f47d",
   "properties": {},
   "nodes": {
-    "0cc92d5d-7179-4e8e-b2e4-19e9fea014d7": {
-      "id": "0cc92d5d-7179-4e8e-b2e4-19e9fea014d7",
-      "name": "FindWanderPoint",
-      "title": "FindWanderPoint",
-      "description": "找到徘徊点",
+    "38519c83-5e6a-4779-a661-ecc00b019bbf": {
+      "id": "38519c83-5e6a-4779-a661-ecc00b019bbf",
+      "name": "Attack",
+      "title": "攻击",
+      "description": "攻击",
       "properties": {
-        "radius": 5,
-        "x": 10,
-        "y": 10
-      },
-      "display": {
-        "x": -180,
-        "y": -156
-      }
-    },
-    "a414b3af-bccd-4eac-b3e5-9e454b6da52a": {
-      "id": "a414b3af-bccd-4eac-b3e5-9e454b6da52a",
-      "name": "MoveToPoint",
-      "title": "MoveToPoint",
-      "description": "移动到指定点",
-      "properties": {
-        "x": 100,
-        "y": 100
-      },
-      "display": {
-        "x": -180,
-        "y": -60
-      }
-    },
-    "3a38510d-7a06-46f5-a0a4-deeec8df5b12": {
-      "id": "3a38510d-7a06-46f5-a0a4-deeec8df5b12",
-      "name": "Wait",
-      "title": "Wait <milliseconds>ms",
-      "description": "",
-      "properties": {
-        "milliseconds": 10,
-        "turn": 10
+        "skill": "火云手"
       },
       "display": {
         "x": -180,
         "y": 24
       }
     },
-    "38519c83-5e6a-4779-a661-ecc00b019bbf": {
-      "id": "38519c83-5e6a-4779-a661-ecc00b019bbf",
-      "name": "Attack",
-      "title": "Attack",
-      "description": "攻击",
-      "properties": {},
+    "e37b6223-89df-40d3-820d-853b82c12326": {
+      "id": "e37b6223-89df-40d3-820d-853b82c12326",
+      "name": "FindTarget",
+      "title": "找到目标",
+      "description": "搜索，发现 目标",
+      "properties": {
+        "type": "Actors",
+        "name": "虚竹",
+        "distance": 5,
+        "class": "enemy"
+      },
       "display": {
         "x": -180,
-        "y": 132
+        "y": -156
       }
     },
-    "35dda9b1-0a27-4fb5-b458-7f20cd4b2a3b": {
-      "id": "35dda9b1-0a27-4fb5-b458-7f20cd4b2a3b",
-      "name": "Selector",
-      "title": "Selector",
-      "description": "随机选择器",
+    "9e2a3333-28f9-4446-9c60-3734e8f4aab2": {
+      "id": "9e2a3333-28f9-4446-9c60-3734e8f4aab2",
+      "name": "SeekTarget",
+      "title": "靠近目标",
+      "description": "靠近目标",
+      "properties": {
+        "distance": 2
+      },
+      "display": {
+        "x": -180,
+        "y": -60
+      }
+    },
+    "c441b480-210b-4bdd-8089-42b34dd6f47d": {
+      "id": "c441b480-210b-4bdd-8089-42b34dd6f47d",
+      "name": "Sequence",
+      "title": "攻击",
+      "description": "",
       "properties": {},
       "display": {
-        "x": -408,
+        "x": -384,
         "y": -60
       },
       "children": [
-        "0cc92d5d-7179-4e8e-b2e4-19e9fea014d7",
-        "a414b3af-bccd-4eac-b3e5-9e454b6da52a",
-        "3a38510d-7a06-46f5-a0a4-deeec8df5b12",
+        "e37b6223-89df-40d3-820d-853b82c12326",
+        "9e2a3333-28f9-4446-9c60-3734e8f4aab2",
         "38519c83-5e6a-4779-a661-ecc00b019bbf"
       ]
     }
@@ -104,13 +91,29 @@
       "category": "action",
       "title": "Attack",
       "description": "攻击",
-      "properties": {}
+      "properties": {
+        "skill": ""
+      }
     },
     {
       "name": "Selector",
       "category": "composite",
       "title": "Selector",
       "description": "随机选择器",
+      "properties": {}
+    },
+    {
+      "name": "FindTarget",
+      "category": "condition",
+      "title": "FindTarget",
+      "description": "搜索，发现 目标",
+      "properties": {}
+    },
+    {
+      "name": "SeekTarget",
+      "category": "action",
+      "title": "SeekTarget",
+      "description": "靠近目标",
       "properties": {}
     }
   ]
