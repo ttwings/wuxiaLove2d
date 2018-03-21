@@ -1,8 +1,12 @@
 local assets = require('lib.cargo').init('assets')
+local font = assets.font.myfont(20)
 local Screen = require( "lib/Screen" )
 require("lib.util")
 local actorData = assets.data.actorData
 local sti = require "sti"
+
+local roomFunc = require("assets.data.wuguan.wuguanRoomFunc")
+
 local GameScreen = {}
 local map
 local tx, ty
@@ -47,7 +51,7 @@ local function loadData(  )
 		blackBoard:set("actor",enemy)
 		blackBoard:set('target',player)
 
-		love.graphics.setFont(font)
+		--love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua")
 		-- Prepare translations
 		tx, ty = 0, 0
@@ -88,13 +92,6 @@ local function loadData(  )
 			map:setObjectSpriteBatches(self)
 		end
 
-		-----@param 复写这里就能达到物品增减的效果
-		--function region.objLayer:draw()
-		--	for _, batch in pairs(self.batches) do
-		--		lg.draw(batch, 0, 0)
-		--	end
-		--end
-
 		---@param actorLayer
 		function region.actorLayer:update(dt)
 			for _, actor in pairs(self.objects) do
@@ -106,11 +103,7 @@ local function loadData(  )
 		end
 		--
 		function region.actorLayer:draw()
-			--for _, sprite in pairs(self.objects) do
-            --
-            --
-			--end
-			--love.graphics.print(sprite.Name .."",sprite.x,sprite.y)
+
 			player:drawAnim()
 			player:draw()
 			enemy:drawAnim()
@@ -125,6 +118,7 @@ function GameScreen.new(  )
 	local self=Screen.new()
 	GameScreen.cam = Camera.new(0,0,1280,800)
 	loadData()
+	roomFunc.load()
 	function self:draw()
 		love.graphics.setShader(shader)
 		GameScreen.cam:draw(function()
@@ -135,6 +129,7 @@ function GameScreen.new(  )
 		guiDraw()
 		love.graphics.print("FPS:" .. love.timer.getFPS(),1220,0)
 		date.draw()
+		roomFunc.draw()
 	end
 
 	function self:update( dt )
@@ -144,6 +139,7 @@ function GameScreen.new(  )
 		end
 		if gameTurn >= player.turn then
 			player:key(dt)
+			-- Update Moan
 		end
 		if gameTurn >= enemy.turn then
 			--Actions.moveW(enemy,dt)
@@ -162,9 +158,12 @@ function GameScreen.new(  )
 		animations.update(dt)
 		date.update()
 --		GameScreen.cam:shakeUpdate()
+		roomFunc.update(dt)
 	end
 	function self:keypressed(key)
 		player:keypressed(key)
+		-- Pass keypresses to Moan
+		roomFunc.keypressed(key)
 	end
 	return self
 end
