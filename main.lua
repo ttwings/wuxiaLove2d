@@ -17,12 +17,14 @@ require("keymap")
 require("Region")
 require("Npcs")
 
+---替换 print 输出debug 信息
 testing()
-Timer = require( 'lib.Timer' )
+---
+local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
 
+
+Timer = require( 'lib.Timer' )
 local ScreenManager = require( "lib/ScreenManager" )
---- testing print
-print("test")
 screens = {
     main = require( "MainScreen" ),
     help = require( "HelpScreen" ),
@@ -32,11 +34,25 @@ screens = {
 
 function love.load( )
     timer = Timer()
+    love.graphics.setFont(font)
     ScreenManager.init(screens, 'main')
+
 end
 
 function love.draw()
     ScreenManager.draw()
+    local stats = love.graphics.getStats()
+    local i = 1
+    local str = string.format("texture memory used: %.2f MB", stats.texturememory / 1024 / 1024)
+    for k, v in pairs(stats) do
+        if k == "texturememory" then
+           v =  string.format("%d MB", stats.texturememory / 1024 / 1024)
+        end
+        str = k .. ":" .. v
+        love.graphics.print(k .. ":" .. v, 1080, i * 20 )
+        i = i + 1
+    end
+
 end
 
 function love.update(dt)

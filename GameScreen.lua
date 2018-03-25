@@ -1,10 +1,9 @@
 local assets = require('lib.cargo').init('assets')
-local font = assets.font.myfont(20)
 local Screen = require( "lib/Screen" )
 require("lib.util")
-local actorData = assets.data.actorData
+local actorData = assets.data.actorDataNew
 local sti = require "sti"
-
+local npcs = require("Npcs")
 local roomFunc = require("assets.data.wuguan.wuguanRoomFunc")
 
 local GameScreen = {}
@@ -40,12 +39,12 @@ region = {}
 local function loadData(  )
 		-- actor class
 	---@param actor Actor
-		player=Actor:new(actorData["虚竹"])
-		enemy=Actor:new(actorData["段誉"])
+		player=Actor:new(actorData["XuZhu"])
+		enemy=Actor:new(actorData["DuanYu"])
 	---
 		player.id = math.createID()
 		enemy.id = math.createID()
-		-- actors = npcs:load()
+		npcs:load()
 	--- load  behavior tree
 		behaviorTree:load('lib/behavior3/jsons/behavior3.json', {})
 		blackBoard:set("actor",enemy)
@@ -108,7 +107,7 @@ local function loadData(  )
 			player:draw()
 			enemy:drawAnim()
 			enemy:draw()
-			--npcs:drawAnim()
+			npcs:drawAnim()
 			animations.draw()
 		end
 		--canvasLoad()
@@ -148,12 +147,13 @@ function GameScreen.new(  )
 		end
 		player:update(dt)
 		enemy:update(dt)
-		--npcs:update(dt)
+		npcs:update(dt)
 		-- 地图的位移
 		tx = math.floor((player.x - 1280/2))
     	ty = math.floor((player.y - 800/2))
     	-- 画布
     	canvasLoad()
+
     	guiUpdata(player,dt)
 		animations.update(dt)
 		date.update()

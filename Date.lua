@@ -45,8 +45,10 @@ local skyMsg = {"夜幕低垂，满天繁星"
 --			"浮尘","扬沙","沙尘暴","强沙尘暴","特强沙尘暴轻雾",
 --			"浓雾强浓雾","轻微霾","轻度霾","中度霾","重度霾","特强霾","霰","飑线"}
 
-font = love.graphics.newFont("assets/font/myfont.ttf", 20)
-love.graphics.setFont(font)
+
+local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
+--love.graphics.setFont(font)
+local richtext = love.graphics.newText(font,"")
 date.year = 111
 date.month = 3
 date.hour = 5
@@ -69,10 +71,8 @@ function date:draw()
 	local colorStr = fontcolor[d.hour]
 	local text = {{Color[fontcolor[d.hour]]},monthMsgIn[d.month]..hourType[d.hour]..skyMsg[d.hour]}
 	dateStr = string.format("%s年%s月%s%s%s时",yearStr,monthStr,weekStr,dayStr,hourStr)
-	love.graphics.print(dateStr,800,0)
-	love.graphics.setColor(Color[colorStr])
-	love.graphics.print(text[2],330,0)
-	love.graphics.setColor(255,255,255,255)
+	richtext:set({Color[fontcolor[d.hour]],dateStr})
+	love.graphics.draw(richtext,330,0)
 end
 
 --- 将数字转为文字

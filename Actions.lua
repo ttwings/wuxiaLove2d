@@ -37,7 +37,8 @@ function eat(actor, target)
 end
 ---@type actor actorData
 function fire(actor, target)
-    local bullet = skills[actor.mainHand]
+    local bullet = skills["罗汉拳"]
+    print("临时使用 罗汉拳")
     bullet.x = actor.hx
     bullet.y = actor.hy
     bullet.x0 = actor.hx
@@ -46,8 +47,8 @@ function fire(actor, target)
     bullet.h = 4
     bullet.r = actor.r
     --bullet.damage=5
-    --actor.mp = actor.mp - bullet.mp
-    actor:subMp(bullet.mp)
+    actor.mp = actor.mp - bullet.mp
+    --actor:subMp(bullet.mp)
     bullets.add(bullet)
     --    cd = 0
 end
