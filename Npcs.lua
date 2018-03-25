@@ -4,9 +4,10 @@ local npcs={}
 Npcs = npcs
 function npcs:add(name)
 	if actorData[name] then
-		npc = Class("npc",Actor)
-		npc:readData(actorData[name])
-		table.insert( npcs, npc )
+		Npc = Class("npc",Actor)
+		Npc:new(actorData[name])
+		--npc:readData
+		table.insert( npcs, Npc )
 	end
 
 end

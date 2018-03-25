@@ -3,7 +3,7 @@ local Screen = require( "lib/Screen" )
 require("lib.util")
 local actorData = assets.data.actorDataNew
 local sti = require "sti"
-local npcs = require("Npcs")
+
 local roomFunc = require("assets.data.wuguan.wuguanRoomFunc")
 
 local GameScreen = {}
@@ -36,15 +36,23 @@ function canvasLoad()
 	love.graphics.setCanvas()
 end
 region = {}
+local npcs = {}
 local function loadData(  )
 		-- actor class
 	---@param actor Actor
 		player=Actor:new(actorData["XuZhu"])
 		enemy=Actor:new(actorData["DuanYu"])
-	---
+		---
+		for k, v in pairs(actorData) do
+			if v.name ~= player.name then
+				local npc = Actor:new(actorData[k])
+				table.insert(npcs,npc)
+			end
+			print(#npcs)
+		end
 		player.id = math.createID()
 		enemy.id = math.createID()
-		npcs:load()
+
 	--- load  behavior tree
 		behaviorTree:load('lib/behavior3/jsons/behavior3.json', {})
 		blackBoard:set("actor",enemy)
@@ -80,11 +88,10 @@ local function loadData(  )
 				local px,py = player.x + 16 ,player.y + 32
 				local distance = math.getDistance(px,py,ox,oy)
 				if  distance <= 96 then
-					player.target = obj.name
-					--print(obj.name)
+					player.obj = obj.name
 					break
 				else
-					player.target = ""
+					player.obj = ""
 				end
 			end
 			---@param obj 的更新，需要重新set 同理tile
@@ -99,6 +106,20 @@ local function loadData(  )
 					actor.y = player.y
 				end
 			end
+			---actor target
+			for _,npc in pairs(npcs) do
+				local ox,oy = npc.x + 16,npc.y + 16
+				local px,py = player.x + 16 ,player.y + 32
+				local distance = math.getDistance(px,py,ox,oy)
+				if  distance <= 96 then
+					player.target = npc.name
+					--print(obj.name)
+					break
+				else
+					player.target = ""
+				end
+			end
+
 		end
 		--
 		function region.actorLayer:draw()
@@ -107,7 +128,9 @@ local function loadData(  )
 			player:draw()
 			enemy:drawAnim()
 			enemy:draw()
-			npcs:drawAnim()
+			for _, v in pairs(npcs) do
+				v:drawAnim()
+			end
 			animations.draw()
 		end
 		--canvasLoad()
@@ -120,9 +143,10 @@ function GameScreen.new(  )
 	roomFunc.load()
 	function self:draw()
 		love.graphics.setShader(shader)
-		GameScreen.cam:draw(function()
+		--- 屏幕震动需要，添加后，GPU 占用率提升 todo 寻找问题，更换camera类
+		--GameScreen.cam:draw(function()
 			love.graphics.draw(canvas)
-		end)
+		--end)
 		love.graphics.setShader()
 		-- GUI
 		guiDraw()
@@ -147,7 +171,10 @@ function GameScreen.new(  )
 		end
 		player:update(dt)
 		enemy:update(dt)
-		npcs:update(dt)
+		for _, v in pairs(npcs) do
+			v:update(dt)
+		end
+		--npcs:update(dt)
 		-- 地图的位移
 		tx = math.floor((player.x - 1280/2))
     	ty = math.floor((player.y - 800/2))

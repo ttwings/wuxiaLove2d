@@ -19,7 +19,7 @@ end
 local cd = 0
 function Actor:key(dt)
     cd = cd + dt
-    speed = 4
+    speed = 8
     --cd=cd-dt
     self.hx = self.x
     self.hy = self.y

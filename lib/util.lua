@@ -1144,3 +1144,53 @@ while true do
 end    
 return ret    
 end
+
+
+---@param draw
+function graphicsStats()
+	--- print debug message
+	local stats = love.graphics.getStats()
+	local i = 1
+	local str = string.format("texture memory used: %.2f MB", stats.texturememory / 1024 / 1024)
+	for k, v in pairs(stats) do
+		if k == "texturememory" then
+			v =  string.format("%d MB", stats.texturememory / 1024 / 1024)
+		end
+		str = k .. ":" .. v
+		love.graphics.print(k .. ":" .. v, 1080, i * 20 )
+		i = i + 1
+	end
+end
+
+local Counters = {}
+local Names = {}
+function hook()
+	local f = debug.getinfo(2,"f").func
+	if Counters[f] == nil then
+		Counters[f] = 1
+		Names[f] = debug.getinfo(2,"Sn")
+	else
+		Counters[f] = Counters[f] + 1
+	end
+end
+
+local function getname(func)
+	local n = Names[func]
+	if n.what == "C" then
+		return n.name
+	end
+	local lc = string.format("[%s]:%s",n.short_src,n.linedefined)
+	if n.namewhat ~= "" then
+		return string.format("%s (%s)",lc,n.name)
+	else
+		return lc
+	end
+end
+
+function drawHook()
+	local j = 1
+	for func,count in pairs(Counters) do
+		love.graphics.print(getname(func) ..":".. count,820,j * 20)
+		j = j + 1
+	end
+end

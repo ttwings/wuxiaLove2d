@@ -48,7 +48,10 @@ function roomFunc.caidi.draw()
 end
 function roomFunc.caidi.keypressed(key)
     --if key == "1" then
-        print(doSomeThing.doChu(player))
+    if player.message == nil then
+        player.message = {}
+    end
+    table.insert(player.message,doSomeThing.doChu(player))
     --end
 end
 
