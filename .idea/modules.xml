@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/wxrpg.iml" filepath="$PROJECT_DIR$/.idea/wxrpg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wuxiaLove2d.iml" filepath="$PROJECT_DIR$/wuxiaLove2d.iml" />
     </modules>
   </component>
 </project>

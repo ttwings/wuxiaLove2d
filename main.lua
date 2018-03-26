@@ -21,6 +21,7 @@ Timer = require( 'lib.Timer' )
 local ScreenManager = require( "lib/ScreenManager" )
 screens = {
     main = require( "MainScreen" ),
+    new = require("NewScreen"),
     help = require( "HelpScreen" ),
     game = require( "GameScreen" ),
     battle = require("BattleScreen")
@@ -42,12 +43,13 @@ end
 
 
 function love.draw()
-    debug.sethook(hook,"c")
+    ---@param hook
+    --debug.sethook(hook,"c")
     ScreenManager.draw()
-    debug.sethook()
+    --debug.sethook()
 
     graphicsStats()
-    drawHook()
+    --drawHook()
 end
 
 function love.keypressed( key )
