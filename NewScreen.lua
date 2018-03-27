@@ -4,7 +4,9 @@
 --- DateTime: 18/3/26 下午8:39
 ---
 local Screen = require("lib/Screen")
+local ScreenManager = require("lib/ScreenManager")
 local assets = require("lib.cargo").init("assets")
+local actorData = assets.data.actorDataNew
 local NewScreen = {}
 local bg = love.graphics.newImage("bg.jpeg")
 --local font = love.graphics.newFont("assets/font/myfont.ttf", 24)
@@ -14,20 +16,10 @@ local titlefont = assets.font.myfont(48)
 local index = 1
 local indexY = 1
 local newActor = {}
-newActor.gui = {
-    { name = "姓名", prop = "name", guiType = "text", contant = "东方未明", select = { "东方未明", "无名" }, color = { 255, 255, 255 } },
-    { name = "性别", prop = "gender", guiType = "text", contant = "男性", select = { "男性", "女性", "无性" }, color = { 255, 255, 255 } },
-    { name = "年龄", prop = "age", guiType = "int", contant = "16", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "臂力", prop = "Str", guiType = "int", contant = "20", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "根骨", prop = "Con", guiType = "int", contant = "20", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "身法", prop = "Dex", guiType = "int", contant = "20", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "悟性", prop = "Int", guiType = "int", contant = "20", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "五感", prop = "Cho", guiType = "int", contant = "20", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "魅力", prop = "Chn", guiType = "int", contant = "20", select = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25 }, color = { 255, 255, 255 } },
-    { name = "气血", prop = "HP", guiType = "int", contant = "120", color = { 255, 255, 255 } },
-    { name = "真气", prop = "MP", guiType = "int", contant = "120", color = { 255, 255, 255 } },
-    { name = "确定", guiType = "text", contant = "再想想", select = { "再想想", "确定了" }, color = { 255, 255, 255 } }
-}
+newActor["gui"] = assets.gui.newGameGUI
+local face
+local moveImg
+local fname,lname
 function NewScreen.new()
     love.graphics.setFont(font)
     local self = Screen.new()
@@ -35,18 +27,35 @@ function NewScreen.new()
     local t = love.graphics.newText(font)
     function self:draw()
         love.graphics.draw(bg, 0, 0, 0)
-        local num = 1
+        love.graphics.setColor(0, 0, 0, 100)
+        love.graphics.rectangle("fill", 90, 90, 400, 600, 8)
+        love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.rectangle("line", 90, 90, 400, 600, 8)
+
         for i, v in pairs(newActor.gui) do
+            if v.prop and  v.prop == "faceImg" then
+                face = assets.graphics.Faces[v.contant]
+            end
+            if v.prop and v.prop == "actorImg" then
+                moveImg = assets.graphics.Characters[v.contant]
+            end
             if i == index then
                 v.color = { 255, 0, 0 }
             else
                 v.color = { 255, 255, 255 }
             end
             t:set({ v.color, v.name .. "  " .. v.contant })
-            love.graphics.print(index, 200, 200)
-            love.graphics.draw(t, 100, 100 + 30 * num)
-            num = num + 1
+            love.graphics.draw(t, v.x,v.y)
+            end
+        --face = assets.graphics.Faces[1]
+        if face ~= nil then
+            --print(face)
+            love.graphics.draw(face,380,120)
         end
+        if moveImg ~= nil then
+            love.graphics.draw(moveImg,260,240)
+        end
+
         love.graphics.draw(title, 300, 40)
         love.graphics.setColor(255, 255, 255, 255)
     end
@@ -65,8 +74,28 @@ function NewScreen.new()
             if v.select then
                 v.contant = v.select[math.random(#v.select)]
             end
-        elseif key == "s" and indexY > 1 then
-            indexY = indexY - 1
+        elseif key == "j" and newActor.gui[#newActor.gui].contant == "是" then
+            player = Actor:new(actorData["XuZhu"])
+            for i, v in pairs(newActor.gui) do
+                if player[v.prop] then
+                    if v.type == "int" then
+                        player[v.prop] = tonumber(v.contant)
+                    else
+                        player[v.prop] = v.contant
+                    end
+                end
+
+                if v.prop == "fname" then
+                    fname = v.contant
+                end
+                if v.prop == "lname" then
+                    lname = v.contant
+                end
+
+            end
+
+            player["name"] = fname .. lname
+            ScreenManager.switch("game")
         end
     end
     return self

@@ -12,7 +12,7 @@ function Actor:readData(data)
     for k, v in pairs( data ) do
         self[k] = v
     end
-    local actorImg = self["actorImg"] or "actor (1)"
+    local actorImg = self["actorImg"]
     self:getAnims(actorImg)
 end
 --------------------------- 键盘控制 ------------------------
@@ -159,8 +159,8 @@ end
 ------------------ 行走图文件 --------------------
 
 function Actor:getAnims(name)
-    self.actorImg = assets.graphics.Characters[name]
-    local image = self.actorImg
+    self.moveImg = assets.graphics.Characters[name]
+    local image = self.moveImg
     local g = anim8.newGrid(32, 64, image:getWidth(), image:getHeight())
     self.anim = {}
     self["anim"]["S"] = anim8.newAnimation(g('1-4', 1), 0.5)
@@ -172,7 +172,7 @@ end
 
 function Actor:drawAnim()
     --love.graphics.print(self.name, self.x - 8, self.y - 24)
-    self.image:draw(self.actorImg, self.x, self.y)
+    self.image:draw(self.moveImg, self.x, self.y)
     --love.graphics.draw(self.actorImg, self.x, self.y)
     love.graphics.colorRectangle("fill", self.x, self.y + 50, self.hp, 2, { 255, 0, 0, 255 })
     love.graphics.colorRectangle("fill", self.x, self.y + 52, self.mp, 2, { 0, 0, 255, 255 })

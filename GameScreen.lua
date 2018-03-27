@@ -40,7 +40,7 @@ local npcs = {}
 local function loadData(  )
 		-- actor class
 	---@param actor Actor
-		player=Actor:new(actorData["XuZhu"])
+	--	player=Actor:new(actorData["XuZhu"])
 		enemy=Actor:new(actorData["DuanYu"])
 		---
 		for k, v in pairs(actorData) do
@@ -165,8 +165,7 @@ function GameScreen.new(  )
 			-- Update Moan
 		end
 		if gameTurn >= enemy.turn then
-			--Actions.moveW(enemy,dt)
-			--enemy.turn = gameTurn +  math.random(1,6)
+			enemy.turn = gameTurn +  math.random(1,6)
 			behaviorTree:tick(enemy.id, blackBoard)
 		end
 		player:update(dt)
