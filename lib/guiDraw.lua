@@ -51,7 +51,8 @@ function guiUpdata(actor, dt)
     else
         guiData["描述"].contant = ""
     end
-    guiData["对话"].image = actor.faceImg
+    guiData["对话1"].image = actor.faceImg
+    guiData["对话2"].image = actor.faceImg
     guiData["商铺"].image = actor.faceImg
     guiData["遇见"].contant = actor.target
     guiData["发现"].contant = actor.obj

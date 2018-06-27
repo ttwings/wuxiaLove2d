@@ -40,7 +40,7 @@ local npcs = {}
 local function loadData(  )
 		-- actor class
 	---@param actor Actor
-	--	player=Actor:new(actorData["XuZhu"])
+		player=Actor:new(actorData["XuZhu"])
 		enemy=Actor:new(actorData["DuanYu"])
 		---
 		for k, v in pairs(actorData) do

@@ -95,6 +95,7 @@ function NewScreen.new()
             end
 
             player["name"] = fname .. lname
+            player:getAnims(player["actorImg"])
             ScreenManager.switch("game")
         end
     end

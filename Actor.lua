@@ -74,13 +74,13 @@ keyFunc["闲逛"][keymap.A] = function(actor)
 end
 keyFunc["闲逛"][keymap.B] = function(actor)
     Actions.eat(actor, actor.target)
-    local i = 1
     for i, v in pairs(_G) do
         print("test _G")
         print(i ..":".. tostring(v))
-        --i = i + 1
     end
 end
+
+
 keyFunc["闲逛"][keymap.X] = function(actor)
     Actions.wear(actor, actor.target)
 end
