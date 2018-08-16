@@ -73,11 +73,13 @@ keyFunc["闲逛"][keymap.A] = function(actor)
     Actions.get(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.B] = function(actor)
-    Actions.eat(actor, actor.target)
-    for i, v in pairs(_G) do
-        print("test _G")
-        print(i ..":".. tostring(v))
-    end
+    --Actions.eat(actor, actor.target)
+    --for i, v in pairs(_G) do
+    --    print("test _G")
+    --    print(i ..":".. tostring(v))
+    --end
+
+    DoSomeThing.chu_di(actor)
 end
 
 

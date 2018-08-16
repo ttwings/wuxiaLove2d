@@ -9,7 +9,7 @@ require("lib.richtext")
 
 ---@param actor
 ---@param 锄地
-function doChu(actor)
+function DoSomeThing.chu_di(actor)
     local me,weapon
     local costj,costq
     me = actor
