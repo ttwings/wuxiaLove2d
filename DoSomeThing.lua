@@ -42,7 +42,7 @@ function doChu(actor)
         me.mark["完了"] = true
         return "干的不错，好了，你可以到大师兄鲁坤那里去覆命了！"
     end
-    
+
     me.startBusy(1)
     me.mark["锄"] = me.mark["锄"] + 1
     if me.skill.staff < 20 and math.random(10)>6 then
