@@ -41,6 +41,8 @@ local function loadData(  )
 		-- actor class
 	---@param actor Actor
 		player=Actor:new(actorData["XuZhu"])
+		player.jobName = "锄草"
+		player.weapon = "锄头"
 		enemy=Actor:new(actorData["DuanYu"])
 		---
 		for k, v in pairs(actorData) do
@@ -48,7 +50,7 @@ local function loadData(  )
 				local npc = Actor:new(actorData[k])
 				table.insert(npcs,npc)
 			end
-			print(#npcs)
+			-- print(#npcs)
 		end
 		player.id = math.createID()
 		enemy.id = math.createID()

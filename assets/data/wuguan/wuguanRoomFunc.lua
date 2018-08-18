@@ -51,7 +51,7 @@ function roomFunc.caidi.keypressed(key)
     if player.message == nil then
         player.message = {}
     end
-    table.insert(player.message,doSomeThing.doChu(player))
+    table.insert(player.message,doSomeThing.chu_di(player))
     --end
 end
 
