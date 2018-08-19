@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="测试任务，中文ID后期会有影响，准备更正数据显示模式，id以拼音为主。。">
+    <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Actions.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Actions.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Actor.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Actor.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameScreen.lua" beforeDir="false" afterPath="$PROJECT_DIR$/GameScreen.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/behavior3/actions/SeekTarget.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/behavior3/actions/SeekTarget.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Npcs.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Npcs.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/behavior3/actions/Attack.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/behavior3/actions/Attack.lua" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +20,29 @@
       <file leaf-file-name="GameScreen.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameScreen.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+            <state relative-caret-position="-160">
+              <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="178" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wuguanActor.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/data/wuguan/wuguanActor.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6498" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CloseToPoint.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/behavior3/actions/CloseToPoint.lua">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="wuguanRoomFunc.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/data/wuguan/wuguanRoomFunc.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1595">
+              <caret line="55" column="3" lean-forward="true" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -31,22 +50,26 @@
       <file leaf-file-name="NewScreen.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NewScreen.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
+            <state relative-caret-position="-2308">
               <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Npcs.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Npcs.lua">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="Attack.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/behavior3/actions/Attack.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="23" column="20" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="20" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="Actor.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Actor.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="212" selection-start-line="212" selection-end-line="212" />
+            <state relative-caret-position="273">
+              <caret line="295" column="7" selection-start-line="295" selection-start-column="7" selection-end-line="295" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -54,7 +77,7 @@
       <file leaf-file-name="main.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-636">
+            <state relative-caret-position="-1090">
               <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
             </state>
           </provider>
@@ -63,42 +86,17 @@
       <file leaf-file-name="Actions.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Actions.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="142" column="23" lean-forward="true" selection-start-line="142" selection-start-column="23" selection-end-line="142" selection-end-column="23" />
+            <state relative-caret-position="1079">
+              <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SeekTarget.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/behavior3/actions/SeekTarget.lua">
+      <file leaf-file-name="actorData.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/data/actorData.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Region.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Region.lua">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-312" />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="56" column="6" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainScreen.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MainScreen.lua">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+            <state relative-caret-position="24904">
+              <caret line="928" column="19" lean-forward="true" selection-start-line="928" selection-start-column="19" selection-end-line="928" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -139,6 +137,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/lib/behavior3/actions/SeekTarget.lua" />
         <option value="$PROJECT_DIR$/GameScreen.lua" />
+        <option value="$PROJECT_DIR$/Npcs.lua" />
+        <option value="$PROJECT_DIR$/lib/behavior3/actions/Attack.lua" />
         <option value="$PROJECT_DIR$/Actor.lua" />
       </list>
     </option>
@@ -167,6 +167,29 @@
               <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
               <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="behavior3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="behavior3" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -176,7 +199,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -293,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534424219971</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="更改移动为按格子。">
+      <created>1534698772290</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1534698772290</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -354,44 +384,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加 newscreen 新增侠客界面" />
     <MESSAGE value="测试任务，中文ID后期会有影响，准备更正数据显示模式，id以拼音为主。。" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试任务，中文ID后期会有影响，准备更正数据显示模式，id以拼音为主。。" />
+    <MESSAGE value="更改移动为按格子。" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改移动为按格子。" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DoSomeThing.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="957">
-          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HelpScreen.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/data/actorData.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26912">
-          <caret line="928" column="19" lean-forward="true" selection-start-line="928" selection-start-column="19" selection-end-line="928" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1624">
-          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ani.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="22" column="3" lean-forward="true" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -560,20 +556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/data/wuguan/wuguanRoomFunc.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1595">
-          <caret line="55" column="3" lean-forward="true" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/data/actorData.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26912">
-          <caret line="928" column="19" lean-forward="true" selection-start-line="928" selection-start-column="19" selection-end-line="928" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleScreen.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1102">
@@ -617,9 +599,6 @@
     <entry file="file://$PROJECT_DIR$/Date.lua">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/bullets.lua">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
@@ -633,20 +612,6 @@
     <entry file="file://$PROJECT_DIR$/Region.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-312" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MainScreen.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NewScreen.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -663,34 +628,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Actions.lua">
+    <entry file="file://$PROJECT_DIR$/Npcs.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="142" column="23" lean-forward="true" selection-start-line="142" selection-start-column="23" selection-end-line="142" selection-end-column="23" />
+        <state relative-caret-position="41">
+          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Npcs.lua">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/bullets.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MainScreen.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/skills.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/actorDataNew.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4">
+          <caret line="59" column="60" selection-start-line="59" selection-start-column="60" selection-end-line="59" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Actions.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1079">
+          <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-636">
+        <state relative-caret-position="-1090">
           <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameScreen.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+        <state relative-caret-position="-160">
+          <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="178" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/actorData.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24904">
+          <caret line="928" column="19" lean-forward="true" selection-start-line="928" selection-start-column="19" selection-end-line="928" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/wuguan/wuguanRoomFunc.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1595">
+          <caret line="55" column="3" lean-forward="true" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/wuguan/wuguanActor.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6498" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/behavior3/actions/CloseToPoint.lua">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/behavior3/actions/Attack.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewScreen.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2308">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Actor.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="212" selection-start-line="212" selection-end-line="212" />
+        <state relative-caret-position="273">
+          <caret line="295" column="7" selection-start-line="295" selection-start-column="7" selection-end-line="295" selection-end-column="7" />
         </state>
       </provider>
     </entry>

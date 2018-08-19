@@ -2,6 +2,9 @@ local Class = require "lib/middleclass"
 local anim8 = require "lib/anim8"
 require("keymap")
 local assets = require("lib.cargo").init("assets")
+local skills = require("assets.data.skills")
+local GameScreen = require("GameScreen")
+
 --- 角色数据
 ---@class Actor
 Actor = Class("Actor")
@@ -106,6 +109,7 @@ keyFunc["闲逛"][keymap.L1] = function(actor)
 end
 keyFunc["战斗"][keymap.B] = function(actor)
     Actions.fire(actor, actor.target)
+    actor:attack()
 end
 keyFunc["战斗"][keymap.U] = function(actor)
     actor:moveN()
@@ -135,7 +139,7 @@ end
 function Actor:update(dt)
     self.image=self["anim"][self.toward]
     self.image:update(dt)
-    bullets.update(dt)
+    -- bullets.update(dt)
     self:heartbeat(dt)
 end
 ------------------ 更新角色的状态 --------------
@@ -261,4 +265,33 @@ function Actor:moveW()
     self.toward = "W"
     self.image = self["anim"][self.toward]
     self:move(-1,0)
+end
+
+function Actor:attack()
+    if self.skill == nil or self.skill == "" then
+        self.skill = "罗汉拳"
+        return
+    end
+    local ax,ay = 0,0
+    if self.toward == "N" then
+        ax = self.grid_x
+        ay = self.grid_y - 1
+    end
+    if self.toward == "S" then
+        ax = self.grid_x
+        ay = self.grid_y + 1
+    end
+    if self.toward == "W" then
+        ax = self.grid_x - 1
+        ay = self.grid_y
+    end
+    if self.toward == "E" then
+        ax = self.grid_x + 1
+        ay = self.grid_y
+    end
+    local skill = skills["罗汉拳"]
+    local skill_x,skill_y = ax * 32,ay * 32
+    animations.add(skill.anim,skill_x,skill_y)
+    messages.add(skill.name)
+    -- GameScreen.cam:shake(0.1,4)
 end
