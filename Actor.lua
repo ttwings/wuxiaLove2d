@@ -7,6 +7,8 @@ local assets = require("lib.cargo").init("assets")
 Actor = Class("Actor")
 function Actor:init(data)
     self:readData(data)
+    self.grid_x = math.floor(self.x / 32)
+    self.grid_y = math.floor(self.y / 32)
 end
 function Actor:readData(data)
     for k, v in pairs( data ) do
@@ -23,7 +25,7 @@ function Actor:key(dt)
     --cd=cd-dt
     self.hx = self.x
     self.hy = self.y
-    if self.state == "闲逛" then
+    if self.state == "闲逛1" then
         if love.keyboard.isDown(keymap.R) then
             self.x = self.x + speed
             -- 调整出招的位置
@@ -63,22 +65,29 @@ keyFunc["闲逛"] = {}
 
 keyFunc["战斗"][keymap.select] = function(actor)
     actor.state = "闲逛"
-    --ScreenManager.switch("game")
 end
 keyFunc["闲逛"][keymap.select] = function(actor)
     actor.state = "战斗"
-    --ScreenManager.switch("battle")
+end
+
+
+keyFunc["闲逛"][keymap.U] = function(actor)
+    actor:moveN()
+end
+keyFunc["闲逛"][keymap.D] = function(actor)
+    -- Actions.moveS(actor)
+    actor:moveS()
+end
+keyFunc["闲逛"][keymap.L] = function(actor)
+    actor:moveW()
+end
+keyFunc["闲逛"][keymap.R] = function(actor)
+    actor:moveE()
 end
 keyFunc["闲逛"][keymap.A] = function(actor)
     Actions.get(actor, actor.target)
 end
 keyFunc["闲逛"][keymap.B] = function(actor)
-    --Actions.eat(actor, actor.target)
-    --for i, v in pairs(_G) do
-    --    print("test _G")
-    --    print(i ..":".. tostring(v))
-    --end
-
     DoSomeThing.chu_di(actor)
 end
 
@@ -99,16 +108,17 @@ keyFunc["战斗"][keymap.B] = function(actor)
     Actions.fire(actor, actor.target)
 end
 keyFunc["战斗"][keymap.U] = function(actor)
-    Actions.moveN(actor)
+    actor:moveN()
 end
 keyFunc["战斗"][keymap.D] = function(actor)
-    Actions.moveS(actor)
+    -- Actions.moveS(actor)
+    actor:moveS()
 end
 keyFunc["战斗"][keymap.L] = function(actor)
-    Actions.moveW(actor)
+    actor:moveW()
 end
 keyFunc["战斗"][keymap.R] = function(actor)
-    Actions.moveE(actor)
+    actor:moveE()
 end
 function Actor:keypressed(key)
     if keyFunc[self.state] and keyFunc[self.state][key] then
@@ -148,7 +158,7 @@ function Actor:heartbeat()
     end
 end
 
-function Actor:addCondition(actor,con)
+function Actor:addCondition(con)
     if con == nil then
         print("not condition find")
     end
@@ -169,7 +179,7 @@ function Actor:getAnims(name)
     self["anim"]["W"] = anim8.newAnimation(g('1-4', 2), 0.5)
     self["anim"]["E"] = anim8.newAnimation(g('1-4', 3), 0.5)
     self["anim"]["N"] = anim8.newAnimation(g('1-4', 4), 0.5)
-    self.image = self["anim"]["N"]
+    self.image = self["anim"][self.toward]
 end
 
 function Actor:drawAnim()
@@ -198,14 +208,57 @@ function Actor:drawAnim()
 end
 
 function Actor:unconcious()
-    self.state = "昏迷"
-    self.turn = self.turn + 100
-    print(self.name .. "昏迷了。")
+    if self.state == "昏迷" then
+        self.turn = self.turn + 100
+        print(self.name .. "昏迷了。")
+        return true
+    end
 end
 
 function Actor:startBusy(turn)
     self.turn = self.turn + turn
     print(self.name .. "晕了")
 end
+function Actor:can_pass(d_grid_x,d_grid_y)
+    local grid_x = self.grid_x + d_grid_x
+    local grid_y = self.grid_y + d_grid_y
+    for i, v in pairs(npcs) do
+        if v.grid_x == grid_x and v.grid_y == grid_y then
+            return false
+        end
+    end
+    return true
+end
 
+function Actor:move(d_grild_x,d_grild_y)
+    -- if self:can_pass(d_grild_x,d_grild_y) then
+        self.grid_x = self.grid_x + d_grild_x
+        self.grid_y = self.grid_y + d_grild_y
+        local xx,yy = self.grid_x * 32,self.grid_y * 32
+        timer:tween(0.2, self, { x = xx, y = yy }, 'in-linear')
+    -- end
+end
 
+function Actor:moveS()
+    self.toward = "S"
+    self.image = self["anim"][self.toward]
+    self:move(0,1)
+end
+
+function Actor:moveN()
+    self.toward = "N"
+    self.image = self["anim"][self.toward]
+    self:move(0,-1)
+end
+
+function Actor:moveE()
+    self.toward = "E"
+    self.image = self["anim"][self.toward]
+    self:move(1,0)
+end
+
+function Actor:moveW()
+    self.toward = "W"
+    self.image = self["anim"][self.toward]
+    self:move(-1,0)
+end

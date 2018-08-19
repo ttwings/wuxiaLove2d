@@ -47,7 +47,7 @@ local function loadData(  )
 		---
 		for k, v in pairs(actorData) do
 			if v.name ~= player.name then
-				local npc = Actor:new(actorData[k])
+				npc = Actor:new(actorData[k])
 				table.insert(npcs,npc)
 			end
 			-- print(#npcs)
