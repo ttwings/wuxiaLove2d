@@ -5,6 +5,7 @@ local actorData = assets.data.actorDataNew
 local sti = require "sti"
 
 local roomFunc = require("assets.data.wuguan.wuguanRoomFunc")
+--local Actor = require("Actor")
 
 local GameScreen = {}
 local map
@@ -50,7 +51,6 @@ local function loadData(  )
 				npc = Actor:new(actorData[k])
 				table.insert(npcs,npc)
 			end
-			-- print(#npcs)
 		end
 		player.id = math.createID()
 		enemy.id = math.createID()
@@ -163,8 +163,8 @@ function GameScreen.new(  )
 			gameTurn = gameTurn + 1
 		end
 		if gameTurn >= player.turn then
-			player:key(dt)
 			-- Update Moan
+			player.isTurn = true
 		end
 		if gameTurn >= enemy.turn then
 			enemy.turn = gameTurn +  math.random(1,6)
@@ -190,7 +190,6 @@ function GameScreen.new(  )
 	end
 	function self:keypressed(key)
 		player:keypressed(key)
-		-- Pass keypresses to Moan
 		roomFunc.keypressed(key)
 	end
 	return self

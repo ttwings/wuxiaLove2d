@@ -27,9 +27,9 @@ function NewScreen.new()
     local t = love.graphics.newText(font)
     function self:draw()
         love.graphics.draw(bg, 0, 0, 0)
-        love.graphics.setColor(0, 0, 0, 100)
+        love.graphics.setColor(0, 0, 0, 0.1)
         love.graphics.rectangle("fill", 90, 90, 400, 600, 8)
-        love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.setColor(1, 1, 1, 1)
         love.graphics.rectangle("line", 90, 90, 400, 600, 8)
 
         for i, v in pairs(newActor.gui) do
@@ -40,9 +40,9 @@ function NewScreen.new()
                 moveImg = assets.graphics.Characters[v.contant]
             end
             if i == index then
-                v.color = { 255, 0, 0 }
+                v.color = { 1, 0, 0 }
             else
-                v.color = { 255, 255, 255 }
+                v.color = { 1, 1, 1 }
             end
             t:set({ v.color, v.name .. "  " .. v.contant })
             love.graphics.draw(t, v.x,v.y)
@@ -57,7 +57,7 @@ function NewScreen.new()
         end
 
         love.graphics.draw(title, 300, 40)
-        love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.setColor(1, 1, 1, 1)
     end
 
     function self:update(dt)

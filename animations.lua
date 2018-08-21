@@ -7,7 +7,8 @@ require("ani")
 animations = {}
 
 animations.add = function (aniName,x,y,w,h,dur)
-    local animation = ani.init(aniName,x,y,w,h,dur)
+    local animation = {}
+    animation = ani:new(aniName,x,y,w,h,dur)
     table.insert(animations,animation)
 end
 

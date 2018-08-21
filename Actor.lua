@@ -6,59 +6,18 @@ local skills = require("assets.data.skills")
 local GameScreen = require("GameScreen")
 
 --- 角色数据
----@class Actor
+--- @class Actor
 Actor = Class("Actor")
 function Actor:init(data)
-    self:readData(data)
-    self.grid_x = math.floor(self.x / 32)
-    self.grid_y = math.floor(self.y / 32)
-end
-function Actor:readData(data)
-    for k, v in pairs( data ) do
+    local data = data or {}
+    for k, v in pairs(data) do
         self[k] = v
     end
-    local actorImg = self["actorImg"]
-    self:getAnims(actorImg)
-end
---------------------------- 键盘控制 ------------------------
-local cd = 0
-function Actor:key(dt)
-    cd = cd + dt
-    speed = 8
-    --cd=cd-dt
-    self.hx = self.x
-    self.hy = self.y
-    if self.state == "闲逛1" then
-        if love.keyboard.isDown(keymap.R) then
-            self.x = self.x + speed
-            -- 调整出招的位置
-            self.hx = self.x + 32
-            self.image = self.anim.E
-            self.r = 0
-            self.toward = 'E'
-        elseif love.keyboard.isDown(keymap.L) then
-            self.x = self.x - speed
-            self.hx = self.x - 8
-            self.image = self.anim.W
-            self.r = math.pi
-            self.toward = 'W'
-        end
-
-        if love.keyboard.isDown(keymap.D) then
-            self.y = self.y + speed
-            self.hy = self.y + 48
-            self.image = self.anim.S
-            self.r = math.pi / 2
-            self.toward = 'S'
-        elseif love.keyboard.isDown(keymap.U) then
-            self.y = self.y - speed
-            self.hy = self.y - 8
-            self.image = self.anim.N
-            self.r = math.pi * 1.5
-            self.toward = 'N'
-        end
-    end
-
+    self.grid_x = math.floor(self.x / 32)
+    self.grid_y = math.floor(self.y / 32)
+    self:getAnims(self["actorImg"])
+    self.cd = 1
+    self.sleep = false
 end
 
 --------------------------- 菜单控制 ------------------------
@@ -132,14 +91,12 @@ end
 
 -------------- 总体功能 -------------------------
 function Actor:draw()
-    bullets.draw()
-    --messages.draw()
+    self:drawAnim()
 end
 
 function Actor:update(dt)
     self.image=self["anim"][self.toward]
     self.image:update(dt)
-    -- bullets.update(dt)
     self:heartbeat(dt)
 end
 ------------------ 更新角色的状态 --------------
@@ -149,8 +106,8 @@ function Actor:heartbeat()
     if heart < 0 then
         -- 心跳
         heart = self.Con
-        self.food = self.food - 1
-        self.water = self.water - 1
+        self.food = math.max(self.food - 1,0)
+        self.water = math.max(self.water - 1,0)
         if self.food < 30 then
             self:addCondition("饥饿")
         end
@@ -223,7 +180,7 @@ function Actor:startBusy(turn)
     self.turn = self.turn + turn
     print(self.name .. "晕了")
 end
-function Actor:can_pass(d_grid_x,d_grid_y)
+function Actor:canPass(d_grid_x,d_grid_y)
     local grid_x = self.grid_x + d_grid_x
     local grid_y = self.grid_y + d_grid_y
     for i, v in pairs(npcs) do
@@ -292,6 +249,8 @@ function Actor:attack()
     local skill = skills["罗汉拳"]
     local skill_x,skill_y = ax * 32,ay * 32
     animations.add(skill.anim,skill_x,skill_y)
+    animations.add(skill.anim,skill_x + 32,skill_y + 32)
     messages.add(skill.name)
     -- GameScreen.cam:shake(0.1,4)
 end
+
