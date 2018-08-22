@@ -20,7 +20,8 @@ function Region:load(name)
     self.map = require("assets/data/" .. name .."Map")
 end
 function Region:update(dt)
-    self.map:update(dt)
+    -- TODO
+    -- self.map:update(dt)
 end
 function Region:draw()
     self.map:draw()

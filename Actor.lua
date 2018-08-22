@@ -4,15 +4,16 @@ require("keymap")
 local assets = require("lib.cargo").init("assets")
 local skills = require("assets.data.skills")
 local GameScreen = require("GameScreen")
-
+local region = Region
 --- 角色数据
 --- @class Actor
 Actor = Class("Actor",GameObject)
-function Actor:init(data)
-    local data = data or {}
-    for k, v in pairs(data) do
-        self[k] = v
-    end
+function Actor:init(sets)
+    --local data = data or {}
+    --for k, v in pairs(data) do
+    --    self[k] = v
+    --end
+    GameObject.init(self,0,0,sets)
     self.grid_x = math.ceil(self.x / 32)
     self.grid_y = math.ceil(self.y / 32)
     self:getAnims(self["actorImg"])
@@ -268,5 +269,22 @@ function Actor:pickUpObj()
         end
     end
     return "nothing find"
+end
+
+function Actor:use()
+
+    local obj = {}
+    local sets = {}
+    if objType(self.target) == "Food" then
+        sets = Foods:readData(self.target)
+        obj = Food:new(0,0,sets)
+    end
+end
+
+function Actor:eat()
+    sets = Foods:readData(self.target)
+    local obj = Food:new(0,0,sets)
+    self.food = math.min(self.food + obj.food,self.max_food)
+    self.action = string.format("你拿起%s,吃了起来",obj.name)
 end
 
