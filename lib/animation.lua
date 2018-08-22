@@ -8,7 +8,7 @@
 ----2. ani:update(dt) 在update里加入
 ----3. love.graphics.draw(img,ani.frame) --画包含动画image,ani.frame是一个quad
 Class = require "lib/middleclass"
-local animation=Class("ani")
+local animation=Class("animation")
 
 
 function animation:init(img,fx,fy,w,h,offx,offy,lx,ly,delay,count)

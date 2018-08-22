@@ -1,5 +1,5 @@
 require "lib/animation"
-local Class = require("lib.middleclass")
+-- local Class = require("lib.middleclass")
 -- ani 动画测试
 ani = Class("ani")
 
@@ -15,7 +15,7 @@ function ani:init(img,x,y,w,h,dur)
 	self.animation.mode = 1
 	self.x = x -80
 	self.y = y -80
-	return self
+	--return self
 end
 
 
@@ -24,5 +24,7 @@ function ani:update(dt)
 end
 
 function ani:draw(r,sx,sy,offx,offy)
-	self.animation:draw(self.x,self.y,r,sx,sy,offx,offy)
+    local x,y = self.x,self.y
+	local animation = self.ani
+	self.animation:draw(x,y,r,sx,sy,offx,offy)
 end

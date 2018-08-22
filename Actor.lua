@@ -7,14 +7,14 @@ local GameScreen = require("GameScreen")
 
 --- 角色数据
 --- @class Actor
-Actor = Class("Actor")
+Actor = Class("Actor",GameObject)
 function Actor:init(data)
     local data = data or {}
     for k, v in pairs(data) do
         self[k] = v
     end
-    self.grid_x = math.floor(self.x / 32)
-    self.grid_y = math.floor(self.y / 32)
+    self.grid_x = math.ceil(self.x / 32)
+    self.grid_y = math.ceil(self.y / 32)
     self:getAnims(self["actorImg"])
     self.cd = 1
     self.sleep = false
@@ -224,11 +224,7 @@ function Actor:moveW()
     self:move(-1,0)
 end
 
-function Actor:attack()
-    if self.skill == nil or self.skill == "" then
-        self.skill = "罗汉拳"
-        return
-    end
+function Actor:getHandGrid()
     local ax,ay = 0,0
     if self.toward == "N" then
         ax = self.grid_x
@@ -246,11 +242,31 @@ function Actor:attack()
         ax = self.grid_x + 1
         ay = self.grid_y
     end
+    return ax,ay
+end
+
+function Actor:attack()
+    if self.skill == nil or self.skill == "" then
+        self.skill = "罗汉拳"
+    end
+    local ax,ay = self:getHandGrid()
     local skill = skills["罗汉拳"]
     local skill_x,skill_y = ax * 32,ay * 32
     animations.add(skill.anim,skill_x,skill_y)
     animations.add(skill.anim,skill_x + 32,skill_y + 32)
     messages.add(skill.name)
     -- GameScreen.cam:shake(0.1,4)
+end
+
+function Actor:pickUpObj()
+    local ax,ay = self:getHandGrid()
+    local objs = region.objs
+    for k, v in pairs(objs) do
+        if objs.gx == ax and objs.gy == ay then
+            table.insert(self.bag,v)
+            return "pick up " .. k
+        end
+    end
+    return "nothing find"
 end
 

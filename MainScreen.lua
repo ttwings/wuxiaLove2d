@@ -1,7 +1,8 @@
 local Screen = require( "lib/Screen" )
 local ScreenManager = require("lib/ScreenManager")
 local assets = require("lib.cargo").init("assets")
-local snow = require( "Snow" )
+require( "Snow" )
+require("GameObject")
 local MainScreen = {}
 local bg = love.graphics.newImage("bg.jpeg")
 local font = assets.font.myfont(32)
@@ -9,6 +10,7 @@ local titlefont = assets.font.myfont(56)
 local menu = {}
 local index = 1
 function MainScreen.new(  )
+    local ob = GameObject:new(100,100)
     --love.graphics.setFont(font)
     local self = Screen.new()
     local title = love.graphics.newText(titlefont, "武侠与江湖")
@@ -18,7 +20,7 @@ function MainScreen.new(  )
     menu[3] = { color = { 255, 0, 0, 255 }, text = "侠客宝典" }
     menu[4] = { color = { 255, 0, 0, 255 }, text = "归隐山林" }
     -- 下雪
-    snow.init(100)
+    Snow:new(0,0,{n = 100})
     function self:draw(  )
         love.graphics.draw(bg, 0, 0, 0)
         love.graphics.setColor(0, 0, 0, 255)
@@ -33,11 +35,12 @@ function MainScreen.new(  )
                 menu[i].color = { 0, 0, 0, 255 }
             end
         end
-        snow.draw()
+        Snow:draw()
+        ob:draw()
     end
 
     function self:update( dt )
-        snow.update(dt)
+        Snow:update(dt)
     end
     local screenStr = { "new","game", "help", "main" }
     function self:keypressed(key)

@@ -29,6 +29,7 @@ screens = {
 
 function love.load( )
     ---替换 print 输出debug 信息
+    love.keyboard.setKeyRepeat(true)
     testing()
     timer = Timer()
     ScreenManager.init(screens, 'main')
