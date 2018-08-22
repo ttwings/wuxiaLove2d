@@ -259,7 +259,7 @@ function Actor:attack()
     -- GameScreen.cam:shake(0.1,4)
 end
 
-function Actor:pickUpObj()
+function Actor:pickup()
     local ax,ay = self:getHandGrid()
     local objs = region.objs
     for k, v in pairs(objs) do
