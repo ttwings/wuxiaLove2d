@@ -1,10 +1,11 @@
-local Class = require "lib/middleclass"
+Class = require "lib/middleclass"
 local anim8 = require "lib/anim8"
 require("keymap")
 local assets = require("lib.cargo").init("assets")
 local skills = require("assets.data.skills")
 local GameScreen = require("GameScreen")
 local region = Region
+require("Food")
 --- 角色数据
 --- @class Actor
 Actor = Class("Actor",GameObject)
@@ -19,6 +20,11 @@ function Actor:init(sets)
     self:getAnims(self["actorImg"])
     self.cd = 1
     self.sleep = false
+    self.max_food = 100
+    self.max_water = 100
+    self.condition = {}
+    self.isOpenBag = false
+    self:bagInit()
 end
 
 --------------------------- 菜单控制 ------------------------
@@ -48,10 +54,16 @@ keyFunc["闲逛"][keymap.R] = function(actor)
     actor:moveE()
 end
 keyFunc["闲逛"][keymap.A] = function(actor)
-    Actions.get(actor, actor.target)
+    -- Actions.get(actor, actor.target)
+    actor:eat()
 end
 keyFunc["闲逛"][keymap.B] = function(actor)
-    DoSomeThing.chu_di(actor)
+    -- DoSomeThing.chu_di(actor)
+    if actor.isOpenBag then
+        actor.isOpenBag = false
+    else
+        actor.isOpenBag = true
+    end
 end
 
 
@@ -93,20 +105,23 @@ end
 -------------- 总体功能 -------------------------
 function Actor:draw()
     self:drawAnim()
+    if self.isOpenBag then
+        self:openBag()
+    end
 end
 
 function Actor:update(dt)
     self.image=self["anim"][self.toward]
     self.image:update(dt)
     self:heartbeat(dt)
+
 end
 ------------------ 更新角色的状态 --------------
-
+local heart = 0
 function Actor:heartbeat()
-    local heart = self.Con - 1
-    if heart < 0 then
-        -- 心跳
-        heart = self.Con
+    heart = heart + 1
+    if heart > 600 then
+        heart = 0
         self.food = math.max(self.food - 1,0)
         self.water = math.max(self.water - 1,0)
         if self.food < 30 then
@@ -259,32 +274,52 @@ function Actor:attack()
     -- GameScreen.cam:shake(0.1,4)
 end
 
-function Actor:pickup()
+function Actor:getObj()
+    local id = self.target
+    local objs = require("assets.data.objs")
+    if objs[id] then
+        if bojs[id] == "food" then
+            local food = Food:getFromId(id)
+            table.insert(bag,food)
+        end
+    end
+end
+
+function Actor:findObj()
     local ax,ay = self:getHandGrid()
     local objs = region.objs
     for k, v in pairs(objs) do
         if objs.gx == ax and objs.gy == ay then
-            table.insert(self.bag,v)
-            return "pick up " .. k
+            self.target = objs.id
+            return self.target
         end
     end
-    return "nothing find"
 end
 
-function Actor:use()
-
-    local obj = {}
-    local sets = {}
-    if objType(self.target) == "Food" then
-        sets = Foods:readData(self.target)
-        obj = Food:new(0,0,sets)
-    end
+function Actor:bagInit()
+    self.bag = {}
+    self.bagSize = 20
+    self.bagIndex = 1
+    self.bag[1] = Food:new(0,0,{id = "米饭"})
+    self.bag[2] = Food:new(0,0,{id = "米饭"})
 end
 
 function Actor:eat()
-    sets = Foods:readData(self.target)
-    local obj = Food:new(0,0,sets)
-    self.food = math.min(self.food + obj.food,self.max_food)
-    self.action = string.format("你拿起%s,吃了起来",obj.name)
+    -- local item = bag[1]
+    --local item = Food:getFromId("米饭")
+     local item = Food:new(0,0,{id = "米饭"})
+    -- if item.actionA == "eat" then
+        item:eatby(self)
+        -- table.remove(bag,item)
+    -- end
+end
+
+function Actor:openBag()
+    love.graphics.setColor(0,0,0,1)
+    love.graphics.rectangle("fill",self.x,self.y,200,200,8)
+    love.graphics.setColor(1,1,1,1)
+    for i, v in ipairs(self.bag) do
+        love.graphics.print(v.name,self.x,self.y + i * 20)
+    end
 end
 

@@ -32,19 +32,13 @@ function Snow:draw()
 		love.graphics.circle("fill",v.x,v.y,v.r-5)
 		love.graphics.circle("fill",v.x,v.y,v.r-6)
 	end
-	-- love.graphics.setColor(1, 1, 1, 1)
 end
 
 
 function Snow:update(dt)
-	--self.cd=self.cd+1
-	--if self.cd<5 then return end
-	--cd=0
 	for i = #circles,1,-1 do
 		v=circles[i]
-		--v.x = v.x + math.random(-1, 1)
 		v.y = v.y + v.r*0.1
-		--v.color[4] = math.random(0.1, 0.3)
 		if v.y>800 then
 		    v.y=-10
 		    v.x=v.x+math.random(-10, 10)

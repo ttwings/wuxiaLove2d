@@ -1,13 +1,13 @@
-local date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
-Date = date
-animals = {"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
-weeks 	= {"上旬","中旬","下旬"}
-days 	= {"月曜日","火曜日","水曜日","木曜日","金曜日","土曜日","日曜日"}
-hours 	= {"子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"}
-months  = {"正","二","三","四","五","六","七","八","九","十","冬","腊"}
-numbers = {"〇","一","二","三","四","五","六","七","八","九"}
-season	= {"春","夏","秋","冬"}
-monthMsgOut = {	"春天悄悄地走来了，","春风轻轻地拂过你的脸庞，","天气逐渐变暖了，",
+local Date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
+--Date = date
+local animals = {"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
+local weeks 	= {"上旬","中旬","下旬"}
+local days 	= {"月曜日","火曜日","水曜日","木曜日","金曜日","土曜日","日曜日"}
+local hours 	= {"子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"}
+local months  = {"正","二","三","四","五","六","七","八","九","十","冬","腊"}
+local numbers = {"〇","一","二","三","四","五","六","七","八","九"}
+local season	= {"春","夏","秋","冬"}
+local monthMsgOut = {	"春天悄悄地走来了，","春风轻轻地拂过你的脸庞，","天气逐渐变暖了，",
 				"已经是初夏时节了，","知了的叫声让你感觉到了盛夏的气息，","天气变得非常闷热，",
 				"虽然是秋天了，天气还是有些热，","中秋佳节快到了，","一阵秋风吹来，卷起了地上的落叶，",
 				"秋去冬来，","寒风凛冽，","快到年关了，"}
@@ -47,22 +47,21 @@ local skyMsg = {"夜幕低垂，满天繁星"
 
 
 local font = love.graphics.newFont("assets/font/myfont.ttf", 20)
---love.graphics.setFont(font)
 local richtext = love.graphics.newText(font,"")
-date.year = 111
-date.month = 3
-date.hour = 5
-date.second = math.random(10000,1000000)
-function date:update(dt)
+Date.year = 111
+Date.month = 3
+Date.hour = 5
+Date.second = math.random(10000,1000000)
+function Date:update(dt)
 	-- 1年 = 12 月 * 3 旬 * 7 天 * 12 时辰 * 120 分 * 60 秒 * 60 帧 = 15552000
 	-- 计算年月日
 	-- 6 秒一回合
-	date.second = date.second + 6
-	date.new(date.second)
+	Date.second = Date.second + 6
+	Date:new(Date.second)
 end
 
-function date:draw()
-	local d = date
+function Date:draw()
+	local d = Date
 	local yearStr = hours[d.year]..animals[d.year]
 	local monthStr = months[d.month]
 	local weekStr = weeks[d.week]
@@ -94,22 +93,22 @@ end
 ---new
 ---@param second number 回合数
 ---@return table date 日期
-function date.new(second)
-	date.second	= second
-	date.minute = math.modf(date.second/60)
-	date.hour 	= math.modf(date.minute/60)
-	date.day 	= math.modf(date.hour/12)
-	date.week 	= math.modf(date.day/7)
-	date.month 	= math.modf(date.week/3)
-	date.year 	= math.modf(date.month/12)
+function Date:new(second)
+	Date.second	= second
+	Date.minute = math.modf(Date.second/60)
+	Date.hour 	= math.modf(Date.minute/60)
+	Date.day 	= math.modf(Date.hour/12)
+	Date.week 	= math.modf(Date.day/7)
+	Date.month 	= math.modf(Date.week/3)
+	Date.year 	= math.modf(Date.month/12)
 ---- 日期转化
-	date.minute = math.modf(date.minute%60)+1
-	date.hour 	= math.modf(date.hour%12)+1
-	date.day 	= math.modf(date.day%7)+1
-	date.week 	= math.modf(date.week%3)+1
-	date.month 	= math.modf(date.month%12)+1
-	date.year 	= math.modf(date.year%12)+1
-	return date
+	Date.minute = math.modf(Date.minute%60)+1
+	Date.hour 	= math.modf(Date.hour%12)+1
+	Date.day 	= math.modf(Date.day%7)+1
+	Date.week 	= math.modf(Date.week%3)+1
+	Date.month 	= math.modf(Date.month%12)+1
+	Date.year 	= math.modf(Date.year%12)+1
+	return Date
 end
 
-return date
+return Date

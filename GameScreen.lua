@@ -11,13 +11,9 @@ local GameScreen = {}
 local map
 local tx, ty
 local canvas = love.graphics.newCanvas()
-local tx
-local ty
 
+gameObjects = {}
 
-
-local behaviorTree = b3.BehaviorTree.new()
-local blackBoard = b3.Blackboard.new()
 date = require("Date")
 gameTurn = 0
 --- @language C
@@ -39,26 +35,26 @@ end
 region = {}
 local npcs = {}
 local function loadData(  )
-		-- actor class
 	---@param actor Actor
 		player=Actor:new(actorData["XuZhu"])
-		player.jobName = "锄草"
-		player.weapon = "锄头"
 		enemy=Actor:new(actorData["DuanYu"])
+
+		table.insert(gameObjects,player)
+		table.insert(gameObjects,enemy)
 		---
 		for k, v in pairs(actorData) do
 			if v.name ~= player.name then
-				npc = Actor:new(actorData[k])
-				table.insert(npcs,npc)
+				local npc = Actor:new(actorData[k])
+				table.insert(gameObjects,npc)
 			end
 		end
 		player.id = math.createID()
 		enemy.id = math.createID()
 
 	--- load  behavior tree
-		behaviorTree:load('lib/behavior3/jsons/behavior3.json', {})
-		blackBoard:set("actor",enemy)
-		blackBoard:set('target',player)
+	--	behaviorTree:load('lib/behavior3/jsons/behavior3.json', {})
+	--	blackBoard:set("actor",enemy)
+	--	blackBoard:set('target',player)
 
 		--love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua")
@@ -126,10 +122,14 @@ local function loadData(  )
 		--
 		function region.actorLayer:draw()
 
-			player:drawAnim()
-			player:draw()
-			enemy:drawAnim()
-			enemy:draw()
+			--player:drawAnim()
+			table.sort(gameObjects,function(a,b) return a.y > b.y end)
+			for i = #gameObjects, 1,-1 do
+				gameObjects[i]:draw()
+			end
+			-- player:draw()
+			--enemy:drawAnim()
+			-- enemy:draw()
 			for _, v in pairs(npcs) do
 				v:drawAnim()
 			end
@@ -163,20 +163,16 @@ function GameScreen.new(  )
 			gameTurn = gameTurn + 1
 		end
 		if gameTurn >= player.turn then
-			-- Update Moan
 			player.isTurn = true
 		end
 		if gameTurn >= enemy.turn then
 			enemy.turn = gameTurn +  math.random(1,6)
-			behaviorTree:tick(enemy.id, blackBoard)
 		end
-		player:update(dt)
-		enemy:update(dt)
-		for _, v in pairs(npcs) do
+
+		for _, v in pairs(gameObjects) do
 			v:update(dt)
 		end
-		--npcs:update(dt)
-		-- 地图的位移
+
 		tx = math.floor((player.x - 1280/2))
     	ty = math.floor((player.y - 800/2))
     	-- 画布
