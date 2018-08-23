@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Actor.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Actor.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Date.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Date.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Food.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Food.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameScreen.lua" beforeDir="false" afterPath="$PROJECT_DIR$/GameScreen.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Skill.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Skill.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snow.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Snow.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/objs.lua" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/objs.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/guiData.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/guiData.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/guiDraw.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/guiDraw.lua" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,14 +27,18 @@
       </file>
       <file leaf-file-name="guiData.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/guiData.lua">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="657">
+              <caret line="30" column="47" lean-forward="true" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="guiDraw.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/guiDraw.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="267" column="22" lean-forward="true" selection-start-line="267" selection-end-line="268" />
+            <state relative-caret-position="109">
+              <caret line="252" column="57" lean-forward="true" selection-start-line="252" selection-start-column="57" selection-end-line="252" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -102,9 +100,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>date</find>
+      <find>255</find>
+      <find>64</find>
+      <find>128</find>
     </findStrings>
     <replaceStrings>
       <replace>Date</replace>
+      <replace>1</replace>
+      <replace>0.3</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -154,6 +157,7 @@
         <option value="$PROJECT_DIR$/Food.lua" />
         <option value="$PROJECT_DIR$/Actor.lua" />
         <option value="$PROJECT_DIR$/GameScreen.lua" />
+        <option value="$PROJECT_DIR$/lib/guiData.lua" />
         <option value="$PROJECT_DIR$/lib/guiDraw.lua" />
       </list>
     </option>
@@ -363,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534958754658</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="food 类编写测试，将功能放入物品中，例如 食物 food 可以 吃 eat">
+      <created>1535042779784</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1535042779784</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -416,7 +427,8 @@
     <MESSAGE value="面对对象编程，改写，大面积重构中" />
     <MESSAGE value="面向对象，有待加强" />
     <MESSAGE value="测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试" />
+    <MESSAGE value="food 类编写测试，将功能放入物品中，例如 食物 food 可以 吃 eat" />
+    <option name="LAST_COMMIT_MESSAGE" value="food 类编写测试，将功能放入物品中，例如 食物 food 可以 吃 eat" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.lua">
@@ -696,13 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameScreen.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="185" column="7" lean-forward="true" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sti/graphics.lua">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -732,13 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/data/objs.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Actor.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9193">
@@ -746,13 +744,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GameScreen.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="185" column="7" lean-forward="true" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/objs.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/guiData.lua">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="30" column="47" lean-forward="true" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/guiDraw.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="267" column="22" lean-forward="true" selection-start-line="267" selection-end-line="268" />
+        <state relative-caret-position="109">
+          <caret line="252" column="57" lean-forward="true" selection-start-line="252" selection-start-column="57" selection-end-line="252" selection-end-column="57" />
         </state>
       </provider>
     </entry>

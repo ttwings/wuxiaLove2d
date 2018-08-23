@@ -2,6 +2,8 @@ Class = require "lib/middleclass"
 local anim8 = require "lib/anim8"
 require("keymap")
 local assets = require("lib.cargo").init("assets")
+local font = assets.font.myfont(20)
+love.graphics.setFont(font)
 local skills = require("assets.data.skills")
 local GameScreen = require("GameScreen")
 local region = Region

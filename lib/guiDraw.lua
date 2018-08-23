@@ -136,7 +136,7 @@ gui.colorText = function(v)
     buffs(v.contant, v.x, v.y)
 end
 gui.long = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 1, 1, 1, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -145,7 +145,7 @@ gui.long = function(v)
     love.graphics.draw(text, v.x, v.y)
 end
 gui.message = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 1, 1, 1, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -156,7 +156,7 @@ end
 gui.dialog = function(v)
     local image = assets.graphics.Faces[v.image]
     love.graphics.draw(image, v.x - image:getWidth(), v.y)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 1, 1, 1, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -165,7 +165,7 @@ gui.dialog = function(v)
     love.graphics.draw(text, v.x, v.y)
 end
 gui.map = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 1, 1, 1, 1 }
     text:setf({ color, v.title or "地图" }, v.width, "center")
     love.graphics.draw(text, v.x, v.y)
@@ -199,7 +199,7 @@ gui.shop = function(v)
     love.graphics.draw(image, v.x + 7, v.y + 7)
 end
 gui.skill = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -209,7 +209,7 @@ gui.skill = function(v)
     skillItem(v.contant, v.x, v.y)
 end
 gui.bag = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -219,7 +219,7 @@ gui.bag = function(v)
     bagItem(v.contant, v.x, v.y)
 end
 gui.equip = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -229,7 +229,7 @@ gui.equip = function(v)
     equipItem(v.contant, v.x, v.y)
 end
 gui.money = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
@@ -240,7 +240,7 @@ gui.money = function(v)
     moneyItem(v.contant, v.x, v.y)
 end
 gui.turn = function(v)
-    local alpha = v.alpha or 128
+    local alpha = v.alpha or 0.3
     local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
