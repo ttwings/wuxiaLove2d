@@ -2,7 +2,7 @@ local Screen = require( "lib/Screen" )
 local ScreenManager = require("lib/ScreenManager")
 local assets = require("lib.cargo").init("assets")
 require( "Snow" )
-require("GameObject")
+require("objects.GameObject")
 local MainScreen = {}
 local bg = love.graphics.newImage("bg.jpeg")
 local font = assets.font.myfont(32)
@@ -10,7 +10,7 @@ local titlefont = assets.font.myfont(56)
 local menu = {}
 local index = 1
 function MainScreen.new(  )
-    local ob = GameObject:new(100,100)
+    local ob = GameObject:new(nil,100,100)
     --love.graphics.setFont(font)
     local self = Screen.new()
     local title = love.graphics.newText(titlefont, "武侠与江湖")

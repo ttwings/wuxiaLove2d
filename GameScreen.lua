@@ -36,15 +36,15 @@ region = {}
 local npcs = {}
 local function loadData(  )
 	---@param actor Actor
-		player=Actor:new(actorData["XuZhu"])
-		enemy=Actor:new(actorData["DuanYu"])
+		player=Actor:new(nil,actorData["XuZhu"].x,actorData["XuZhu"].y,actorData["XuZhu"])
+		enemy=Actor:new(nil,actorData["DuanYu"].x,actorData["DuanYu"].y,actorData["DuanYu"])
 
 		table.insert(gameObjects,player)
 		table.insert(gameObjects,enemy)
 		---
 		for k, v in pairs(actorData) do
 			if v.name ~= player.name then
-				local npc = Actor:new(actorData[k])
+				local npc = Actor:new(nil,actorData[k].x,actorData[k].y,actorData[k])
 				table.insert(gameObjects,npc)
 			end
 		end

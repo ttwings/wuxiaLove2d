@@ -5,18 +5,20 @@ local assets = require("lib.cargo").init("assets")
 local font = assets.font.myfont(20)
 love.graphics.setFont(font)
 local skills = require("assets.data.skills")
-local GameScreen = require("GameScreen")
 local region = Region
-require("Food")
+require("objects.Food")
+GameObject = require("objects.GameObject")
 --- 角色数据
 --- @class Actor
 Actor = Class("Actor",GameObject)
-function Actor:init(sets)
+function Actor:init(area,x,y,opts)
     --local data = data or {}
     --for k, v in pairs(data) do
     --    self[k] = v
     --end
-    GameObject.init(self,0,0,sets)
+    GameObject.init(self,area,x,y,opts)
+    self.x = x or 0
+    self.y = y or 0
     self.grid_x = math.ceil(self.x / 32)
     self.grid_y = math.ceil(self.y / 32)
     self:getAnims(self["actorImg"])
