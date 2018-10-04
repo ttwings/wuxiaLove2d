@@ -80,7 +80,7 @@ function guiDraw()
 end
 --  不同的gui部件。
 gui.txt = function(v)
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:set({ color, v.contant })
     love.graphics.draw(text, v.x, v.y)
 end
@@ -91,40 +91,40 @@ gui.image = function(v)
     love.graphics.draw(image, v.x, v.y)
 end
 gui.barHP = function(v)
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:set({ color, v.title .. ":" })
     love.graphics.draw(text, v.x, v.y)
     bar(v.now, v.max, v.x + 50, v.y + 26, color)
 end
 gui.barMP = function(v)
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:set({ color, v.title .. ":" })
     love.graphics.draw(text, v.x, v.y)
     bar(v.now, v.max, v.x + 50, v.y + 26, color)
 end
 gui.barAP = function(v)
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:set({ color, v.title .. ":" })
     love.graphics.draw(text, v.x, v.y)
     bar(v.now, v.max, v.x + 50, v.y + 26, color)
 end
 gui.barFood = function(v)
     local maxFood = v.max
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:set({ color, v.title .. ":" })
     love.graphics.draw(text, v.x, v.y)
     bar(v.now, maxFood, v.x + 50, v.y + 26, color)
 end
 gui.barWater = function(v)
     local max = v.max
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:set({ color, v.title .. ":" })
     love.graphics.draw(text, v.x, v.y)
     bar(v.now, max, v.x + 50, v.y + 26, color)
 end
 gui.state = function(v)
     local debuff = v.debuff or { "state1", "state2" }
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
 
     for i, s in ipairs(debuff) do
         --love.graphics.print(s,v.x,v.y + i * 20-20)
@@ -136,62 +136,62 @@ gui.colorText = function(v)
     buffs(v.contant, v.x, v.y)
 end
 gui.long = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     text:setf({ color, v.contant }, v.width, "left")
     love.graphics.draw(text, v.x, v.y)
 end
 gui.message = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     text:setf({ color, v.contant[#v.contant] or "测试信息窗口" }, v.width, "left")
     love.graphics.draw(text, v.x, v.y)
 end
 gui.dialog = function(v)
     local image = assets.graphics.Faces[v.image]
     love.graphics.draw(image, v.x - image:getWidth(), v.y)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     text:setf({ color, v.contant }, v.width, "left")
     love.graphics.draw(text, v.x, v.y)
 end
 gui.map = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     text:setf({ color, v.title or "地图" }, v.width, "center")
     love.graphics.draw(text, v.x, v.y)
     --love.graphics.print(v.title or "地图", v.x, v.y)
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y + 20, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
 end
 gui.shop = function(v)
 
     local alpha = v.alpha or 200
-    local color = Color[v.color] or { 255, 255, 255, 255 }
+    local color = Color[v.color] or { 1, 1, 1, 1 }
     -- 底色
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
     -- 边框
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.rectangle("line", v.x, v.y, v.width, v.height / 4, 10)
     love.graphics.rectangle("line", v.x, v.y, 100, v.height / 4, 10)
     love.graphics.rectangle("line", v.x, v.y + 100, v.width, v.height / 4, 10)
     love.graphics.rectangle("line", v.x, v.y + 200, v.width, v.height / 4, 10)
     love.graphics.rectangle("line", v.x, v.y + 300, v.width, v.height / 4, 10)
     -- 文字信息
-    --love.graphics.setColor(255,255,255,255)
+    --love.graphics.setColor(1,1,1,1)
     --love.graphics.print(v.title or "商铺", v.x+108, v.y)
-    text:set({ { 255, 255, 255 }, v.title })
+    text:set({ { 1, 1, 1 }, v.title })
     love.graphics.draw(text, v.x + 108, v.y)
     -- 图片 头像、物品图标
     local dir = "assets/graphics/Faces/"
@@ -199,52 +199,52 @@ gui.shop = function(v)
     love.graphics.draw(image, v.x + 7, v.y + 7)
 end
 gui.skill = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 0, 0, 0, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     --text:setf({color,v.contant[1]},v.width,v.align)
     --love.graphics.draw(text,v.x,v.y+4)
     skillItem(v.contant, v.x, v.y)
 end
 gui.bag = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 0, 0, 0, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
-    text:set({ { 255, 255, 255 }, v.title })
+    love.graphics.setColor(1, 1, 1, 1)
+    text:set({ { 1, 1, 1 }, v.title })
     love.graphics.draw(text, v.x, v.y - 20)
     bagItem(v.contant, v.x, v.y)
 end
 gui.equip = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 0, 0, 0, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
-    text:set({ { 255, 255, 255 }, v.title })
+    love.graphics.setColor(1, 1, 1, 1)
+    text:set({ { 1, 1, 1 }, v.title })
     love.graphics.draw(text, v.x, v.y - 20)
     equipItem(v.contant, v.x, v.y)
 end
 gui.money = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 0, 0, 0, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     --love.graphics.print(v.title,v.x,v.y-20)
-    text:set({ { 255, 255, 255 }, v.title })
+    text:set({ { 1, 1, 1 }, v.title })
     love.graphics.draw(text, v.x, v.y - 20)
     moneyItem(v.contant, v.x, v.y)
 end
 gui.turn = function(v)
-    local alpha = v.alpha or 128
-    local color = Color[v.color] or { 0, 0, 0, 255 }
+    local alpha = v.alpha or 0.3
+    local color = Color[v.color] or { 0, 0, 0, 1 }
     love.graphics.setColor(0, 0, 0, alpha)
     love.graphics.rectangle("fill", v.x, v.y, v.width, v.height, 10)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(1, 1, 1, 1)
     --love.graphics.print(v.title,v.x,v.y-20)
     timeLine(v.contant, v.x, v.y)
 end
@@ -254,19 +254,19 @@ function bar(now, max, x, y, color)
     local now = math.max(0, now)
     love.graphics.setColor(color)
     love.graphics.rectangle("fill", x, y - 18, now * 128 / max, 8, 4)
-    love.graphics.setColor(255, 255, 255, 255)
-    local color = color or { 255, 255, 255, 255 }
+    love.graphics.setColor(1, 1, 1, 1)
+    local color = color or { 1, 1, 1, 1 }
     text:set({ color, now })
     love.graphics.draw(text, x + 130, y - 24)
 end
 --- 背包绘制
 function bagItem(bag, x, y)
-    local bag = bag or actor.misc or {}
+    local bag = bag or actor.bag or {"米饭"}
     local item = { "[一]", "[二]", "[三]", "[四]", "[五]", "[六]", "[七]", "[八]", "[九]" }
 
     for i, v in ipairs(bag) do
         --love.graphics.print(item[i]..v,x,y+i*20-20)
-        local color = v.color or { 255, 255, 255, 255 }
+        local color = v.color or { 1, 1, 1, 1 }
         text:set({ color, v })
         love.graphics.draw(text, x, y + i * 20 - 20)
     end
@@ -278,7 +278,7 @@ function equipItem(equips, x, y)
     for i, v in ipairs(equips) do
         local t = string.format("%s%s", item[i], v)
         --love.graphics.print(text,x,y+i*20-20)
-        local color = v.color or { 255, 255, 255, 255 }
+        local color = v.color or { 1, 1, 1, 1 }
         text:set({ color, t })
         love.graphics.draw(text, x, y + i * 20 - 20)
     end
@@ -289,7 +289,7 @@ function moneyItem(money, x, y)
     local g1, g2 = math.modf(m / 1000), math.modf(m % 1000)
     local t = string.format("%18d贯%6d钱", g1, g2)
     --love.graphics.print(text,x,y)
-    local color = { 255, 255, 0 }
+    local color = { 1, 1, 0 }
     text:set({ color, t })
     love.graphics.draw(text, x, y)
 end
@@ -301,7 +301,7 @@ function skillItem(skills, x, y)
     for i, v in ipairs(skills) do
         local t = string.format("%s%s", item[i], v)
         --love.graphics.print(text,x+(i-1)*200,y+8)
-        local color = { 255, 255, 0 }
+        local color = { 1, 1, 0 }
         text:setf({ color, t }, 200, "center")
         love.graphics.draw(text, x + (i - 1) * 200, y + 8)
     end
@@ -323,29 +323,29 @@ function timeLine(contant, x, y)
     local tableNpcs = contant.npcs or {}
     love.graphics.rectangle("fill", x + gameTurn % 600, y, 4, 4, 2)
     --love.graphics.print("回合".. gameTurn,x + gameTurn%600,y-20)
-    local t = { { 255, 255, 255 }, "回合" .. gameTurn }
+    local t = { { 1, 1, 1 }, "回合" .. gameTurn }
     text:set(t)
     love.graphics.draw(text, x + gameTurn % 600, y - 20)
 
     for _, v in pairs(tabelPlayers) do
-        love.graphics.setColor(0, 255, 0)
+        love.graphics.setColor(0, 1, 0)
         love.graphics.rectangle("fill", x + v.turn % 600, y, 4, 4, 2)
-        text:set({ { 0, 255, 0 }, v.name .. v.turn })
+        text:set({ { 0, 1, 0 }, v.name .. v.turn })
         love.graphics.draw(text, x + v.turn % 600, y + 10)
         --love.graphics.print(v.name .. v.turn,x + v.turn%600,y+10)
     end
     for _, v in pairs(tableEnemys) do
-        love.graphics.setColor(255, 0, 0)
+        love.graphics.setColor(1, 0, 0)
         love.graphics.rectangle("fill", x + v.turn % 600, y, 4, 4, 2)
-        text:set({ { 255, 0, 0 }, v.name .. v.turn })
+        text:set({ { 1, 0, 0 }, v.name .. v.turn })
         love.graphics.draw(text, x + v.turn % 600, y + 10)
 
     end
     for _, v in pairs(tableNpcs) do
-        love.graphics.setColor(0, 0, 255)
+        love.graphics.setColor(0, 0, 1)
         love.graphics.rectangle("fill", x + v.turn % 600, y, 4, 4, 2)
         love.graphics.print(v.name .. v.turn, x + v.turn % 600, y + 10)
-        text:set({ { 0, 0, 255 }, v.name .. v.turn })
+        text:set({ { 0, 0, 1 }, v.name .. v.turn })
         love.graphics.draw(text, x + v.turn % 600, y + 10)
     end
 

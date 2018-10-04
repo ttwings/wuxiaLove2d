@@ -96,7 +96,6 @@ function GameScreen.new(  )
     function self:update( dt )
         world:update(dt)
         battleMap:update(dt)
-        actor:key(dt)
         actor:update(dt)
         npcs:update(dt)
         -- 地图的位移

@@ -20,7 +20,8 @@ function attack:tick(tick)
 	local attackDis = 5
     local skill = self.properties.skill
 	if distance <= attackDis then
-		Actions.attack(actor,target)
+		-- Actions.attack(actor,target)
+		Actor.attack()
 		return b3.SUCCESS
 	end
 

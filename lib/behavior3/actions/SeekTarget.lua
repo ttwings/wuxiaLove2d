@@ -20,14 +20,14 @@ function seekTarget:tick(tick)
 	if  distance <= self.properties.distance then
 		return b3.SUCCESS
 	end
-	if d == 'N' then Actions.moveN(actor) 
-        elseif d == 'S' then Actions.moveS(actor) 
-        elseif d == 'W' then Actions.moveW(actor) 
-        elseif d == 'E' then Actions.moveE(actor) 
-        elseif d == 'EN' then Actions.moveEN(actor) 
-        elseif d == 'ES' then Actions.moveES(actor) 
-        elseif d == 'WN' then Actions.moveWN(actor) 
-        elseif d == 'WS' then Actions.moveWS(actor) 
+	if d == 'N' then actor:moveN()
+        elseif d == 'S' then actor:moveS()
+        elseif d == 'W' then actor:moveW()
+        elseif d == 'E' then actor:moveE()
+        --elseif d == 'EN' then actor:moveEN()
+        --elseif d == 'ES' then actor:moveES()
+        --elseif d == 'WN' then Actions.moveWN()
+        --elseif d == 'WS' then Actions.moveWS()
     end
 
 	return b3.RUNNING

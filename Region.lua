@@ -3,26 +3,27 @@
 --- DateTime: 2017/10/20 0:58
 --- 区域场景数据
 --- @class Region
---local Class = require("lib.middleclass")
---Region = Class("Region")
---function Region:init(name)
---    self.npc = require("assets/data/" .. name .."Npc")
---    self.room = require("assets/data/" .. name .."Room")
---    self.obj = require("assets/data/" .. name .."Obj")
---    self.map = require("assets/data/" .. name .."Map")
---end
-local r = {}
-Region = r
-function r:load(name)
+local Class = require("lib.middleclass")
+Region = Class("Region",GameObject)
+function Region:init(name)
     self.npc = require("assets/data/" .. name .."Npc")
     self.room = require("assets/data/" .. name .."Room")
     self.obj = require("assets/data/" .. name .."Obj")
     self.map = require("assets/data/" .. name .."Map")
 end
-function r:update(dt)
-    self.map:update(dt)
+--local r = {}
+--Region = r
+function Region:load(name)
+    self.npc = require("assets/data/" .. name .."Npc")
+    self.room = require("assets/data/" .. name .."Room")
+    self.obj = require("assets/data/" .. name .."Obj")
+    self.map = require("assets/data/" .. name .."Map")
 end
-function r:draw()
+function Region:update(dt)
+    -- TODO
+    -- self.map:update(dt)
+end
+function Region:draw()
     self.map:draw()
 end
 --function Region:readData(data)
@@ -39,4 +40,4 @@ end
 ---- 保存工作信息
 --Region.jobs={}
 --Region.tiledMap = "wuguan"
-return r
+return Region
