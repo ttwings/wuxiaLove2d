@@ -6,22 +6,21 @@ local font = assets.font.myfont(20)
 love.graphics.setFont(font)
 local skills = require("assets.data.skills")
 local region = Region
+
+
 require("objects.Food")
 GameObject = require("objects.GameObject")
 --- 角色数据
 --- @class Actor
 Actor = Class("Actor",GameObject)
 function Actor:init(area,x,y,opts)
-    --local data = data or {}
-    --for k, v in pairs(data) do
-    --    self[k] = v
-    --end
     GameObject.init(self,area,x,y,opts)
     self.x = x or 0
     self.y = y or 0
     self.grid_x = math.ceil(self.x / 32)
     self.grid_y = math.ceil(self.y / 32)
-    self:getAnims(self["actorImg"])
+    self.actorImg = "actor (0)"
+    self:getAnims(self["actorImg"] or "actor (1)")
     self.cd = 1
     self.sleep = false
     self.max_food = 100

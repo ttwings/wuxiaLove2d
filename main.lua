@@ -3,6 +3,7 @@ require("lib.Color")
 Camera = require("lib.gamera")
 Input = require("lib.input")
 Physics = require("lib.windfield")
+Richtext = require("lib.richtext")
 require("lib.guiDraw")
 require("lib.util")
 require("lib.behavior3.b3")
@@ -29,7 +30,10 @@ screens = {
 }
 
 function love.load( )
-    ---替换 print 输出debug 信息
+    --- font
+    assets = require("lib.cargo").init("assets")
+    font = assets.font.myfont(20)
+    love.graphics.setFont(font)    ---替换 print 输出debug 信息
     love.keyboard.setKeyRepeat(true)
     testing()
     timer = Timer()
