@@ -127,3 +127,109 @@ quality_labels[3] = '【超三品】'
 quality_labels[2] = '【绝二品】'
 quality_labels[1] = '【天一品】'
 
+--- 绘制
+--- @type func love.graphics.rectangleArcPanel
+function love.graphics.rectangleArcPanel(x,y,w,h,r,line_width,line_color,panel_color)
+    local line_width = line_width or 2
+    local r = r or 10
+    local line_color = line_color or {0.8,0.8,0.8}
+    local panel_color = panel_color or {0.3,0.3,0.3,1}
+    local init_color = {1,1,1,1}
+    local PI = math.pi
+    love.graphics.setLineWidth(line_width)
+    love.graphics.setColor(panel_color)
+    love.graphics.rectangle('fill',x,y,w,h,r * 2)
+    love.graphics.setColor(line_color)
+    love.graphics.line(x + r,y,x + w - r,y)
+    love.graphics.line(x + r,y + h,x + w - r,y + h)
+    love.graphics.line(x,y + r,x,y + h - r)
+    love.graphics.line(x + w,y + r,x + w,y + h - r)
+
+    love.graphics.arc('line','open',x,y,r,0,PI/2)
+    love.graphics.arc('line','open',x + w,y,r,PI/2,PI)
+    love.graphics.arc('line','open',x + w,y + h,r,PI,PI + PI/2)
+    love.graphics.arc('line','open',x,y + h,r,PI + PI/2,PI * 2)
+
+    love.graphics.setColor(1,1,1,0.3)
+    love.graphics.setLineWidth(1)
+    love.graphics.line(x + r,y + 43,x + w - r,y + 43)
+    love.graphics.setColor(init_color)
+end
+
+function objInfoText(info,font,w,margin,line_height)
+    local text = love.graphics.newText(font)
+
+    local q = 'q' .. tostring(info.quality)
+    local r,line_h = margin or 16,line_height or 22
+    local w = w - r * 2
+
+    text:addf({text_style[q],info.name},w,'center',r,0)
+    text:addf({text_style[q],quality_labels[info.quality]},w,'center',r,line_h)
+    --- 根据内容
+    local des_index = text:addf({text_style['q11'],info.des},w,'left',r,line_h * 2)
+    local des_h = text:getHeight(des_index)
+    --- 直接控制
+    --local des_h = 2 * line_h
+    text:addf({Color["橘黄"],"【道具类型】"},w,'left',r,line_h * 3 + des_h)
+    text:addf({Color["棕灰"],"-类别：",Color["浅灰"],info.type},w,'left',r,line_h * 4 + des_h)
+    text:addf({Color["棕灰"],"-材质：",Color["浅灰"],info.material},w,'left',r,line_h * 5 + des_h)
+    text:addf({Color["棕灰"],"-耐久：",Color["红色"],info.dur,Color["棕灰"]," / ",Color["白色"],info.dur_max,Color["浅灰"]," (无法修复) "},w,'left',r,line_h * 6 + des_h)
+    text:addf({Color["棕灰"],"-重量：",Color["浅灰"],info.weight},w,'left',r,line_h * 7 + des_h)
+    text:addf({Color["浅灰"],"-无法精制"},w,'left',r,line_h * 8 + des_h)
+
+    text:addf({Color["橘黄"],"【使用效果】"},w,'left',r,line_h * 10 + des_h)
+    local color = Color["浅灰"]
+    if  info.use:find("+") then
+        color = Color["绿色"]
+    elseif info.use:find("-") then
+        color = Color["红色"]
+    end
+    text:addf({Color["浅灰"],"-"..info.use_type .. "：",color,info.use},w,'left',r,line_h * 11 + des_h)
+    text:addf({text_style["q10"],"价值 ",text_style["q5"],info.value},w,'right',r,line_h * 17)
+    local max_height = line_h * (17 + 1)
+    return text,max_height
+end
+
+function gongFaInfoText(info,font,margin,line_height)
+    local text = love.graphics.newText(font)
+
+    local q = 'q' .. tostring(info.quality)
+    local r,line_h = margin or 16,line_height or 22
+    local w = w - r * 2
+
+    text:addf({text_style[q],info.name},w,'center',r,0)
+    text:addf({text_style[q],quality_labels[info.quality]},w,'center',r,line_h)
+    --- 根据内容
+    local des_index = text:addf({text_style['q11'],info.des},w,'left',r,line_h * 2)
+    local des_h = text:getHeight(des_index)
+    --- 直接控制
+    --local des_h = 2 * line_h
+    text:addf({Color["橘黄"],"【功法类型】"},w,'left',r,line_h * 3 + des_h)
+    text:addf({Color["棕灰"],"-类别：",Color["浅灰"],info.type},w,'left',r,line_h * 4 + des_h)
+    text:addf({Color["棕灰"],"-材质：",Color["浅灰"],info.material},w,'left',r,line_h * 5 + des_h)
+    text:addf({Color["棕灰"],"-耐久：",Color["红色"],info.dur,Color["棕灰"]," / ",Color["白色"],info.dur_max,Color["浅灰"]," (无法修复) "},w,'left',r,line_h * 6 + des_h)
+    text:addf({Color["棕灰"],"-重量：",Color["浅灰"],info.weight},w,'left',r,line_h * 7 + des_h)
+    text:addf({Color["浅灰"],"-无法精制"},w,'left',r,line_h * 8 + des_h)
+
+    text:addf({Color["橘黄"],"【装备效果】"},w,'left',r,line_h * 10 + des_h)
+    local color = Color["浅灰"]
+    if  info.use:find("+") then
+        color = Color["绿色"]
+    elseif info.use:find("-") then
+        color = Color["红色"]
+    end
+    text:addf({Color["浅灰"],"-"..info.use_type .. "：",color,info.use},w,'left',r,line_h * 11 + des_h)
+    text:addf({text_style["q10"],"价值 ",text_style["q5"],info.value},w,'right',r,line_h * 17)
+   --- 输出最大高度，方便绘制背景面板大小
+    local max_height = line_h * 20
+    return text,max_height
+end
+
+function infoText(info,font,margin,line_height)
+    if info.type == "物品" then
+        return objInfoText(info,font,margin,line_height)
+    elseif info.type == "功法" then
+        return objInfoText(info,font,margin,line_height)
+    end
+        return error("can not find info func")
+end
