@@ -1306,6 +1306,10 @@ function pushRote(x,y,r,sx,sy)
 	love.graphics.translate(-x,-y)
 end
 
+function pop()
+	love.graphics.pop()
+end
+
 ---
 
 --Color = {}

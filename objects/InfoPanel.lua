@@ -8,20 +8,31 @@
 --- @class InfoPanel
 InfoPanel = Class("InfoPanel",GameObject)
 
+--- @param area Area
+--- @param x number
+--- @param y number
+--- @param opts table
+
 function InfoPanel:init(area,x,y,opts)
     InfoPanel.super.init(self,area,x,y,opts)
     local opts = opts or {}
-    --info = opts.info or {name = "罗汉拳秘籍",type = "书籍 / 秘籍",material = "纸",quality= 5,dur = 1,dur_max = 4,weight = 0.5,use_type = "习得",use = "罗汉拳",value = 3000,des = "一本武林秘籍，记载着少林寺罗汉拳。"}
-    self.w = opts.w or 300
-    local info = opts.info or  {name = "劣质金疮药",type = "物品 / 药丸",material = "药",quality= 9,dur = 1,dur_max = 2,weight = 0.1,use_type = "气血",use = "-50",value = 10,des = "治疗外伤的良药。但可惜的是放的时间太长了，反倒是起了相反的效果"}
+    --info = opts.info or
+    self.w = 300
+    local info = opts
     local info_max_h = 600
     self.text,info_max_h = objInfoText(info,text_style.font18,self.w)
-    self.h = opts.h or info_max_h or 400
+    self.h = info_max_h or 400
+
+    self.hover = false
 end
 
 function InfoPanel:update(dt)
     InfoPanel.super.update(self,dt)
     self.x,self.y = love.mouse.getX(),love.mouse.getY()
+    --local m_x,m_y = love.mouse.getX(),love.mouse.getY()
+    --if m_x > self.x and m_x < self.x + self.w and m_y > self.y and m_y < self.y + self.h then
+    --    self.hover = true
+    --end
 end
 
 function InfoPanel:draw()
