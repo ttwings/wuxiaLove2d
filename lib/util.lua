@@ -1,5 +1,5 @@
 ------------------------------shotcut--------------------------------
-Pi=math.pi
+PI=math.pi
 lg = love.graphics
 lk = love.keyboard
 lm = love.mouse
@@ -1308,10 +1308,23 @@ end
 
 ---
 
-Color = {}
-Color.default = {222/256,222/256,222/256}
-Color.background = {22/256,22/256,22/256}
-Color.ammo = {123/256,200/256,164/256}
-Color.boost = {76/256,195/256,217/256}
-Color.hp = {241/256,103/256,69/256}
-Color.skill_point = {255/256,198/256,93/256}
+--Color = {}
+--Color.default = {222/256,222/256,222/256}
+--Color.background = {22/256,22/256,22/256}
+--Color.ammo = {123/256,200/256,164/256}
+--Color.boost = {76/256,195/256,217/256}
+--Color.hp = {241/256,103/256,69/256}
+--Color.skill_point = {255/256,198/256,93/256}
+
+
+--- table
+function getMat(w,h,init)
+	local mat = {}
+	for i = 1, w do
+		mat[i] = {}
+		for j = 1, h do
+			mat[i][j] = init
+		end
+	end
+	return mat
+end

@@ -1,10 +1,18 @@
 require("lib.messages")
 require("lib.Color")
+assets = require("lib.cargo").init("assets")
+
+--Object = require("lib.classic")
+Class = require("lib.middleclass")
 Camera = require("lib.gamera")
 Input = require("lib.input")
 Physics = require("lib.windfield")
+Richtext = require("lib.richtext")
 require("lib.guiDraw")
 require("lib.util")
+
+require('globle')
+
 require("lib.behavior3.b3")
 requireDirectory("lib/behavior3/core")
 requireDirectory("lib/behavior3/actions")
@@ -29,7 +37,10 @@ screens = {
 }
 
 function love.load( )
-    ---替换 print 输出debug 信息
+    --- font
+    assets = require("lib.cargo").init("assets")
+    font = assets.font.myfont(20)
+    love.graphics.setFont(font)    ---替换 print 输出debug 信息
     love.keyboard.setKeyRepeat(true)
     testing()
     timer = Timer()
@@ -45,8 +56,7 @@ function love.load( )
     input:bind("l","d-right")
     input:bind("i","d-up")
     input:bind("k","d-down")
-    --camera = Camera()
-    --physics = Physics()
+
     ScreenManager.init(screens, 'main')
 end
 

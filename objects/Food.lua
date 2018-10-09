@@ -54,3 +54,18 @@ function Food:update(dt)
         self.state = "坏掉了"
     end
 end
+
+function Food:drawInfoPanel()
+    local w,h = 200,400
+    local x,y = 200,200
+    local cell_x,cell_y = 20,20
+    local cell = {}
+    for x = 0, w/cell_x - 1 do
+        cell[x] = {}
+        for y = 0,h/cell_y - 1 do
+            cell[x][y] = ""
+        end
+    end
+    love.graphics.rectangle("line",x,y,w,h)
+    love.graphics.print()
+end
