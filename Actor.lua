@@ -14,13 +14,14 @@ GameObject = require("objects.GameObject")
 --- @class Actor
 Actor = Class("Actor",GameObject)
 function Actor:init(area,x,y,opts)
-    GameObject.init(self,area,x,y,opts)
+    --GameObject.init(self,area,x,y,opts)
     self.x = x or 0
     self.y = y or 0
     self.grid_x = math.ceil(self.x / 32)
     self.grid_y = math.ceil(self.y / 32)
-    self.actorImg = "actor (0)"
+    self.actorImg = assets.graphics.characters.actor_001
     self:getAnims(self["actorImg"] or "actor (1)")
+    self.turn = 0
     self.cd = 1
     self.sleep = false
     self.max_food = 100

@@ -41,7 +41,7 @@ function Food:init(x,y,opts)
     self.info.max_store_time = 100
     self.info.state = "新鲜的"
 
-    self.infoPanel = InfoPanel.init(_,self.x,self.y,self.info)
+    --self.infoPanel = InfoPanel.init(_,self.x,self.y,self.info)
 end
 
 function Food:eatby(actor)
