@@ -5,7 +5,7 @@ require( "Snow" )
 require("objects.GameObject")
 require("objects.InfoPanel")
 local MainScreen = {}
-local bg = love.graphics.newImage("bg.jpg")
+local bg = assets.graphics.Backgrounds.bg
 local font = assets.font.myfont(32)
 local menu = {}
 local index = 1

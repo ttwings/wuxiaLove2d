@@ -1,6 +1,6 @@
 local Screen = require( "lib/Screen" )
 local HelpScreen = {}
-local bg = love.graphics.newImage("bg.jpg")
+local bg = assets.graphics.Backgrounds.bg
 local font = love.graphics.newFont("assets/font/msyh.ttf", 24)
 local titlefont = love.graphics.newFont("assets/font/msyh.ttf", 48)
 local index = 1
