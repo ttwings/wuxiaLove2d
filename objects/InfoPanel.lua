@@ -8,6 +8,11 @@
 --- @class InfoPanel
 InfoPanel = Class("InfoPanel",GameObject)
 
+--- @param area Area
+--- @param x number
+--- @param y number
+--- @param opts table
+
 function InfoPanel:init(area,x,y,opts)
     InfoPanel.super.init(self,area,x,y,opts)
     local opts = opts or {}

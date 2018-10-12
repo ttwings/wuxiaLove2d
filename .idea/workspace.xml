@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/globle.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/objects/InfoPanel.lua" afterDir="false" />
+    <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="将信息面板摘出。方便后续改写。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainScreen.lua" beforeDir="false" afterPath="$PROJECT_DIR$/MainScreen.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Color.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Color.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/main.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objects/Food.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/Food.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/InfoPanel.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/InfoPanel1.lua" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +18,8 @@
       <file leaf-file-name="MainScreen.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MainScreen.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-64">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="174">
+              <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -33,17 +27,26 @@
       <file leaf-file-name="globle.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/globle.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1364">
-              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+            <state relative-caret-position="-1710">
+              <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InfoPanel.lua" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/objects/InfoPanel.lua">
+      <file leaf-file-name="InfoPanel1.lua" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/objects/InfoPanel1.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+            <state relative-caret-position="174">
+              <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Area.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/objects/Area.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="10" selection-start-column="10" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -108,6 +111,7 @@
       <find>64</find>
       <find>128</find>
       <find>255</find>
+      <find>self.</find>
     </findStrings>
     <replaceStrings>
       <replace>Date</replace>
@@ -178,7 +182,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1387" />
     <option name="height" value="877" />
@@ -199,13 +203,7 @@
             <path>
               <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
               <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="objects" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -407,7 +405,21 @@
       <option name="project" value="LOCAL" />
       <updated>1538732431628</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Text  仿照《太吾绘卷》风格，做信息面板">
+      <created>1538838944726</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1538838944726</updated>
+    </task>
+    <task id="LOCAL-00013" summary="将信息面板摘出。方便后续改写。">
+      <created>1538843177222</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1538843177223</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -420,16 +432,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1387" height="877" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1387" height="877" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="2" />
       <window_info anchor="bottom" id="TODO" order="10" sideWeight="0.49962935" weight="0.32948717" />
       <window_info anchor="right" id="Palette&#9;" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.51375467" side_tool="true" visible="true" weight="0.32948717" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="3" sideWeight="0.51375467" side_tool="true" visible="true" weight="0.32948717" />
       <window_info anchor="right" id="Maven Projects" order="1" />
       <window_info anchor="bottom" id="LuaCheck" order="0" sideWeight="0.49814677" weight="0.32948717" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.48624536" visible="true" weight="0.32948717" />
+      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.48624536" visible="true" weight="0.32948717" />
       <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4951673" weight="0.32948717" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info id="Designer" order="2" />
@@ -489,7 +500,9 @@
     <MESSAGE value="food 类编写测试，将功能放入物品中，例如 食物 food 可以 吃 eat" />
     <MESSAGE value="重构有难度，已经发现很多错误。。。" />
     <MESSAGE value="rich text lib test" />
-    <option name="LAST_COMMIT_MESSAGE" value="rich text lib test" />
+    <MESSAGE value="Text  仿照《太吾绘卷》风格，做信息面板" />
+    <MESSAGE value="将信息面板摘出。方便后续改写。" />
+    <option name="LAST_COMMIT_MESSAGE" value="将信息面板摘出。方便后续改写。" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/lib/messages.lua">
@@ -631,13 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4060">
           <caret line="140" column="34" lean-forward="true" selection-start-line="140" selection-start-column="34" selection-end-line="140" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/objects/Area.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -803,13 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/globle.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1364">
-          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/Color.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -817,17 +816,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MainScreen.lua">
+    <entry file="file://$PROJECT_DIR$/globle.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-64">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="-1710">
+          <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/InfoPanel.lua">
+    <entry file="file://$PROJECT_DIR$/MainScreen.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        <state relative-caret-position="174">
+          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/Area.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/InfoPanel1.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
         </state>
       </provider>
     </entry>
