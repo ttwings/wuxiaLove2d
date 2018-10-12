@@ -11,7 +11,7 @@ local GameScreen = {}
 local map
 local tx, ty
 local canvas = love.graphics.newCanvas()
-
+local player = {}
 gameObjects = {}
 
 date = require("Date")
@@ -55,7 +55,7 @@ local function loadData(  )
 	--	behaviorTree:load('lib/behavior3/jsons/behavior3.json', {})
 	--	blackBoard:set("actor",enemy)
 	--	blackBoard:set('target',player)
-
+	--	love.graphics.print(text)
 		--love.graphics.setFont(font)
 		map = sti("assets/tileMaps/wuguan.lua")
 		-- Prepare translations

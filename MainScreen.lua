@@ -5,7 +5,7 @@ require( "Snow" )
 require("objects.GameObject")
 require("objects.InfoPanel")
 local MainScreen = {}
-local bg = love.graphics.newImage("bg.jpeg")
+local bg = love.graphics.newImage("bg.jpg")
 local font = assets.font.myfont(32)
 local menu = {}
 local index = 1
@@ -24,7 +24,9 @@ function MainScreen.new(  )
     menu[4] = { color = { 1, 0, 0, 1 }, text = "归隐山林" }
     -- 下雪
     Snow:new(0,0,{n = 100})
-    local panel = InfoPanel:new(nil,100,100)
+    local food =  {name = "劣质金疮药",type = "物品 / 药丸",material = "药",quality= 9,dur = 1,dur_max = 2,weight = 0.1,use_type = "气血",use = "-50",value = 10,des = "治疗外伤的良药。但可惜的是放的时间太长了，反倒是起了相反的效果"}
+    local book = {name = "罗汉拳秘籍",type = "书籍 / 秘籍",material = "纸",quality= 5,dur = 1,dur_max = 4,weight = 0.5,use_type = "习得",use = "罗汉拳",value = 3000,des = "一本武林秘籍，记载着少林寺罗汉拳。"}
+    local panel = InfoPanel:new(nil,100,100,food)
     function self:draw(  )
         love.graphics.draw(bg, 0, 0, 0)
         love.graphics.setColor(0, 0, 0, 1)

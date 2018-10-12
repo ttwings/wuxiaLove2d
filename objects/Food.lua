@@ -26,6 +26,7 @@ end
 
 function Food:init(x,y,opts)
     GameObject.init(self,x,y,opts)
+    self.info = {}
     local foods = require("assets.data.objs")
     if foods[opts.id] then
         local food = foods[opts.id]
@@ -33,12 +34,14 @@ function Food:init(x,y,opts)
             error("not food")
         end
         for k,v in pairs(food) do
-            self[k] = v
+            self.info[k] = v
         end
     end
-    self.store_time = 0
-    self.max_store_time = 100
-    self.state = "新鲜的"
+    self.info.store_time = 0
+    self.info.max_store_time = 100
+    self.info.state = "新鲜的"
+
+    --self.infoPanel = InfoPanel.init(_,self.x,self.y,self.info)
 end
 
 function Food:eatby(actor)

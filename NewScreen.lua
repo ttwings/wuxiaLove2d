@@ -8,7 +8,7 @@ local ScreenManager = require("lib/ScreenManager")
 local assets = require("lib.cargo").init("assets")
 local actorData = assets.data.actorDataNew
 local NewScreen = {}
-local bg = love.graphics.newImage("bg.jpeg")
+local bg = love.graphics.newImage("bg.jpg")
 --local font = love.graphics.newFont("assets/font/myfont.ttf", 24)
 local font = assets.font.myfont(24)
 local titlefont = assets.font.myfont(48)
@@ -27,11 +27,7 @@ function NewScreen.new()
     local t = love.graphics.newText(font)
     function self:draw()
         love.graphics.draw(bg, 0, 0, 0)
-        love.graphics.setColor(0, 0, 0, 0.1)
-        love.graphics.rectangle("fill", 90, 90, 400, 600, 8)
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.rectangle("line", 90, 90, 400, 600, 8)
-
+        love.graphics.rectangleArcPanel(90,90,400,600)
         for i, v in pairs(newActor.gui) do
             if v.prop and  v.prop == "faceImg" then
                 face = assets.graphics.Faces[v.contant]
@@ -75,7 +71,7 @@ function NewScreen.new()
                 v.contant = v.select[math.random(#v.select)]
             end
         elseif key == "j" and newActor.gui[#newActor.gui].contant == "是" then
-            player = Actor:new(actorData["XuZhu"])
+            player = Actor:new(_,100,100,actorData["XuZhu"])
             for i, v in pairs(newActor.gui) do
                 if player[v.prop] then
                     if v.type == "int" then
