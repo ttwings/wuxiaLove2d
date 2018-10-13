@@ -58,6 +58,10 @@ function Food:update(dt)
     end
 end
 
+function Food:draw()
+    love.graphics.rectangle("fill",self.x,self.y,32,32)
+end
+
 function Food:drawInfoPanel()
     local w,h = 200,400
     local x,y = 200,200

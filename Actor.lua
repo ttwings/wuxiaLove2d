@@ -309,13 +309,10 @@ function Actor:bagInit()
 end
 
 function Actor:eat()
-    -- local item = bag[1]
-    --local item = Food:getFromId("米饭")
-     local item = Food:new(0,0,{id = "米饭"})
-    -- if item.actionA == "eat" then
+     local item = self.bag[self.bagIndex]
+     if item.action.eat then
         item:eatby(self)
-        -- table.remove(bag,item)
-    -- end
+     end
 end
 
 function Actor:openBag()
@@ -323,6 +320,7 @@ function Actor:openBag()
     love.graphics.rectangle("fill",self.x,self.y,200,200,8)
     love.graphics.setColor(1,1,1,1)
     for i, v in ipairs(self.bag) do
+        love.graphics.draw(v.img,self.x + i*32,self.y)
         love.graphics.print(v.name,self.x,self.y + i * 20)
     end
 end

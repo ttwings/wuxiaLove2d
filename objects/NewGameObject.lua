@@ -5,12 +5,13 @@
 ---
 
 --- @class NewGameObject
-GameObject = require("objects.GameObject")
+--GameObject = require("objects.GameObject")
 
 NewGameObject = Class("NewGameObject",GameObject)
+--NewGameObject = GameObject:extend()
 
 function NewGameObject:init(area,x,y,opts)
-    NewGameObject.super.new(self,area,x,y,opts)
+    GameObject.init(self,area,x,y,opts)
 end
 
 function NewGameObject:update(dt)

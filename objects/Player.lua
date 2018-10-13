@@ -7,9 +7,10 @@
 ---@class Player
 
 Player = Class("Player",NewGameObject)
+--Player = NewGameObject:extend()
 
 function Player:init(area,x,y,opts)
-    Player.super.new(self, area, x, y, opts)
+    NewGameObject.init(self, area, x, y, opts)
     self.x ,self.y = x,y
     self.w,self.h = 12,12
     self.r = -math.pi/2
@@ -24,20 +25,11 @@ function Player:init(area,x,y,opts)
     self.ship = "Fighter"
     self.polygons = {}
 
-    self.timer:every(0.01,function ()
-        self.area:addObject("TrailParticle",self.x - self.w*math.cos(self.r),
-        self.y - self.h*math.sin(self.r), {parent = self,r = random(2,4), d = random(0.15,0.25),
-                color = self.trail_color}
-        )
-    end)
-
     self.collider = self.area.world:newCircleCollider(self.x,self.y,self.w)
     --self.area.world:addCollisionClass("Player")
     --self.collider:setCollisionClass("Player")
     self.collider:setObject(self)
-    self.attack_speed = 1
-    self.timer:every(0.24/self.attack_speed,function () self:shot() end)
-    self.timer:every(5,function () self:tick()end)
+
     input:bind('f4',function () self:die() end)
 end
 

@@ -3,11 +3,12 @@ require("lib.Color")
 assets = require("lib.cargo").init("assets")
 
 --Object = require("lib.classic")
-Class = require("lib.middleclass")
-Camera = require("lib.gamera")
+Camera = require("lib.Camera")
 Input = require("lib.input")
 Physics = require("lib.windfield")
 Richtext = require("lib.richtext")
+Class = require("lib.middleclass")
+
 require("lib.guiDraw")
 require("lib.util")
 
@@ -37,13 +38,21 @@ screens = {
 }
 
 function love.load( )
-    --- font
+    --- assets
     assets = require("lib.cargo").init("assets")
+    --- object load
+    local object_files = {}
+    recursiveEnumerate('objects',object_files)
+    requireFiles(object_files)
+    --- font init
     font = assets.font.myfont(20)
     love.graphics.setFont(font)    ---替换 print 输出debug 信息
-    love.keyboard.setKeyRepeat(true)
+    --- debug output
     testing()
+    --- slow animation update use
+    slow_amount = 1
     timer = Timer()
+    camera = Camera()
     --- Input
     input = Input()
     input:bind("e","up")
@@ -56,29 +65,34 @@ function love.load( )
     input:bind("l","d-right")
     input:bind("i","d-up")
     input:bind("k","d-down")
-
-    ScreenManager.init(screens, 'main')
+    current_room = MainStage:new()
+    --ScreenManager.init(screens, 'main')
 end
 
 function love.update(dt)
-
-    ScreenManager.update(dt)
-
-    timer:update(dt)
+    timer:update(dt*slow_amount)
+    camera:update(dt*slow_amount)
+    if current_room then current_room:update(dt*slow_amount) end    --ScreenManager.update(dt)
 end
 
 
 function love.draw()
+    if current_room then current_room:draw() end
     ---@param hook
     --debug.sethook(hook,"c")
-    ScreenManager.draw()
+    --ScreenManager.draw()
     --debug.sethook()
 
     graphicsStats()
     --drawHook()
 end
 
-function love.keypressed( key )
-    ScreenManager.keypressed(key)
+--function love.keypressed( key )
+--    --ScreenManager.keypressed(key)
+--end
+
+function slow(amount,duration)
+    slow_amount = amount
+    timer:tween(duration,_G,{slow_amount = 1},"in-out-cubic")
 end
 
