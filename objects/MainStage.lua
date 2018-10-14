@@ -7,38 +7,54 @@
 --- @class MainStage : Stage
 MainStage = Class("MainStage",Stage)
 
+--- init
+local style = {
+    font = assets.font.myfont(32),
+    showBorder = false,
+    bgColor = {0.208, 0.220, 0.222,0.222},
+    --fgColor = {1,0,0}
+}
+
 
 function MainStage:init()
     self.area = Area(self)
     self.area:addPhysicsWorld()
     self.main_canvas = love.graphics.newCanvas(gw,gh)
-    --self.player = self.area:addObject("Player",gw/2,gh/2)
     self.background = assets.graphics.Backgrounds.bg
     local title_font = assets.font.myfont(80)
-    self.title = love.graphics.newText(title_font)
-    self.title:set({{0,0,0},"武侠与江湖"})
-    local menu_font = assets.font.myfont(32)
-    self.menu = love.graphics.newText(menu_font)
-    self.menu:addf({{1,1,1},"新的回忆"},200,'center',500,500)
-    self.menu:addf({{1,1,1},"新的回忆"},200,"center",500,550)
-    self.menu:addf({{1,1,1},"新的回忆"},200,"center",500,600)
-
-    --self.text = love.graphics.newText(title_font)
-    --self.text.add("武侠与江湖",200,200)
+    gooi.desktopMode()
+    gooi.shadow()
+    gooi.setStyle({font = title_font})
+    gooi.newLabel({text = "武侠与江湖",x = gw/3,y=gh/6}):fg({0,0,0}):center()
+    gooi.setStyle(style)
+    --gooi.glass()
+    gooi.newPanel()
+    b1 = gooi.newButton({text = "新的穿越",x = 500,y = 500,w = 150,h = 36})
+            :onRelease(
+            function()
+                gotoRoom("CreatStage","CreatStage")
+            end)
+    b2 = gooi.newButton({text = "梦回武林",x = 500,y = 550,w = 150,h = 36})
+    b3 = gooi.newButton({text = "侠客宝典",x = 500,y = 600,w = 150,h = 36})
+    b4 = gooi.newButton({text = "归隐山林",x = 500,y = 650,w = 150,h = 36})
+            :onRelease(
+            function()
+                gooi.confirm({text = "梦醒",okText = "是",cancelText = "否",ok = function () love.event.quit() end})
+            end
+    )
+    --gooi.setCanvas(self.main_canvas)
 end
 
 function MainStage:update(dt)
     if self.area then self.area:update(dt) end
+    gooi.update(dt)
 end
 
 function MainStage:draw()
     love.graphics.setCanvas(self.main_canvas)
     love.graphics.clear()
     camera:attach(0,0,gw,gh)
-    --love.graphics.circle("line",gw/2,gh/2,50)
     love.graphics.draw(self.background)
-    love.graphics.draw(self.title,gw/4,gh/6)
-    love.graphics.draw(self.menu)
     if self.area then self.area:draw() end
     camera:detach()
     love.graphics.setCanvas()
@@ -47,6 +63,16 @@ function MainStage:draw()
     love.graphics.setBlendMode('alpha','premultiplied')
     love.graphics.draw(self.main_canvas,0,0,0,sx,sy)
     love.graphics.setBlendMode('alpha')
+    gooi.draw()
+
+end
+
+function MainStage:mousereleased()
+    gooi.released()
+end
+
+function MainStage:mousepressed()
+    gooi.pressed()
 end
 
 function MainStage:destroy()

@@ -1,7 +1,7 @@
 require("lib.messages")
 require("lib.Color")
 assets = require("lib.cargo").init("assets")
-
+Gooi = require("lib.gooi")
 --Object = require("lib.classic")
 Camera = require("lib.Camera")
 Input = require("lib.input")
@@ -36,8 +36,9 @@ screens = {
     game = require( "GameScreen" ),
     battle = require("BattleScreen")
 }
-
+rooms = {}
 function love.load( )
+    love.graphics.setDefaultFilter('nearest','nearest')
     --- assets
     assets = require("lib.cargo").init("assets")
     --- object load
@@ -47,6 +48,8 @@ function love.load( )
     --- font init
     font = assets.font.myfont(20)
     love.graphics.setFont(font)    ---替换 print 输出debug 信息
+    ---gooi ui init
+
     --- debug output
     testing()
     --- slow animation update use
@@ -87,6 +90,9 @@ function love.draw()
     --drawHook()
 end
 
+function love.mousereleased(x, y, button) if current_room then current_room:mousereleased()  end end
+function love.mousepressed(x, y, button)  if current_room then current_room:mousepressed()  end end
+function love.keyreleased(key, scancode) if current_room then current_room:keypressed() end end
 --function love.keypressed( key )
 --    --ScreenManager.keypressed(key)
 --end
