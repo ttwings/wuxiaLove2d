@@ -10,44 +10,57 @@ MainStage = Class("MainStage",Stage)
 --- init
 local style = {
     font = assets.font.myfont(32),
-    showBorder = false,
+    showBorder = true,
     bgColor = {0.208, 0.220, 0.222,0.222},
     --fgColor = {1,0,0}
 }
 
-
+require("lib.gooi")
 function MainStage:init()
     self.area = Area(self)
     self.area:addPhysicsWorld()
     self.main_canvas = love.graphics.newCanvas(gw,gh)
     self.background = assets.graphics.Backgrounds.bg
     local title_font = assets.font.myfont(80)
-    gooi.desktopMode()
-    gooi.shadow()
-    gooi.setStyle({font = title_font})
-    gooi.newLabel({text = "武侠与江湖",x = gw/3,y=gh/6}):fg({0,0,0}):center()
-    gooi.setStyle(style)
+    self.ui = gooi
+    self.ui.desktopMode()
+    self.ui_group = "MainStage"
+    self.ui.setStyle({font = title_font})
+    self.ui.newLabel({text = "武侠与江湖",x = gw/3,y=gh/6,group = self.ui_group}):fg({0,0,0}):center()
+    self.ui.setStyle(style)
     --gooi.glass()
-    gooi.newPanel()
-    b1 = gooi.newButton({text = "新的穿越",x = 500,y = 500,w = 150,h = 36})
+    --gooi.newPanel()
+    self.ui.newButton({text = "新的穿越",x = 500,y = 500,w = 150,h = 36,group = self.ui_group})
             :onRelease(
             function()
-                gotoRoom("CreatStage","CreatStage")
+                gotoRoom("CreateStage","CreateStage")
             end)
-    b2 = gooi.newButton({text = "梦回武林",x = 500,y = 550,w = 150,h = 36})
-    b3 = gooi.newButton({text = "侠客宝典",x = 500,y = 600,w = 150,h = 36})
-    b4 = gooi.newButton({text = "归隐山林",x = 500,y = 650,w = 150,h = 36})
+    self.ui.newButton({text = "梦回武林",x = 500,y = 550,w = 150,h = 36,group = self.ui_group})
+    self.ui.newButton({text = "侠客宝典",x = 500,y = 600,w = 150,h = 36,group = self.ui_group})
+    self.ui.newButton({text = "归隐山林",x = 500,y = 650,w = 150,h = 36,group = self.ui_group})
             :onRelease(
             function()
-                gooi.confirm({text = "梦醒",okText = "是",cancelText = "否",ok = function () love.event.quit() end})
+                p_print("Main")
+                self.ui.confirm({group = self.ui_group,text = "梦醒",okText = "是",cancelText = "否",ok = function () love.event.quit() end})
             end
     )
+    --self.area:addObject()
     --gooi.setCanvas(self.main_canvas)
+end
+
+function MainStage:activate()
+    self.ui.setGroupVisible(self.ui_group,true)
+    self.ui.setGroupEnabled(self.ui_group,true)
+end
+
+function MainStage:deactivate()
+    self.ui.setGroupVisible(self.ui_group,false)
+    self.ui.setGroupEnabled(self.ui_group,false)
 end
 
 function MainStage:update(dt)
     if self.area then self.area:update(dt) end
-    gooi.update(dt)
+    self.ui.update(dt)
 end
 
 function MainStage:draw()
@@ -63,16 +76,16 @@ function MainStage:draw()
     love.graphics.setBlendMode('alpha','premultiplied')
     love.graphics.draw(self.main_canvas,0,0,0,sx,sy)
     love.graphics.setBlendMode('alpha')
-    gooi.draw()
+    self.ui.draw(self.ui_group)
 
 end
 
 function MainStage:mousereleased()
-    gooi.released()
+    self.ui.released()
 end
 
 function MainStage:mousepressed()
-    gooi.pressed()
+    self.ui.pressed()
 end
 
 function MainStage:destroy()
