@@ -26,6 +26,7 @@ function MainStage:init()
     self.ui.desktopMode()
     self.ui_group = "MainStage"
     self.ui.setStyle({font = title_font})
+    --self.panel = self.ui.newPanel({x = gw/2,y = hg/2,w = 200,h = 120,layout = "grid 4x1"})
     self.ui.newLabel({text = "武侠与江湖",x = gw/3,y=gh/6,group = self.ui_group}):fg({0,0,0}):center()
     self.ui.setStyle(style)
     --gooi.glass()
