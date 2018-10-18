@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/globle.lua" beforeDir="false" afterPath="$PROJECT_DIR$/globle.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/graphics/Faces/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/graphics/Faces/face_001.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/objects/CreateStage.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/CreateStage.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objects/MainStage.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/MainStage.lua" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainStage.lua" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainStage.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/MainStage.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+            <state>
+              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -54,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateStage.lua" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CreateStage.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/objects/CreateStage.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
+            <state relative-caret-position="1363">
+              <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -185,9 +184,9 @@
         <option value="$PROJECT_DIR$/objects/CreatStage.lua" />
         <option value="$PROJECT_DIR$/main.lua" />
         <option value="$PROJECT_DIR$/objects/Stage.lua" />
-        <option value="$PROJECT_DIR$/objects/CreateStage.lua" />
         <option value="$PROJECT_DIR$/globle.lua" />
         <option value="$PROJECT_DIR$/objects/MainStage.lua" />
+        <option value="$PROJECT_DIR$/objects/CreateStage.lua" />
       </list>
     </option>
   </component>
@@ -219,6 +218,13 @@
               <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="graphics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuxiaLove2d" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="graphics" type="462c0819:PsiDirectoryNode" />
+              <item name="Faces" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wuxiaLove2d" type="b2602c69:ProjectViewProjectNode" />
@@ -508,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539797567057</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="gooi test">
+      <created>1539874369811</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1539874369811</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -623,7 +636,8 @@
     <MESSAGE value="重构第一步。结构采用新的场景控制。" />
     <MESSAGE value="gooi lib test." />
     <MESSAGE value="gooi lib test.switch stage test." />
-    <option name="LAST_COMMIT_MESSAGE" value="gooi lib test.switch stage test." />
+    <MESSAGE value="gooi test" />
+    <option name="LAST_COMMIT_MESSAGE" value="gooi test" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/MainScreen.lua">
@@ -865,13 +879,6 @@
     <entry file="file://$PROJECT_DIR$/lib/gooi/button.lua">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/Stage.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-410">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/util.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1556">
@@ -883,13 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="721">
           <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/objects/CreateStage.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -907,10 +907,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/objects/Stage.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-410">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/objects/MainStage.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+        <state>
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/CreateStage.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1363">
+          <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
         </state>
       </provider>
     </entry>

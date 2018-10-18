@@ -8,11 +8,16 @@
 CreateStage = Class("CreateStage",Stage)
 
 local style = {
-    font = assets.font.myfont(18),
-    showBorder = true,
-    bgColor = {0.208, 0.220, 0.222,0.222},
-    group = "CreatStage"
-    --fgColor = {1,0,0}
+    bgColor = {0.222,0.222,0.222},
+    fgColor = {1,1,1}, -- Foreground color
+    tooltipFont = font18, -- tooltips are smaller than the main font
+    radius = 2, -- raw pixels
+    innerRadius = 2, -- raw pixels
+    showBorder = true, -- border for components
+    borderColor = {0,0,1},
+    borderWidth = love.window.toPixels(2), -- in pixels
+    borderStyle = "smooth", -- or "smooth"
+    font = font20,
 }
 
 function CreateStage:init()
@@ -29,18 +34,60 @@ function CreateStage:init()
     self.ui.desktopMode()
     self.ui.shadow()
 ---- no border bug
-    local font18 = assets.font.myfont(18)
-    self.panel = self.ui.newPanel({x = 10, y = 200, w = 200, h = 270, layout = "grid 10x3"})
-    self.panel:setStyle({bgColor = {0.208, 0.220, 0.222},fgColor = {0,0,0},font = font18 })
+--    local font18 = assets.font.myfont(18)
+    local face_index = 1
+    local face_id = string.format("face_%03d",face_index)
+    p_print(face_id)
+    self.ui_face = self.ui.newLabel({group = self.ui_group,x = 10,y = 140,w = 48,h = 48,text = "",icon = assets.graphics.Faces[face_id]})
+    self.panel = self.ui.newPanel({x = 10, y = 200, w = 200, h = 400, layout = "grid 10x4"})
+    --self.panel:setStyle({bgColor = {0.208, 0.220, 0.222},fgColor = {0,0,0},font = font24 })
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "头像"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = face_index}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"})
+    :onRelease(
+            function()
+                face_index = face_index + 1
+                face_id = string.format("face_%03d",face_index)
+                self.ui_face:setIcon(assets.graphics.Faces[face_id])
+    end))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}):setTooltip("调整名字"))
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "姓名"}))
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "悟道"}))
-    self.panel:add(self.ui.newButton({group = self.ui_group,text = "变更"}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"}):setTooltip("调整姓氏"))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}):setTooltip("调整名字"))
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "性别"}))
-    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "男"}))
-    self.panel:add(self.ui.newButton({group = self.ui_group,text = "变更"}))
+    self.ui_gender = self.ui.newLabel({group = self.ui_group,text = "男"})
+    self.panel:add(self.ui_gender)
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"})
+            :onRelease(function ()
+        self.ui_gender:setText("女")
+    end))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"})
+            :onRelease(function ()
+        self.ui_gender:setText("男")
+    end))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "年龄"}))
+    local age = 18
+    self.ui_age = self.ui.newLabel({group = self.ui_group,text = tostring(age)})
+    self.panel:add(self.ui_age)
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"})
+            :onRelease(function ()
+        if age > 14 then
+            age = age - 1
+            self.ui_age:setText(tostring(age))
+        end
+    end))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"})
+            :onRelease(function ()
+        if age <50 then
+            age = age + 1
+            self.ui_age:setText(tostring(age))
+        end
+    end))
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "年龄"}))
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "18"}))
-    self.panel:add(self.ui.newButton({group = self.ui_group,text = "变更"}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}))
     self.ui.newButton({group = self.ui_group,text = "返回太虚",x = gw - 200,y = gh - 100})
             :onRelease(
             function ()
