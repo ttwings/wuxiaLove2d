@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a6482d4a-e1b2-49e9-b033-f4637948b153" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util.lua" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/main.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objects/CreatStage.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/CreateStage.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/globle.lua" beforeDir="false" afterPath="$PROJECT_DIR$/globle.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/CreateStage.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/CreateStage.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/objects/MainStage.lua" beforeDir="false" afterPath="$PROJECT_DIR$/objects/MainStage.lua" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainStage.lua" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainStage.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/objects/MainStage.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="57" column="27" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="27" />
+            <state relative-caret-position="156">
+              <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -34,11 +33,6 @@
               <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bar.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/gooi/bar.lua">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="checkbox.lua" pinned="false" current-in-tab="false">
@@ -54,15 +48,17 @@
       <file leaf-file-name="component.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/gooi/component.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2513" />
+            <state relative-caret-position="159">
+              <caret line="413" column="42" lean-forward="true" selection-start-line="413" selection-start-column="42" selection-end-line="413" selection-end-column="42" />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateStage.lua" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreateStage.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/CreateStage.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="35" column="84" selection-start-line="35" selection-start-column="84" selection-end-line="35" selection-end-column="84" />
+            <state relative-caret-position="155">
+              <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -79,6 +75,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="721">
               <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="globle.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/globle.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -163,7 +168,6 @@
         <option value="$PROJECT_DIR$/GameScreen.lua" />
         <option value="$PROJECT_DIR$/lib/richtext.lua" />
         <option value="$PROJECT_DIR$/lib/Color.lua" />
-        <option value="$PROJECT_DIR$/globle.lua" />
         <option value="$PROJECT_DIR$/objects/InfoPanel.lua" />
         <option value="$PROJECT_DIR$/MainScreen.lua" />
         <option value="$PROJECT_DIR$/NewScreen.lua" />
@@ -181,8 +185,9 @@
         <option value="$PROJECT_DIR$/objects/CreatStage.lua" />
         <option value="$PROJECT_DIR$/main.lua" />
         <option value="$PROJECT_DIR$/objects/Stage.lua" />
-        <option value="$PROJECT_DIR$/objects/MainStage.lua" />
         <option value="$PROJECT_DIR$/objects/CreateStage.lua" />
+        <option value="$PROJECT_DIR$/globle.lua" />
+        <option value="$PROJECT_DIR$/objects/MainStage.lua" />
       </list>
     </option>
   </component>
@@ -489,7 +494,21 @@
       <option name="project" value="LOCAL" />
       <updated>1539536337050</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="gooi lib test.switch stage test.">
+      <created>1539796918850</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1539796918850</updated>
+    </task>
+    <task id="LOCAL-00021" summary="gooi lib test.switch stage test.">
+      <created>1539797567057</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1539797567057</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -515,7 +534,7 @@
       <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4944238" weight="0.32948717" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="3" weight="0.12193309" />
+      <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.12193309" />
       <window_info id="Structure" order="4" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
       <window_info id="UI Designer" order="0" />
@@ -603,7 +622,8 @@
     <MESSAGE value="修改readme" />
     <MESSAGE value="重构第一步。结构采用新的场景控制。" />
     <MESSAGE value="gooi lib test." />
-    <option name="LAST_COMMIT_MESSAGE" value="gooi lib test." />
+    <MESSAGE value="gooi lib test.switch stage test." />
+    <option name="LAST_COMMIT_MESSAGE" value="gooi lib test.switch stage test." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/MainScreen.lua">
@@ -830,11 +850,6 @@
     <entry file="file://$PROJECT_DIR$/lib/gooi/checkbox.lua">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/gooi/component.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2513" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/gooi/init.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-765" />
@@ -864,13 +879,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/MainStage.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="57" column="27" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="721">
@@ -880,8 +888,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/objects/CreateStage.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="35" column="84" selection-start-line="35" selection-start-column="84" selection-end-line="35" selection-end-column="84" />
+        <state relative-caret-position="155">
+          <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/globle.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/gooi/component.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="413" column="42" lean-forward="true" selection-start-line="413" selection-start-column="42" selection-end-line="413" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/MainStage.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
         </state>
       </provider>
     </entry>

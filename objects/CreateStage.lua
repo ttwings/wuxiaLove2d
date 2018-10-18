@@ -8,9 +8,10 @@
 CreateStage = Class("CreateStage",Stage)
 
 local style = {
-    font = assets.font.myfont(32),
+    font = assets.font.myfont(18),
     showBorder = true,
     bgColor = {0.208, 0.220, 0.222,0.222},
+    group = "CreatStage"
     --fgColor = {1,0,0}
 }
 
@@ -21,34 +22,30 @@ function CreateStage:init()
     self.background = assets.graphics.Backgrounds.bg
     local title_font = assets.font.myfont(80)
     self.ui = gooi
-    self.ui.desktopMode()
     self.ui_group = "CreateStage"
-    --self.ui.desktopMode()
-    --self.ui.shadow()
-    --self.ui.setStyle({font = title_font})
-    self.ui.newLabel({group = self.ui_group,text = "创建侠客",x = gw/3,y=gh/6}):center():setStyle({font=title_font}):fg({0,0,0})
+    self.ui.newLabel({group = self.ui_group,text = "创建侠客",x = gw/3,y=gh/10})
+            :center():setStyle({font=title_font}):fg({0,0,0})
     self.ui.setStyle(style)
-    --gooi.glass()
-    --self.panel = self.ui.newPanel({x = 500,y = 500,w = 150,h = 36,layout = "grid 4x1"})
-
-    --self.ui.newButton({text = "新的穿越",x = 500,y = 500,w = 150,h = 36})
-    --self.ui.newButton({text = "梦回武林",x = 500,y = 550,w = 150,h = 36})
-    --self.ui.newButton({text = "侠客宝典",x = 500,y = 600,w = 150,h = 36})
-    self.ui.newButton({group = self.ui_group,text = "返回太虚",x = gw - 200,y = gh - 100,w = 150,h = 36})
-             :onRelease(
+    self.ui.desktopMode()
+    self.ui.shadow()
+---- no border bug
+    local font18 = assets.font.myfont(18)
+    self.panel = self.ui.newPanel({x = 10, y = 200, w = 200, h = 270, layout = "grid 10x3"})
+    self.panel:setStyle({bgColor = {0.208, 0.220, 0.222},fgColor = {0,0,0},font = font18 })
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "姓名"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "悟道"}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "变更"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "性别"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "男"}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "变更"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "年龄"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "18"}))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "变更"}))
+    self.ui.newButton({group = self.ui_group,text = "返回太虚",x = gw - 200,y = gh - 100})
+            :onRelease(
             function ()
-                p_print("goto main")
                 gotoRoom("MainStage","MainStage")
             end)
-            --function()
-            --    self.ui.confirm({group = self.ui_group,text = "梦醒",okText = "是",cancelText = "否"
-            --    ,ok = function ()
-            --            p_print("goto main")
-            --            gotoRoom("MainStage","MainStage")
-            --        end})
-            --end
-    --)
-    --gooi.setCanvas(self.main_canvas)
 end
 
 function CreateStage:activate()

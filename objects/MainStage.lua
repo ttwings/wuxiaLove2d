@@ -9,9 +9,10 @@ MainStage = Class("MainStage",Stage)
 
 --- init
 local style = {
-    font = assets.font.myfont(32),
+    font = font24,
     showBorder = true,
     bgColor = {0.208, 0.220, 0.222,0.222},
+    group = "MainStage"
     --fgColor = {1,0,0}
 }
 
@@ -21,32 +22,27 @@ function MainStage:init()
     self.area:addPhysicsWorld()
     self.main_canvas = love.graphics.newCanvas(gw,gh)
     self.background = assets.graphics.Backgrounds.bg
-    local title_font = assets.font.myfont(80)
     self.ui = gooi
     self.ui.desktopMode()
     self.ui_group = "MainStage"
-    self.ui.setStyle({font = title_font})
-    --self.panel = self.ui.newPanel({x = gw/2,y = hg/2,w = 200,h = 120,layout = "grid 4x1"})
-    self.ui.newLabel({text = "武侠与江湖",x = gw/3,y=gh/6,group = self.ui_group}):fg({0,0,0}):center()
     self.ui.setStyle(style)
-    --gooi.glass()
-    --gooi.newPanel()
-    self.ui.newButton({text = "新的穿越",x = 500,y = 500,w = 150,h = 36,group = self.ui_group})
-            :onRelease(
+    self.ui.newLabel({text = "武侠与江湖",x = gw/2 - 320,y=gh/6,w = 320,group = self.ui_group}):setStyle({font = font80}):fg({0,0,0}):center()
+    self.panel = self.ui.newPanel({x = gw/2 - 80,y = gh/2,w = 160,h = 160,layout = "grid 4x1"})
+    self.panel:add(self.ui.newButton({text = "新的穿越",group = self.ui_group}):setStyle({font = font32})
+                       :onRelease(
             function()
                 gotoRoom("CreateStage","CreateStage")
             end)
-    self.ui.newButton({text = "梦回武林",x = 500,y = 550,w = 150,h = 36,group = self.ui_group})
-    self.ui.newButton({text = "侠客宝典",x = 500,y = 600,w = 150,h = 36,group = self.ui_group})
-    self.ui.newButton({text = "归隐山林",x = 500,y = 650,w = 150,h = 36,group = self.ui_group})
-            :onRelease(
+    )
+    self.panel:add(self.ui.newButton({text = "梦回武林",group = self.ui_group})):setStyle({font = font32})
+    self.panel:add(self.ui.newButton({text = "侠客宝典",group = self.ui_group})):setStyle({font = font32})
+    self.panel:add(self.ui.newButton({text = "归隐山林",group = self.ui_group}):setStyle({font = font32})
+                       :onRelease(
             function()
-                p_print("Main")
                 self.ui.confirm({group = self.ui_group,text = "梦醒",okText = "是",cancelText = "否",ok = function () love.event.quit() end})
             end
-    )
-    --self.area:addObject()
-    --gooi.setCanvas(self.main_canvas)
+    ))
+
 end
 
 function MainStage:activate()
