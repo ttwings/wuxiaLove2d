@@ -2,18 +2,14 @@ require("lib.messages")
 require("lib.Color")
 assets = require("lib.cargo").init("assets")
 Gooi = require("lib.gooi")
---Object = require("lib.classic")
 Camera = require("lib.Camera")
 Input = require("lib.input")
 Physics = require("lib.windfield")
-Richtext = require("lib.richtext")
 Class = require("lib.middleclass")
-
+Names = assets.data.names
 require("lib.guiDraw")
 require("lib.util")
-
-require('globle')
-
+require("globle")
 require("lib.behavior3.b3")
 requireDirectory("lib/behavior3/core")
 requireDirectory("lib/behavior3/actions")
@@ -28,7 +24,6 @@ require("Region")
 require("Npcs")
 
 Timer = require( 'lib.Timer' )
-local ScreenManager = require( "lib/ScreenManager" )
 screens = {
     main = require( "MainScreen" ),
     new = require("NewScreen"),
@@ -71,7 +66,6 @@ function love.load( )
     input:bind("k","d-down")
     current_room = nil
     gotoRoom("MainStage","MainStage")
-    --ScreenManager.init(screens, 'main')
 end
 
 function love.update(dt)
@@ -85,9 +79,7 @@ function love.draw()
     if current_room then current_room:draw() end
     ---@param hook
     --debug.sethook(hook,"c")
-    --ScreenManager.draw()
     --debug.sethook()
-
     graphicsStats()
     --drawHook()
 end

@@ -250,6 +250,16 @@ function component:draw()-- Every component has the same base:
 		    self.style.radius,
 		    self.style.radius,
 		    circleRes)
+
+			--love.graphics.rectangleCN(
+			--		math.floor(self.x),
+			--		math.floor(self.y),
+			--		math.floor(self.w),
+			--		math.floor(self.h),
+			--		10
+			--		--self.style.radius,
+			--		--circleRes
+			--)
     end, "replace", 1)
 		love.graphics.setStencilTest("greater", 0)
 		local scaleY = 1

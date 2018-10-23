@@ -9,7 +9,7 @@ MainStage = Class("MainStage",Stage)
 
 --- init
 local style = {
-    font = font24,
+    font = assets.font.myfont(32),
     showBorder = true,
     bgColor = {0.208, 0.220, 0.222,0.222},
     group = "MainStage"
@@ -42,7 +42,6 @@ function MainStage:init()
                 self.ui.confirm({group = self.ui_group,text = "梦醒",okText = "是",cancelText = "否",ok = function () love.event.quit() end})
             end
     ))
-
 end
 
 function MainStage:activate()

@@ -1,3 +1,76 @@
+-- id                               string                           角色ID
+-- name                             string                           名称
+-- fname                            string                           姓
+-- lname                            string                           名
+-- nickname                         string                           绰号
+-- title                            string                           头衔
+-- unique                           boolean                          独特
+-- country                          string                           国家
+-- description                      string                           描述
+-- gender                           string                           性别
+-- sect                             string                           门派
+-- age                              int                              年龄
+-- turn                             int                              回合
+-- exp                              int                              历练
+-- faith                            string                           信仰
+-- moral                            int                              道德
+-- attitude                         string                           态度
+-- reputation                       int                              声望
+-- force                            int                              内力
+-- strike                           int                              攻击
+-- dodge                            int                              躲闪
+-- parry                            int                              招架
+-- skill                            tableString[k:#1(string)|v:#2(int)]   技能
+-- mapSkill                         tableString[k:#1(string)|v:#2(string)]   装备技能
+-- Str                              int                              臂力
+-- Con                              int                              根骨
+-- Dex                              int                              身法
+-- Int                              int                              悟性
+-- Wis                              int                              五感
+-- Cha                              int                              容貌
+-- Luc                              int                              福源
+-- maxHP                            int                              最大气血
+-- maxMP                            int                              最大真气
+-- maxAP                            int                              最大精力
+-- maxEP                            int                              最大精神
+-- hp                               int                              气血
+-- mp                               int                              真气
+-- ap                               int                              体力
+-- ep                               int                              精神
+-- weapon                           string                           武器
+-- armor                            tableString[k:#seq|v:#1(string)]   防具
+-- misc                             tableString[k:#seq|v:#1(string)]   杂物
+-- state                            string                           状态
+-- action                           string                           动作
+-- region                           string                           区域
+-- room                             string                           房间
+-- obj                              string                           发现物品
+-- target                           string                           遇见角色
+-- food                             string                           食物
+-- water                            string                           饮水
+-- money                            int                              金钱
+-- x                                int                              坐标x
+-- y                                int                              坐标y
+-- tx                               int                              tiled坐标x
+-- ty                               int                              tiled坐标y
+-- actorImg                         string                           行走图
+-- anim                             tableString[k:#1(string)|v:#2(int)]   动画
+-- image                            tableString[k:#1(string)|v:#2(int)]   图像
+-- faceImg                          string                           头像
+-- toward                           string                           朝向
+-- condition                        tableString[k:#1(string)|v:#2(int)]   状态
+-- isBusy                           boolean                          忙碌中
+-- isFighting                       boolean                          战斗中
+-- jobName                          mapString[name=string,number=int,state=string,obj=string]   工作名称
+-- mark                             tableString[k:#1(string)|v:#2(int)]   标记
+-- encumbrance                      int                              负重
+-- message                          tableString[k:#seq|v:#1(string)]   讯息
+
+
+
+
+
+
 Class = require "lib/middleclass"
 local anim8 = require "lib/anim8"
 require("keymap")
@@ -12,6 +85,15 @@ require("objects.Food")
 GameObject = require("objects.GameObject")
 --- 角色数据
 --- @class Actor
+--- @param area Area
+--- @param x number
+--- @param y number
+--- @param opts table
+--- @field id string
+--- @field fname string 姓
+--- @field lname string 名
+--- @field name string 姓名
+
 Actor = Class("Actor",GameObject)
 function Actor:init(area,x,y,opts)
     --GameObject.init(self,area,x,y,opts)
@@ -20,7 +102,18 @@ function Actor:init(area,x,y,opts)
     self.grid_x = math.ceil(self.x / 32)
     self.grid_y = math.ceil(self.y / 32)
     self.actorImg = assets.graphics.characters.actor_001
-    self:getAnims(self["actorImg"] or "actor (1)")
+    --self:getAnims(self["actorImg"] or "actor (1)")
+    self.id = UUID()
+    self.fname = ""
+    self.lname = ""
+    self.name = ""
+    self.gender = ""
+    self.age = 16
+    self.nickname = ""
+    self.country = ""
+    self.family = ""
+    self.sect = ""
+    self.title = ""
     self.turn = 0
     self.cd = 1
     self.sleep = false

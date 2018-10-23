@@ -3,7 +3,6 @@
 --- Created by apple.
 --- DateTime: 2018/10/15 上午12:44
 ---
-
 --- @class CreatStage : Stage
 CreateStage = Class("CreateStage",Stage)
 
@@ -20,12 +19,20 @@ local style = {
     font = font20,
 }
 
+--- @return Actor
+--- 新建侠客页面，最终角色将在游戏中运行。
+--- 1、创建模板，将不同类别的侠客，分别开，新的世界生成时，所有人物按模板新增
+--- 2、或者所有基础npc固定。新增npc，以基础npc的父母的形式新增。
+--- 3、基础演化人物之间的关系
+
 function CreateStage:init()
     self.area = Area(self)
     self.area:addPhysicsWorld()
     self.main_canvas = love.graphics.newCanvas(gw,gh)
     self.background = assets.graphics.Backgrounds.bg
     local title_font = assets.font.myfont(80)
+    --- actor base
+    self.actor = Actor:new(self.area,0,0)
     self.ui = gooi
     self.ui_group = "CreateStage"
     self.ui.newLabel({group = self.ui_group,text = "创建侠客",x = gw/3,y=gh/10})
@@ -33,28 +40,71 @@ function CreateStage:init()
     self.ui.setStyle(style)
     self.ui.desktopMode()
     self.ui.shadow()
----- no border bug
---    local font18 = assets.font.myfont(18)
-    local face_index = 1
-    local face_id = string.format("face_%03d",face_index)
-    p_print(face_id)
-    self.ui_face = self.ui.newLabel({group = self.ui_group,x = 10,y = 140,w = 48,h = 48,text = "",icon = assets.graphics.Faces[face_id]})
-    self.panel = self.ui.newPanel({x = 10, y = 200, w = 200, h = 400, layout = "grid 10x4"})
+
+    ---- face image and change
+    local face_id = 1
+    self.ui_face = self.ui.newLabel({group = self.ui_group,x = 64,y = 120,w = 48,h = 48,text = "",icon = assets.graphics.Faces[5]})
+    self.panel = self.ui.newPanel({x = 20, y = 200, w = 200, h = 400, layout = "grid 10x4"})
+    self.ui_face_label = self.ui.newLabel({group = self.ui_group,text = face_id})
     --self.panel:setStyle({bgColor = {0.208, 0.220, 0.222},fgColor = {0,0,0},font = font24 })
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "头像"}))
-    self.panel:add(self.ui.newLabel({group = self.ui_group,text = face_index}))
+    self.panel:add(self.ui_face_label)
     self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"})
-    :onRelease(
+            :onRelease(
             function()
-                face_index = face_index + 1
-                face_id = string.format("face_%03d",face_index)
+                face_id = face_id + 1
+                --face_id = string.format("face_%03d",face_index)
+                --self.ui_face:setText(face_id)
                 self.ui_face:setIcon(assets.graphics.Faces[face_id])
+                self.ui_face_label:setText(face_id)
     end))
-    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}):setTooltip("调整名字"))
-    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "姓名"}))
-    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "悟道"}))
-    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"}):setTooltip("调整姓氏"))
-    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}):setTooltip("调整名字"))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"})
+            :onRelease(
+            function()
+                if face_id > 1 then
+                    face_id = face_id - 1
+                end
+                --face_id = string.format("face_%03d",face_index)
+                --self.ui_face:setText(face_id)
+                self.ui_face:setIcon(assets.graphics.Faces[face_id])
+                self.ui_face_label:setText(face_id)
+            end))
+    local first_name = self.ui.newLabel({group = self.ui_group,text = "孙"})
+    local first_name_id = 1
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "姓氏"}))
+    self.panel:add(first_name)
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"})
+            :onRelease(
+            function()
+                if first_name_id > 1 then
+                    first_name_id = first_name_id - 1
+                end
+                first_name:setText(Names[1][first_name_id])
+            end))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"})
+            :onRelease(
+            function()
+                if first_name_id < #Names[1] then
+                    first_name_id = first_name_id + 1
+                end
+                first_name:setText(Names[1][first_name_id])
+            end))
+
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "名字"}))
+    local last_name = self.ui.newLabel({group = self.ui_group,text = "悟道"})
+    local last_name_id = 1
+    self.panel:add(last_name)
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"})
+            :onRelease(
+            function()
+                local last_name_array = Names[2]
+                if last_name_id < #last_name_array then
+                    last_name_id = last_name_id + 1
+                end
+                last_name:setText(last_name_array[last_name_id])
+            end))
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}))
+
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "性别"}))
     self.ui_gender = self.ui.newLabel({group = self.ui_group,text = "男"})
     self.panel:add(self.ui_gender)
@@ -84,7 +134,7 @@ function CreateStage:init()
             self.ui_age:setText(tostring(age))
         end
     end))
-    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "年龄"}))
+    self.panel:add(self.ui.newLabel({group = self.ui_group,text = "出生"}))
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "18"}))
     self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"}))
     self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}))
@@ -113,10 +163,11 @@ end
 function CreateStage:draw()
     love.graphics.setCanvas(self.main_canvas)
     love.graphics.clear()
-    camera:attach(0,0,gw,gh)
+    --camera:attach(0,0,gw,gh)
     love.graphics.draw(self.background)
     if self.area then self.area:draw() end
-    camera:detach()
+    love.graphics.rectangleArcPanel(5,200,220,400)
+    --camera:detach()
     love.graphics.setCanvas()
 
     love.graphics.setColor(1,1,1,1)
