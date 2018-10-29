@@ -138,10 +138,15 @@ function CreateStage:init()
     self.panel:add(self.ui.newLabel({group = self.ui_group,text = "18"}))
     self.panel:add(self.ui.newButton({group = self.ui_group,text = "<-"}))
     self.panel:add(self.ui.newButton({group = self.ui_group,text = "->"}))
-    self.ui.newButton({group = self.ui_group,text = "返回太虚",x = gw - 200,y = gh - 100})
+    self.ui.newButton({group = self.ui_group,text = "返回太虚",x = gw - 400,y = gh - 100})
             :onRelease(
             function ()
                 gotoRoom("MainStage","MainStage")
+            end)
+    self.ui.newButton({group = self.ui_group,text = "穿越江湖",x = gw - 200,y = gh - 100})
+        :onRelease(
+            function ()
+                gotoRoom("MapStage","MapStage")
             end)
 end
 

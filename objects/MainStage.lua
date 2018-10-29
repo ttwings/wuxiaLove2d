@@ -29,12 +29,17 @@ function MainStage:init()
     self.ui.newLabel({text = "武侠与江湖",x = gw/2 - 320,y=gh/6,w = 320,group = self.ui_group}):setStyle({font = font80}):fg({0,0,0}):center()
     self.panel = self.ui.newPanel({x = gw/2 - 80,y = gh/2,w = 160,h = 160,layout = "grid 4x1"})
     self.panel:add(self.ui.newButton({text = "新的穿越",group = self.ui_group}):setStyle({font = font32})
-                       :onRelease(
+            :onRelease(
             function()
                 gotoRoom("CreateStage","CreateStage")
             end)
     )
-    self.panel:add(self.ui.newButton({text = "梦回武林",group = self.ui_group})):setStyle({font = font32})
+    self.panel:add(self.ui.newButton({text = "梦回武林",group = self.ui_group}):setStyle({font = font32})
+            :onRelease(
+            function ()
+                gotoRoom("LoadStage","LoadStage")
+            end)
+    )
     self.panel:add(self.ui.newButton({text = "侠客宝典",group = self.ui_group})):setStyle({font = font32})
     self.panel:add(self.ui.newButton({text = "归隐山林",group = self.ui_group}):setStyle({font = font32})
                        :onRelease(
