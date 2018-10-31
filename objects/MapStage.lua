@@ -16,12 +16,15 @@ local style = {
     --fgColor = {1,0,0}
 }
 
+local mx,my = 0,0
+
 require("lib.gooi")
 function MapStage:init()
     self.area = Area(self)
     self.area:addPhysicsWorld()
     self.main_canvas = love.graphics.newCanvas(gw,gh)
     self.background = assets.graphics.Backgrounds.bg
+    self.map = assets.graphics.map
     self.ui = gooi
     self.ui.desktopMode()
     --- ui 切换
@@ -48,6 +51,13 @@ end
 function MapStage:update(dt)
     if self.area then self.area:update(dt) end
     self.ui.update(dt)
+    if love.mouse.isDown(1) then
+        local mx,my = camera:getMousePosition(sw,sh,0,0,sw * gw,sh * gh)
+        local dx,dy = mx - self.previous_mx,my - self.previous_my
+        camera:move(-dx,-dy)
+    end
+    self.previous_mx,self.previous_my = camera:getMousePosition(sw,sh,0,0,sw * gw,sh * gh)
+
 end
 
 function MapStage:draw()
@@ -55,6 +65,7 @@ function MapStage:draw()
     love.graphics.clear()
     camera:attach(0,0,gw,gh)
     love.graphics.draw(self.background)
+    love.graphics.draw(self.map)
     if self.area then self.area:draw() end
     camera:detach()
     love.graphics.setCanvas()
@@ -63,6 +74,7 @@ function MapStage:draw()
     love.graphics.setBlendMode('alpha','premultiplied')
     love.graphics.draw(self.main_canvas,0,0,0,sx,sy)
     love.graphics.setBlendMode('alpha')
+
     self.ui.draw(self.ui_group)
 
 

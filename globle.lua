@@ -115,7 +115,18 @@ families = {"参合庄","曼陀山庄","白陀山庄","聚贤庄","一品堂","�
 --- 门派
 sects = {"少林寺","大理寺","金轮寺","武当派","全真教","太乙教","百草帮","丐帮","五毒教","峨眉派","玄女派"}
 
-
+--- 技能树
+---
+attacks = {
+    ["Neutral"] = {cooldown = 0.24, ammo = 0, abbreviation = "Ne", speed = 200, color = Color.default },
+    ["Double"]  = {cooldown = 0.32, ammo = 2, abbreviation = "Do", speed = 200, color = Color.ammo },
+    ['Triple']  = {cooldown = 0.32, ammo = 3, abbreviation = 'Tr', speed = 200, color = Color.boost},
+    ['Rapid']   = {cooldown = 0.12, ammo = 1, abbreviation = 'Ra', speed = 200, color = Color.default},
+    ['Spread']  = {cooldown = 0.16, ammo = 1, abbreviation = 'Sp', speed = 200, color = Color.default},
+    ['Back']    = {cooldown = 0.32, ammo = 2, abbreviation = 'Ba', speed = 200, color = Color.skill_point},
+    ['Side']    = {cooldown = 0.32, ammo = 3, abbreviation = 'Si', speed = 200, color = Color.boost},
+    ['Blast']   = {cooldown = 0.66, ammo = 5, abbreviation = 'Bl', speed = 600, color = Color.hp},
+}
 --- 绘制
 --- @type func love.graphics.rectangleArcPanel
 function love.graphics.rectangleArcPanel(x,y,w,h,r,line_width,line_color,panel_color,isLine)

@@ -40,7 +40,13 @@ function MainStage:init()
                 gotoRoom("LoadStage","LoadStage")
             end)
     )
-    self.panel:add(self.ui.newButton({text = "侠客宝典",group = self.ui_group})):setStyle({font = font32})
+    self.panel:add(self.ui.newButton({text = "侠客宝典",group = self.ui_group}):setStyle({font = font32})
+            :onRelease(
+            function ()
+                gotoRoom("SkillTreeStage","SkillTreeStage")
+            end)
+    )
+
     self.panel:add(self.ui.newButton({text = "归隐山林",group = self.ui_group}):setStyle({font = font32})
                        :onRelease(
             function()

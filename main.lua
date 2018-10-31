@@ -64,6 +64,7 @@ function love.load( )
     input:bind("l","d-right")
     input:bind("i","d-up")
     input:bind("k","d-down")
+
     current_room = nil
     gotoRoom("MainStage","MainStage")
 end
@@ -73,7 +74,6 @@ function love.update(dt)
     camera:update(dt*slow_amount)
     if current_room then current_room:update(dt*slow_amount) end    --ScreenManager.update(dt)
 end
-
 
 function love.draw()
     if current_room then current_room:draw() end
@@ -86,10 +86,6 @@ end
 
 function love.mousereleased(x, y, button) if current_room then current_room:mousereleased()  end end
 function love.mousepressed(x, y, button)  if current_room then current_room:mousepressed()  end end
-function love.keyreleased(key, scancode) if current_room then current_room:keypressed() end end
---function love.keypressed( key )
---    --ScreenManager.keypressed(key)
---end
 
 function slow(amount,duration)
     slow_amount = amount

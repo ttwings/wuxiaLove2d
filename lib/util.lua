@@ -9,21 +9,6 @@ end
 function w() return lg.getWidth() end
 function h() return lg.getHeight() end
 
-
----------------------------------math addon ----------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
 --------------------------------math addon----------------------------------
 function math.percentOffset(num,percentage)
 	return num + num*(0.5-love.math.random())*2*percentage
@@ -207,10 +192,6 @@ function math.pointTest_xy(x,y,pX,pY)
 	return oddNodes
 end
 
-
-
-
-
 function math.RGBtoHSV(r,g,b)
   local max=math.max(r,g,b)
   local min=math.min(r,g,b)
@@ -303,7 +284,6 @@ function math.tessellate(vertices,time,factor)
    		return math.tessellate(new,time - 1 ,factor)
    	end
 end
-
 
 function math.randomCurve(verts,displace,curDetail)
 	local curve = {}
@@ -536,38 +516,6 @@ function math.getPolygonArea(verts)
 	end
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --------------------------------string addon----------------------------------
 function string.split(str,keyword)
 	local tab={}
@@ -707,47 +655,6 @@ end
 function string.stripfilename(filename)
     return string.match(filename, ".+\\([^\\]*%.%w+)$") -- *nix system
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 --------------------------------table addon----------------------------------
 
@@ -897,30 +804,6 @@ function table.load(str)
 end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -----------------------------file addon ------------------------------------
 --- 批量导入目录下所有.lua 文件（带. 共4个字符后缀文件,因此n 默认为5）。
 --- 注意，目录下文件后缀必须 长度一致
@@ -931,24 +814,7 @@ function requireDirectory( path ,n)
 	end
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---------------------------------love addon----------------------------------
-
-
+-------------------------------- addon----------------------------------
 
 function love.graphics.colorRectangle(mod,x,y,w,h,color)
 	local color = color or {255,255,255,255}
@@ -1060,23 +926,6 @@ function love.update(...)
 end
 
 love.system.run=love.system.openURL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ----------------------------------system addon-------------------------------------
 --- change new print
@@ -1217,6 +1066,8 @@ function UUID()
 	return (("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"):gsub("[xy]",fn))
 end
 
+
+------------ switch stage  -----------------
 function addRoom( room_type, room_name, ... )
 	local room = _G[room_type](room_name, ...)
 	rooms[room_name] = room
@@ -1232,6 +1083,7 @@ function gotoRoom( room_type, room_name, ... )
 	else current_room = addRoom(room_type, room_name, ...) end
 end
 
+------------  require objects --------------
 function recursiveEnumerate( folder,file_list )
 	local items = love.filesystem.getDirectoryItems(folder)
 	for _,item in ipairs(items) do
@@ -1256,6 +1108,7 @@ function random(min,max)
 	return (min > max and (love.math.random()*(min - max) + max)) or (love.math.random()*(max - min) + min)
 end
 
+----------------  debug -------------------
 function count_all(f)
 	local seen = {}
 	local count_table
@@ -1296,8 +1149,9 @@ function type_name(o)
 	return global_type_table[getmetatable(o) or 0] or "Unknown"
 end
 
----@see Player
 
+
+------------  graphics -------------
 function pushRote(x,y,r,sx,sy)
 	love.graphics.push()
 	love.graphics.translate(x,y)
