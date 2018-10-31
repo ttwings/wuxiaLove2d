@@ -1,3 +1,7 @@
+--- @class Date
+Date = Class("Date")
+
+
 local Date 	= {year=0,month=0,week=0,day=0,hour=0,minute=0,second=0,turn=0}
 --Date = date
 local animals = {"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"}
@@ -52,6 +56,28 @@ Date.year = 111
 Date.month = 3
 Date.hour = 5
 Date.second = math.random(10000,1000000)
+
+---new
+---@param second number 回合数
+---@return table date 日期
+function Date:init(second)
+	Date.second	= second
+	Date.minute = math.modf(Date.second/60)
+	Date.hour 	= math.modf(Date.minute/60)
+	Date.day 	= math.modf(Date.hour/12)
+	Date.week 	= math.modf(Date.day/7)
+	Date.month 	= math.modf(Date.week/3)
+	Date.year 	= math.modf(Date.month/12)
+	---- 日期转化
+	Date.minute = math.modf(Date.minute%60)+1
+	Date.hour 	= math.modf(Date.hour%12)+1
+	Date.day 	= math.modf(Date.day%7)+1
+	Date.week 	= math.modf(Date.week%3)+1
+	Date.month 	= math.modf(Date.month%12)+1
+	Date.year 	= math.modf(Date.year%12)+1
+	return Date
+end
+
 function Date:update(dt)
 	-- 1年 = 12 月 * 3 旬 * 7 天 * 12 时辰 * 120 分 * 60 秒 * 60 帧 = 15552000
 	-- 计算年月日
@@ -73,42 +99,7 @@ function Date:draw()
 	richtext:set({Color[fontcolor[d.hour]],dateStr})
 	love.graphics.draw(richtext,330,0)
 end
-
---- 将数字转为文字
----@return string
-function replaseNumber(number)
-	numbers = string.gsub(number,"1", "一")
-	numbers = string.gsub(numbers,"2", "二")
-	numbers = string.gsub(numbers,"3", "三")
-	numbers = string.gsub(numbers,"4", "四")
-	numbers = string.gsub(numbers,"5", "五")
-	numbers = string.gsub(numbers,"6", "六")
-	numbers = string.gsub(numbers,"7", "七")
-	numbers = string.gsub(numbers,"8", "八")
-	numbers = string.gsub(numbers,"9", "九")
-	numbers = string.gsub(numbers,"0", "〇")
-	return numbers
-end
-
----new
----@param second number 回合数
----@return table date 日期
-function Date:new(second)
-	Date.second	= second
-	Date.minute = math.modf(Date.second/60)
-	Date.hour 	= math.modf(Date.minute/60)
-	Date.day 	= math.modf(Date.hour/12)
-	Date.week 	= math.modf(Date.day/7)
-	Date.month 	= math.modf(Date.week/3)
-	Date.year 	= math.modf(Date.month/12)
----- 日期转化
-	Date.minute = math.modf(Date.minute%60)+1
-	Date.hour 	= math.modf(Date.hour%12)+1
-	Date.day 	= math.modf(Date.day%7)+1
-	Date.week 	= math.modf(Date.week%3)+1
-	Date.month 	= math.modf(Date.month%12)+1
-	Date.year 	= math.modf(Date.year%12)+1
-	return Date
-end
-
-return Date
+--
+--
+--
+--return Date

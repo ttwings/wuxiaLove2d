@@ -94,6 +94,9 @@ quality_labels[4] = '【极四品】'
 quality_labels[3] = '【超三品】'
 quality_labels[2] = '【绝二品】'
 quality_labels[1] = '【天一品】'
+---
+
+
 
 --- 武器
 weapons = {"手套","剑","刀","棍","枪","琴","箫","镖","奇门"}

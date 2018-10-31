@@ -3,7 +3,6 @@
 --- Created by apple.
 --- DateTime: 2018/10/14 上午12:51
 ---
-
 --- @class MainStage : Stage
 MainStage = Class("MainStage",Stage)
 
@@ -57,12 +56,13 @@ end
 
 function MainStage:activate()
     self.ui.setGroupVisible(self.ui_group,true)
-    self.ui.setGroupEnabled(self.ui_group,true)
+    --self.ui.setGroupEnabled(self.ui_group,true)
 end
 
 function MainStage:deactivate()
+    upper_room = current_room
     self.ui.setGroupVisible(self.ui_group,false)
-    self.ui.setGroupEnabled(self.ui_group,false)
+    --self.ui.setGroupEnabled(self.ui_group,false)
 end
 
 function MainStage:update(dt)
@@ -74,11 +74,11 @@ function MainStage:draw()
     love.graphics.setCanvas(self.main_canvas)
     love.graphics.clear()
     camera:attach(0,0,gw,gh)
-    love.graphics.draw(self.background)
+
     if self.area then self.area:draw() end
     camera:detach()
     love.graphics.setCanvas()
-
+    love.graphics.draw(self.background)
     love.graphics.setColor(1,1,1,1)
     love.graphics.setBlendMode('alpha','premultiplied')
     love.graphics.draw(self.main_canvas,0,0,0,sx,sy)

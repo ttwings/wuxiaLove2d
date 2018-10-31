@@ -1,5 +1,5 @@
 require 'lib.behavior3.core.Action'
-local date = require 'Date'
+local date = require 'objects.Date'
 local wait = b3.Class("Wait", b3.Action)
 b3.Wait = wait
 

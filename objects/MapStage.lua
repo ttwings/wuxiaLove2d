@@ -23,15 +23,16 @@ function MapStage:init()
     self.area = Area(self)
     self.area:addPhysicsWorld()
     self.main_canvas = love.graphics.newCanvas(gw,gh)
-    self.background = assets.graphics.Backgrounds.bg
+    self.date = Date:new(100000)
+    --self.background = assets.graphics.Backgrounds.bg
     self.map = assets.graphics.map
     self.ui = gooi
     self.ui.desktopMode()
     --- ui 切换
     self.ui_group = "MapStage"
     self.ui.setStyle(style)
-    self.ui.newLabel({text = "江湖地图",x = gw/2 - 320,y= 40,w = 320,group = self.ui_group}):fg({0,0,0}):center()
-    self.ui.newButton({group = self.ui_group,text = "返回太虚",x = gw - 400,y = gh - 100})
+    self.ui.newLabel({text = "江湖地图",x = gw/2 - 320,y= 40,w = 320,group = self.ui_group}):setStyle({font=font80}):fg({0,0,0}):center()
+    self.ui.newButton({group = self.ui_group,text = "返回太虚",w = 128,h = 32,x = gw - 256,y = gh - 80})
         :onRelease(
             function ()
                 gotoRoom("MainStage","MainStage")
@@ -64,7 +65,6 @@ function MapStage:draw()
     love.graphics.setCanvas(self.main_canvas)
     love.graphics.clear()
     camera:attach(0,0,gw,gh)
-    love.graphics.draw(self.background)
     love.graphics.draw(self.map)
     if self.area then self.area:draw() end
     camera:detach()
@@ -74,10 +74,16 @@ function MapStage:draw()
     love.graphics.setBlendMode('alpha','premultiplied')
     love.graphics.draw(self.main_canvas,0,0,0,sx,sy)
     love.graphics.setBlendMode('alpha')
+    love.graphics.setColor(0.5,0.5,0.5,0.5)
+    love.graphics.rectangle('fill',0,0,gw,32,0,1,1,8)
+    love.graphics.setColor(1,1,1,1)
+
+
+
 
     self.ui.draw(self.ui_group)
 
-
+    self.date:draw()
 end
 
 function MapStage:mousereleased()

@@ -112,6 +112,17 @@ function SkillTreeStage:canNodeBeBought(id)
     end
 end
 
+function SkillTreeStage:activate()
+    self.ui.setGroupVisible(self.ui_group,true)
+    --self.ui.setGroupEnabled(self.ui_group,true)
+end
+
+function SkillTreeStage:deactivate()
+    upper_room = current_room
+    self.ui.setGroupVisible(self.ui_group,false)
+    --self.ui.setGroupEnabled(self.ui_group,false)
+end
+
 function SkillTreeStage:mousereleased()
     --self.ui.released()
 end

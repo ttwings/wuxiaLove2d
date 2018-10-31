@@ -151,12 +151,12 @@ function CreateStage:init()
 end
 
 function CreateStage:activate()
-    self.ui.setGroupEnabled(self.ui_group,true)
+    --self.ui.setGroupEnabled(self.ui_group,true)
     self.ui.setGroupVisible(self.ui_group,true)
 end
 
 function CreateStage:deactivate()
-    self.ui.setGroupEnabled(self.ui_group,false)
+    --self.ui.setGroupEnabled(self.ui_group,false)
     self.ui.setGroupVisible(self.ui_group,false)
 end
 

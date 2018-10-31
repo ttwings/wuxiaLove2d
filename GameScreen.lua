@@ -14,7 +14,7 @@ local canvas = love.graphics.newCanvas()
 local player = {}
 gameObjects = {}
 
-date = require("Date")
+date = require("objects.Date")
 gameTurn = 0
 --- @language C
 --- @return 透视效果

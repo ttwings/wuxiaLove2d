@@ -18,7 +18,7 @@ requireDirectory("lib/behavior3/decorators")
 require("Actions")
 require("Actor")
 require("animations")
-require("Date")
+--require("Date")
 require("keymap")
 require("Region")
 require("Npcs")
@@ -66,6 +66,8 @@ function love.load( )
     input:bind("k","d-down")
 
     current_room = nil
+    upper_room = current_room
+    --MainStage:deactivate()
     gotoRoom("MainStage","MainStage")
 end
 

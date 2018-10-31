@@ -656,6 +656,21 @@ function string.stripfilename(filename)
     return string.match(filename, ".+\\([^\\]*%.%w+)$") -- *nix system
 end
 
+--- 将数字转为文字
+---@return string
+function string.convertNumber(number)
+	numbers = string.gsub(number,"1", "一")
+	numbers = string.gsub(numbers,"2", "二")
+	numbers = string.gsub(numbers,"3", "三")
+	numbers = string.gsub(numbers,"4", "四")
+	numbers = string.gsub(numbers,"5", "五")
+	numbers = string.gsub(numbers,"6", "六")
+	numbers = string.gsub(numbers,"7", "七")
+	numbers = string.gsub(numbers,"8", "八")
+	numbers = string.gsub(numbers,"9", "九")
+	numbers = string.gsub(numbers,"0", "〇")
+	return numbers
+end
 --------------------------------table addon----------------------------------
 
 function table.getIndex(tab,item)
@@ -902,30 +917,30 @@ function collision.newPolygon(x,y,verts,loop,t,density)
 	local fixture = love.physics.newFixture(body, shape, density)
 	return body
 end
-
-
-love.anydown={}
-function love.keypressed(key,...)
-	love.anydown[key]=true
-end
-function love.keyreleased(key,...)
-	love.anydown[key]=nil
-end
-function love.mousepressed(x,y,key,...)
-	love.anydown[key]=true
-end
-function love.mousereleased(x,y,key,...)
-	love.anydown[key]=nil
-end
-function love.update(...)
-	for k,v in pairs(love.anydown) do
-		if love.keydown then 
-			love.keydown(k) 
-		end
-	end
-end
-
-love.system.run=love.system.openURL
+--
+--
+--love.anydown={}
+--function love.keypressed(key,...)
+--	love.anydown[key]=true
+--end
+--function love.keyreleased(key,...)
+--	love.anydown[key]=nil
+--end
+--function love.mousepressed(x,y,key,...)
+--	love.anydown[key]=true
+--end
+--function love.mousereleased(x,y,key,...)
+--	love.anydown[key]=nil
+--end
+--function love.update(...)
+--	for k,v in pairs(love.anydown) do
+--		if love.keydown then
+--			love.keydown(k)
+--		end
+--	end
+--end
+--
+--love.system.run=love.system.openURL
 
 ----------------------------------system addon-------------------------------------
 --- change new print
@@ -1079,6 +1094,7 @@ function gotoRoom( room_type, room_name, ... )
 	if current_room and rooms[room_name] then
 		if current_room.deactivate then current_room:deactivate() end
 		current_room = rooms[room_name]
+		-- p_print(room_name,"deactivate")
 		if current_room.activate then current_room:activate() end
 	else current_room = addRoom(room_type, room_name, ...) end
 end
