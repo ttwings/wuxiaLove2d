@@ -98,6 +98,7 @@ function Date:draw()
 	dateStr = string.format("%s年%s月%s%s%s时",yearStr,monthStr,weekStr,dayStr,hourStr)
 	richtext:set({Color[fontcolor[d.hour]],dateStr})
 	love.graphics.draw(richtext,330,0)
+	love.graphics.print("Hello world....")
 end
 --
 --

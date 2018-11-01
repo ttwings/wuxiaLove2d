@@ -83,7 +83,7 @@ function MapStage:draw()
 
     self.ui.draw(self.ui_group)
 
-    self.date:draw()
+    --self.date:draw()
 end
 
 function MapStage:mousereleased()
