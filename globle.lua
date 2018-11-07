@@ -69,11 +69,11 @@ text_style['q2'] = quality_colors[2]
 text_style['q1'] = quality_colors[1]
 
 font80 = assets.font.myfont(80)
-font56 = assets.font.myfont(56)
-font48 = assets.font.myfont(48)
-font32 = assets.font.myfont(32)
-font28 = assets.font.myfont(28)
-font24 = assets.font.myfont(24)
+--font56 = assets.font.myfont(56)
+--font48 = assets.font.myfont(48)
+--font32 = assets.font.myfont(32)
+--font28 = assets.font.myfont(28)
+--font24 = assets.font.myfont(24)
 font20 = assets.font.myfont(20)
 font18 = assets.font.myfont(18)
 

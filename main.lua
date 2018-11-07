@@ -43,9 +43,7 @@ function love.load( )
     --- font init
     font = assets.font.myfont(20)
     love.graphics.setFont(font)    ---替换 print 输出debug 信息
-    ---gooi ui init
-    gooi.desktopMode()
-    gooi.shadow()
+
     --- debug output
     testing()
     --- slow animation update use
@@ -66,8 +64,7 @@ function love.load( )
     input:bind("k","d-down")
 
     current_room = nil
-    upper_room = current_room
-    --MainStage:deactivate()
+    gotoRoom('MapStage','MapStage')
     gotoRoom("MainStage","MainStage")
 end
 

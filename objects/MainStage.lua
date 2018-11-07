@@ -11,7 +11,7 @@ local style = {
     font = font32,
     showBorder = true,
     bgColor = {0.208, 0.220, 0.222,0.222},
-    group = "MainStage"
+    --group = "MainStage"
     --fgColor = {1,0,0}
 }
 
@@ -46,7 +46,7 @@ function MainStage:init()
             end)
     )
 
-    self.panel:add(self.ui.newButton({text = "归隐山林",group = self.ui_group}):setStyle({font = font32})
+    self.panel:add(self.ui.newButton({group = self.ui_group,text = "归隐山林"}):setStyle({font = font32})
                        :onRelease(
             function()
                 self.ui.confirm({group = self.ui_group,text = "梦醒",okText = "是",cancelText = "否",ok = function () love.event.quit() end})
@@ -56,13 +56,13 @@ end
 
 function MainStage:activate()
     self.ui.setGroupVisible(self.ui_group,true)
-    --self.ui.setGroupEnabled(self.ui_group,true)
+    self.ui.setGroupEnabled(self.ui_group,true)
 end
 
 function MainStage:deactivate()
     upper_room = current_room
     self.ui.setGroupVisible(self.ui_group,false)
-    --self.ui.setGroupEnabled(self.ui_group,false)
+    self.ui.setGroupEnabled(self.ui_group,false)
 end
 
 function MainStage:update(dt)

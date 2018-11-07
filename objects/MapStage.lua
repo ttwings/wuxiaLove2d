@@ -12,7 +12,7 @@ local style = {
     font = assets.font.myfont(32),
     showBorder = true,
     bgColor = {0.208, 0.220, 0.222,0.222},
-    group = "MapStage"
+    --group = "MapStage"
     --fgColor = {1,0,0}
 }
 
