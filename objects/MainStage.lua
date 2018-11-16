@@ -31,18 +31,24 @@ function MainStage:init()
             :onRelease(
             function()
                 gotoRoom("CreateStage","CreateStage")
+                self.ui.setGroupVisible(self.ui_group,false)
+                self.ui.setGroupEnabled(self.ui_group,false)
             end)
     )
     self.panel:add(self.ui.newButton({text = "梦回武林",group = self.ui_group}):setStyle({font = font32})
             :onRelease(
             function ()
                 gotoRoom("LoadStage","LoadStage")
+                self.ui.setGroupVisible(self.ui_group,false)
+                self.ui.setGroupEnabled(self.ui_group,false)
             end)
     )
     self.panel:add(self.ui.newButton({text = "侠客宝典",group = self.ui_group}):setStyle({font = font32})
             :onRelease(
             function ()
                 gotoRoom("SkillTreeStage","SkillTreeStage")
+                self.ui.setGroupVisible(self.ui_group,false)
+                self.ui.setGroupEnabled(self.ui_group,false)
             end)
     )
 
@@ -60,7 +66,7 @@ function MainStage:activate()
 end
 
 function MainStage:deactivate()
-    upper_room = current_room
+    --upper_room = current_room
     self.ui.setGroupVisible(self.ui_group,false)
     self.ui.setGroupEnabled(self.ui_group,false)
 end

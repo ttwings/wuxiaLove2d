@@ -1024,6 +1024,7 @@ function graphicsStats()
 		love.graphics.print(k .. ":" .. v, 1080, i * 20 )
 		i = i + 1
 	end
+	love.graphics.print({{1,0,0},"FPS:" .. love.timer.getFPS()})
 end
 
 local Counters = {}
