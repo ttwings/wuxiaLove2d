@@ -1,6 +1,6 @@
 require("lib.messages")
 require("lib.Color")
-require("lib.autobatch")
+--require("lib.autobatch")
 assets = require("lib.cargo").init("assets")
 Gooi = require("lib.gooi")
 Camera = require("lib.Camera")
